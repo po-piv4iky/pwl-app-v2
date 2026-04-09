@@ -1,0 +1,29 @@
+@use "helpers" as*;
+
+.footerStartBlock{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: fluid-to-laptop(25, 20);
+    border: solid 1px var(--color-red-200);
+    background-color: var(--color-bg-footer);
+    
+    border-radius: fluid(10, 7);
+
+    @include mobile{
+        font-size: fluid(15, 10);
+    }
+}
+
+.titleBlock{
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonStart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: fluid-to-laptop(20, 15);
+}

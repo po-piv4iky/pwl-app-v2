@@ -1,0 +1,77 @@
+$laptop: 1440px;
+$tablet: 1023px;
+$mobile: 767px;
+$mobile-s: 480px;
+
+// выше laptop
+@mixin laptop-above {
+  @media (min-width: #{ $laptop + 1 }) {
+    @content;
+  }
+}
+
+// до laptop включительно
+@mixin laptop {
+  @media (max-width: $laptop) {
+    @content;
+  }
+}
+
+// выше tablet
+@mixin tablet-above {
+  @media (min-width: #{ $tablet + 1 }) {
+    @content;
+  }
+}
+
+// до tablet включительно
+@mixin tablet {
+  @media (max-width: $tablet) {
+    @content;
+  }
+}
+
+// выше mobile
+@mixin mobile-above {
+  @media (min-width: #{ $mobile + 1 }) {
+    @content;
+  }
+}
+
+// до mobile включительно
+@mixin mobile {
+  @media (max-width: $mobile) {
+    @content;
+  }
+}
+
+// выше mobile-s
+@mixin mobile-s-above {
+  @media (min-width: #{ $mobile-s + 1 }) {
+    @content;
+  }
+}
+
+// до mobile-s включительно
+@mixin mobile-s {
+  @media (max-width: $mobile-s) {
+    @content;
+  }
+}
+
+// для устройств с тачскринами
+@mixin hover($hasActiveEffectOnMobile: true) {
+  @media (any-hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+
+  @if ($hasActiveEffectOnMobile) {
+    @media (any-hover: none) {
+      &:active {
+        @content;
+      }
+    }
+  }
+}

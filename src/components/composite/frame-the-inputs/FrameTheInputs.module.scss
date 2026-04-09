@@ -1,0 +1,94 @@
+@use "helpers" as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 fluid(40, 20) fluid(40, 20) fluid(40, 20);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: fluid(700, 400);
+  margin-bottom: fluid(30, 20);
+
+  h2 {
+    font-size: fluid(32, 24);
+    margin-bottom: fluid(12, 8);
+  }
+
+  p {
+    font-size: fluid(18, 14);
+    opacity: 0.6;
+    line-height: 1.4;
+  }
+}
+
+.sectionMaximum {
+  width: 100%;
+  
+  margin: 0 auto;   // 💥 центрирование
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-red-200);
+  border-radius: fluid(12, 8);
+  padding: fluid(24, 18);
+}
+
+.infoBase {
+  padding-bottom: fluid(30, 25);
+  display: flex;
+  flex-direction: column;
+  gap: fluid(8, 5);
+
+  svg {
+    color: var(--color-red-text-button);
+    margin-right: fluid(6, 4);
+  }
+
+  > p {
+    color: var(--color-gray-text-input);
+    font-size: fluid(16, 12);
+  }
+}
+
+.infoTitle {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: fluid(18, 14);
+  gap: fluid(6, 4);
+}
+
+.saveButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: fluid(10, 6);
+  margin-top: fluid(20, 15);
+  padding: fluid(12, 8) fluid(20, 15);
+  background-color: var(--color-red-button);
+  border-radius: fluid(10, 7);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-duration-longer);
+
+  &:hover {
+    background-color: var(--color-red-hover);
+  }
+
+  &:active {
+    background-color: var(--color-bg-menu);
+    transform: scale(0.98);
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}

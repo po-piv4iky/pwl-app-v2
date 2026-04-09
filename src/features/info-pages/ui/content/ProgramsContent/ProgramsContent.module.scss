@@ -1,0 +1,115 @@
+@use "helpers" as *;
+
+.program {
+    display: flex;
+    flex-direction: column;
+    gap: fluid(20, 14);
+    padding: fluid(20, 16);
+    border: solid fluid-to-laptop(2, 1) var(--color-red-100);
+    border-radius: fluid(10, 7);
+}
+
+/* HEADER */
+.programHeader {
+    display: flex;
+    align-items: center;
+    gap: fluid(10, 8);
+    >h6{
+        font-weight: 300;
+    }
+}
+.programHeaderIcon{
+    color: var(--color-red-button)
+}
+.programTitle {
+    font-size: fluid(26, 20);
+    font-weight: 700;
+}
+
+/* DESCRIPTION */
+.programDescription {
+    font-size: fluid(16, 14);
+    line-height: 1.5;
+    color: var(--color-gray-400);
+}
+
+/* SECTION */
+.programSection {
+    display: flex;
+    flex-direction: column;
+    gap: fluid(10, 8);
+}
+
+/* SECTION HEADER (иконка + текст) */
+.programSectionHeader {
+    display: flex;
+    align-items: center;
+    gap: fluid(8, 6);
+
+    h3 {
+        font-size: fluid(18, 16);
+        font-weight: 600;
+    }
+}
+.programSectionIcon{
+    color: var(--color-yellow-text)
+}
+.programSectionIconPyramid{
+    color: var(--color-green-500);
+}
+/* LIST */
+.programList {
+    display: flex;
+    flex-direction: column;
+    gap: fluid(6, 4);
+
+    li {
+        line-height: 1.4;
+        display: flex;
+        color: var(--color-gray-400);
+    }
+}
+.programListIcon{
+    color: var(--color-red-button)
+}
+
+/* STRUCTURE */
+.programStructure {
+    display: flex;
+    gap: fluid(10, 8);
+    border-radius: fluid(12, 8);
+}
+
+/* STAT */
+.programStat {
+    flex: 1;
+    text-align: center;
+    border: solid 1px var(--color-gray-border);
+    border-radius: fluid(10, 7);
+    padding: fluid(14, 10);
+    background-color: var(--color-bg-card);
+}
+
+/* VALUE */
+.programStatValue {
+    font-size: fluid(24, 18);
+    font-weight: 700;
+    color: var(--color-red-text-button);
+}
+
+/* LABEL */
+.programStatLabel {
+    font-size: fluid(14, 12);
+    color: var(--color-text-secondary);
+}
+.programResult{
+    border: solid 1px var(--color-red-button);
+    border-radius: fluid(10, 7);
+    background-color: var(--color-red-100);
+    padding: fluid(18, 14);
+    color: var(--color-gray-text);
+    >h6{
+        color: var(--color-red-text-button);
+        font-weight: 800;
+    }
+}

@@ -1,0 +1,7 @@
+@use "helpers" as*;
+
+.planContainer{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(25, 19);
+}

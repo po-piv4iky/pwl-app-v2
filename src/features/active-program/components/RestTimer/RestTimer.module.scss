@@ -1,0 +1,10 @@
+@use "helpers" as*;
+
+.rest-timer{
+    display: flex;
+    padding: fluid-to-laptop(15, 10);
+    justify-content: space-between;
+    background-color: var(--color-bg-tabs);
+    border: solid var(--color-red-button) fluid(2, 1);
+    border-radius: fluid(10, 7);
+}

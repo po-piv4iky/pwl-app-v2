@@ -1,0 +1,30 @@
+@use "helpers" as*;
+
+.standart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.standartHeader{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@include mobile-s{
+   .controls {
+    grid-template-columns: 1fr;
+  } 
+}
+
+// @media (max-width: 768px) {
+//   .controls {
+//     grid-template-columns: 1fr;
+//   }
+// }

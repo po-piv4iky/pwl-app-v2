@@ -1,0 +1,74 @@
+@use "helpers" as*;
+
+.trainingSessionContainer{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: fluid(16, 14);
+    margin: 0 auto;
+
+    @include laptop{
+        width: 70%;
+    }
+    @include tablet {
+        width: 80%;
+    }
+
+    // До mobile (480px - 767px)
+    @include mobile {
+        width: 90%;
+    }
+
+    // До mobile-s (до 480px)
+    @include mobile-s {
+        width: 100%;
+    }
+}
+
+.headerBlock{
+    display: flex;
+    width: 100%;
+    
+    flex-direction: column;
+}
+
+.titleAndButtonBlock{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+}
+
+.weekTitle{
+    justify-self: center;
+}
+
+.backButton{
+    justify-self: start;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: fluid-to-laptop(20, 15);
+
+    &:hover{
+        background-color: var(--color-red-button);
+    }
+}
+
+.progressBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: fluid-to-laptop(15, 10);
+    >p{
+        opacity: 60%;
+        font-size: fluid(15, 6);
+    }
+}
+
+.progressBar{
+    width: 100%;
+    height: fluid(15, 8); 
+    background-color: var(--color-red-50);
+    border-radius: fluid(10, 5);
+}

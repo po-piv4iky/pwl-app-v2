@@ -1,0 +1,107 @@
+@use "helpers" as *;
+
+.safety {
+    display: flex;
+    flex-direction: column;
+    gap: fluid(16, 12);
+    padding: fluid(16, 10);
+
+    background-color: var(--color-gray-100);
+    border: 1px solid var(--color-gray-border);
+    border-radius: fluid(10, 7);
+
+    color: var(--color-gray-text);
+}
+
+/* HEADER */
+.safetyHeader {
+    display: flex;
+    align-items: center;
+    gap: fluid(12, 8);
+}
+
+.safetyHeaderIcon {
+    color: var(--color-red-text-button);
+}
+
+.safetyTitle {
+    color: var(--color-white);
+}
+
+/* WARNING */
+.safetyWarning {
+    padding: fluid(12, 8);
+
+    border-left: 4px solid var(--color-red-300);
+    background-color: var(--color-red-100);
+
+    border-radius: fluid(10, 7);
+}
+
+.safetyWarningTitle {
+    color: var(--color-red-text-button);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+/* RULES */
+.safetyRules {
+    display: flex;
+    flex-direction: column;
+    gap: fluid(12, 8);
+}
+
+.safetyRulesTitle {
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+/* RULE CARD */
+.safetyRule {
+    display: flex;
+    align-items: flex-start;
+    gap: fluid(10, 8);
+
+    padding: fluid(14, 10);
+
+    border: 1px solid var(--color-gray-border);
+    border-radius: fluid(10, 7);
+
+    background-color: var(--color-bg-card);
+}
+
+/* ICON */
+.safetyRuleIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+    background-color: var(--color-red-100);
+
+    svg {
+        width: 18px;
+        height: 18px;
+        color: var(--color-red-text-button);
+    }
+}
+
+/* CONTENT */
+.safetyRuleContent {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.safetyRuleTitle {
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.safetyRuleDescription {
+    color: var(--color-gray-text);
+    font-size: fluid(14, 12);
+}

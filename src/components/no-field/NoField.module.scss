@@ -1,0 +1,15 @@
+@use "helpers" as*;
+
+.field{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: fluid(16, 12);
+    padding: fluid(16, 12);
+
+    border: 1px dashed var(--color-gray-border);
+    border-radius: fluid(12, 8);
+    background-color: var(--color-bg-card);
+}
+

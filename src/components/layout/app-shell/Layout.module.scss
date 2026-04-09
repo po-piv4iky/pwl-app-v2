@@ -1,0 +1,83 @@
+@use 'helpers' as *;
+
+.layout {
+  position: relative;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    } 
+    to {
+        opacity: 1;
+    }
+}
+
+.overlay {
+  display: none;
+
+  @include mobile {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg-overlay);
+    backdrop-filter: blur(4px);
+    z-index: 110;
+    animation: fadeIn() .2s ease-out;
+  }
+}
+
+.hidedSidebar{
+    >aside{
+        width: fluid(95, 50);
+        overflow: hidden;
+        transition: .35s;
+        >div a{
+            background-color: var(--color-bg-sidebar);
+            transition: .35s;
+        }
+    }
+
+    @include mobile {
+        >aside{
+            width: 0;
+            padding: 0;
+            border: none;
+            transform: translateX(-100%);
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 350; 
+        }
+    }
+    
+    >div{
+        width: 100%;
+    }
+}
+
+.hidedSidebar > div {
+    width: 100%;
+}
+
+.showedSidebar {
+     >aside{
+        width: fluid(300, 200);
+        transition: width 0.35s ease;
+    }
+    @include mobile{
+       >aside{
+         width: min(80vw, 320px) !important;
+         transition: transform .35s ease;
+         position: fixed;
+         left: 0;
+         top: 0;
+         bottom: 0;
+         height: 100vh;
+         z-index: 150;
+         box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15); 
+
+      }
+    }
+}

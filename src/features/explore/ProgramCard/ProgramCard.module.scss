@@ -1,0 +1,87 @@
+﻿@use "helpers" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(20, 12);
+  background-color: var(--color-bg-card);
+  padding: fluid(30, 20);
+  border: solid fluid(3, 2) var(--color-border-sidebar);
+  border-radius: fluid(10, 8);
+  cursor: pointer;
+  width: 100%;
+  max-width: 320px;
+
+  transition: border-color var(--transition-duration-longer);
+
+  &:hover {
+    border-color: var(--color-red-button);
+  }
+}
+
+/* ---------- HEADER ---------- */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(8, 6);
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: fluid(16, 12);
+  min-width: 0;
+}
+
+.title {
+  min-width: 0;
+  flex: 1 1 auto;
+  font-size: fluid(18, 14);
+  font-weight: 600;
+}
+
+.level {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: fluid(10, 6);
+  border: 1px solid var(--color-red-button);
+  border-radius: fluid(24, 20);
+  font-size: fluid(14, 10);
+  color: var(--color-red-text-button);
+  background-color: var(--color-red-bg-button);
+}
+
+.duration {
+  margin-top: fluid(8, 6);
+  font-size: fluid(18, 14);
+  opacity: 0.6;
+}
+
+/* ---------- CONTENT ---------- */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(20, 14);
+}
+
+.description {
+  font-size: fluid(18, 14);
+  opacity: 0.6;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: fluid(15, 10);
+  background-color: var(--color-red-button);
+  border-radius: fluid(10, 7);
+  width: 100%;
+  font-weight: 600;
+  cursor: pointer;
+}

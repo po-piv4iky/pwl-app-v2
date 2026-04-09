@@ -1,0 +1,32 @@
+
+@use "helpers" as *;
+
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+
+  /* базовый max-width */
+  max-width: var(--container-width);
+}
+
+/* варианты ширины */
+.container--default {
+  max-width: var(--container-width); // например 1200px
+}
+
+.container--wide {
+  max-width: 1400px;
+}
+.container--classic {
+  max-width: 1000px;
+}
+
+.container--narrow {
+  max-width: 800px;
+}
+
+.container--full {
+  max-width: 100%;
+  padding-inline: 0;
+}

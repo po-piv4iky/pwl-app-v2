@@ -1,0 +1,14 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+/* gap */
+.gap-s { gap: 16px; }
+.gap-m { gap: 24px; }
+.gap-l { gap: 32px; }
+
+/* отступы сверху/снизу */
+.padding {
+  padding-block: 32px;
+}

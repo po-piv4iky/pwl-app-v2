@@ -1,0 +1,51 @@
+@use "helpers" as *;
+
+.inputBlock{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(20, 15);
+    padding-bottom: fluid(20, 15);
+}
+
+.borderBlock{
+    border-bottom: solid var(--color-gray-border) 2px;
+}
+
+.liftTypeBlock{
+    display: inline-flex;
+    align-items: center;
+    gap: fluid(20, 14);
+}
+
+.input{
+    background-color: var(--color-gray-bg-input);
+    border-radius: fluid(10, 4);
+    color: var(--color-gray-text-input);
+    padding: fluid-to-laptop(10, 6) fluid-to-laptop(16, 12);
+}
+
+.iconBlock{
+    border-width: 1px;
+    border-style: solid;
+    padding: fluid(10, 7);
+    border-radius: fluid(12, 8);
+    font-weight: 800;
+}
+
+.bench{
+    background-color: var(--color-red-100);
+    border-color: var(--color-red-200);
+    color: var(--color-red-300);
+}
+
+.squat{
+    background-color: var(--color-yellow-200);
+    border-color: var(--color-yellow-300);
+    color: var(--color-yellow-400);
+}
+
+.deadlift{
+    background-color: var(--color-orange-200);
+    border-color: var(--color-orange-300);
+    color: var(--color-orange-400);
+}

@@ -1,0 +1,31 @@
+@use "helpers" as *;
+
+.trigger {
+  height: auto;
+  min-height: 0;
+  padding: fluid(15, 10) fluid(14, 8);
+  border-radius: fluid(10, 7);
+  font-size: fluid(16, 12);
+  line-height: 1.2;
+}
+
+@include tablet {
+  .trigger {
+    padding: fluid(12, 6) fluid(14, 8);
+    font-size: fluid(13, 11);
+  }
+}
+
+@include mobile {
+  .trigger {
+    padding: fluid(10, 6) fluid(12, 8);
+    font-size: 11px;
+    line-height: 1.15;
+  }
+}
+
+@include mobile-s {
+  .trigger {
+    padding: fluid(10, 6) fluid(10, 6);
+  }
+}

@@ -1,0 +1,82 @@
+@use "helpers" as *;
+
+.session-set {
+    display: flex;
+    align-items: flex-start;
+    gap: fluid(12, 8);
+    background-color: var(--color-bg-items-set);
+    border: 1px solid var(--color-gray-400);
+    border-radius: fluid-to-laptop(10, 7);
+    padding: fluid(15, 8);
+}
+
+/* Обёртка */
+.session-set__checkbox-wrapper {
+    position: relative;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+/* Скрытый нативный input */
+.session-set__checkbox-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Наш кастомный квадратик */
+.session-set__checkbox-custom {
+    width: fluid(22, 14);
+    height: fluid(22, 14);
+
+    border: 2px solid var(--color-gray-400);
+    border-radius: 6px;
+
+    background-color: var(--color-gray-100);
+
+    display: inline-block;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Когда checked */
+.session-set__checkbox-input:checked + .session-set__checkbox-custom {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+/* Галочка */
+.session-set__checkbox-input:checked + .session-set__checkbox-custom::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Контент */
+.session-set__content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.session-set__title {
+    font-weight: 700;
+}
+
+.session-set__subtitle {
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+.session-set__inputs {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}

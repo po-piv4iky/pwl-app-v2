@@ -1,0 +1,48 @@
+@use "helpers" as *;
+
+// .weekCard{
+//     margin-bottom: fluid-to-laptop(30, 25);
+// }
+.weekHeader{
+    display: flex;
+    align-items: center;
+    gap: fluid(25, 20);
+    padding: fluid-to-laptop(25, 20) 0;
+}
+
+.weekInfo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: fluid-to-laptop(15, 10);
+}
+
+.numberWeek{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+
+    min-width: fluid-to-laptop(48, 38);
+    height: fluid-to-laptop(48, 38);
+
+    font-size: fluid(20, 16);
+    font-weight: 600;
+
+    border: solid 1px var(--color-red-button);
+    background-color: var(--color-red-200);
+    border-radius: fluid(10, 7);
+}
+
+.daysGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 3fr);
+    gap: fluid-to-laptop(25, 20);
+
+    @include tablet{
+        grid-template-columns: repeat(2, 2fr);
+    }
+    @include mobile{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+

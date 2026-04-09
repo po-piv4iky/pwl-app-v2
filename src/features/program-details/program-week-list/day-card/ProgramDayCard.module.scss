@@ -1,0 +1,59 @@
+@use "helpers" as *;
+
+.dayCard{
+    display: flex;
+    gap: fluid-to-laptop(30, 25); 
+    flex-direction: column;
+    background-color: var(--color-gray-100);
+    padding: fluid-to-laptop(20, 15);
+    border: solid 1px var(--color-gray-border);
+    border-radius: fluid(10, 6);
+    transition: all .2s;
+    &:hover{
+        border-color: var(--color-red-200);
+    }
+}
+
+.exercisesBlock{
+    display: flex;
+    flex-direction: column;
+    gap: fluid-to-laptop(15, 10);
+}
+
+.exercise{
+    display: flex;
+    flex-direction: column;
+    border: solid 1px  var(--color-gray-400);
+    border-radius: fluid(10, 8);
+    padding: fluid-to-laptop(12, 8);
+    background-color: var(--color-gray-bg-input);
+}
+
+.exerciseHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.exerciseName{
+    font-weight: 700;
+}
+
+.intensity{
+    color: var(--color-red-button);
+}
+
+.scheme{
+    font-weight: 700;
+    font-size: fluid(16, 12);
+    color: var(--color-gray-text-input)
+}
+
+.comment{
+    font-size: fluid(16, 12);
+    color: var(--color-gray-text-input)
+}
+.sectionTitle{
+    font-weight: 700;
+    font-size: fluid(16, 12);
+    color: var(--color-gray-text-input)
+}

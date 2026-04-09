@@ -1,0 +1,30 @@
+@use "helpers" as *;
+
+.tipsBlock {
+  margin-top: fluid(30, 20);
+  padding: fluid(20, 15);
+  border-left: 3px solid var(--color-red-text-button); 
+  background: var(--color-red-100);
+  border-radius: fluid(8, 6);
+}
+
+.tipsTitle {
+  display: flex;
+  align-items: center;
+  gap: fluid(8, 6);
+  font-weight: 600;
+  margin-bottom: fluid(16, 12);
+}
+
+.tipsList {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(8, 5);
+  padding-left: fluid(25, 20);
+
+  li {
+    list-style: disc;
+    opacity: 0.85;
+    line-height: 1.4;
+  }
+}

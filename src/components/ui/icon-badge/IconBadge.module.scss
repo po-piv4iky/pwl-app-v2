@@ -1,0 +1,14 @@
+@use "helpers" as*;
+
+.iconContainer{
+    padding: fluid-to-laptop(16, 10); 
+    background-color: var(--color-bg-level);
+    border-radius: fluid-to-laptop(10, 8); 
+    border: 1px solid var(--color-red-hover); 
+}
+
+.icon{
+    width: fluid-to-laptop(32, 20); 
+    height: fluid-to-laptop(32, 20); 
+    color: white; 
+}

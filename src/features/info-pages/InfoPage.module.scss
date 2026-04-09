@@ -1,0 +1,12 @@
+@use "helpers" as*;
+
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(24, 16)
+}
+.infoTabsContent{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(16, 10)
+}

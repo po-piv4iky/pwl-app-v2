@@ -1,0 +1,28 @@
+@use "helpers" as *;
+
+.daysTabsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(20, 15);
+
+    h5 {
+    font-size: fluid(20, 16);
+    opacity: 0.5;
+  }
+}
+
+.tabsGrid{
+  display: grid;
+  gap: fluid(15, 8);
+  grid-template-columns: repeat(7, 1fr);
+
+  @include tablet{
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @include mobile{
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include mobile-s{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,91 @@
+@use "helpers" as*;
+
+.segmentedControl{
+  --control-gap: #{fluid(6, 4)};
+  --control-radius: #{fluid(10, 7)};
+
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--segments-count), minmax(0, 1fr));
+  gap: var(--control-gap);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.button{
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    width: 100%;
+    padding: fluid(15, 10) fluid(14, 8);
+    background-color: transparent;
+    color: var(--color-white);
+    border-radius: var(--control-radius);
+    text-align: center;
+    line-height: 1.2;
+    white-space: normal;
+    text-wrap: balance;
+    transition:
+      color 0.25s ease,
+      transform 0.3s ease,
+      background-color 0.3s ease;
+
+    @include hover {
+      background-color: rgb(255 255 255 / 0.04);
+    }
+
+    &:active{
+      transform: scale(0.98);
+    }
+}
+
+.active{
+  color: var(--color-white);
+}
+
+.indicator{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(
+    (
+      100% - (var(--control-gap) * (var(--segments-count) - 1))
+    ) / var(--segments-count)
+  );
+  border-radius: var(--control-radius);
+  background:
+  linear-gradient(180deg, rgb(255 255 255 / 0.18), rgb(255 255 255 / 0.08));
+  border: 1px solid rgb(255 255 255 / 0.08);
+  box-shadow:
+  0 10px 24px rgb(0 0 0 / 0.18),
+  inset 0 1px 0 rgb(255 255 255 / 0.08);
+  transform: translateX(calc(var(--active-index) * (100% + var(--control-gap))));
+  transition:
+  transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+  background-color 0.3s ease;
+  pointer-events: none;
+}
+
+@include tablet {
+  .segmentedControl{
+    --control-gap: #{fluid(4, 3)};
+  }
+
+  .button{
+    padding: fluid(12, 6) fluid(8, 2);
+    font-size: fluid(13, 11);
+  }
+}
+
+@include mobile {
+  .segmentedControl{
+    --control-gap: 3px;
+  }
+
+  .button{
+    padding:  fluid(10, 6) fluid(6, 1);
+    font-size: 11px;
+    line-height: 1.15;
+  }
+}

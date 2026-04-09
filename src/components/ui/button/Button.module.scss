@@ -1,0 +1,8 @@
+@use "helpers" as*;
+
+.button{
+    padding: fluid(15, 10);
+    background-color: var(--color-red-button);
+    border-radius: fluid(10, 7);
+    cursor: pointer;
+}

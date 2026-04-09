@@ -1,0 +1,11 @@
+@use 'helpers' as *;
+
+.button{
+    padding:fluid-to-laptop(10, 5);
+    border-radius: var(--border-radius-s);
+
+    &:hover{
+        background-color: var(--color-red-button);
+        cursor: pointer;
+   }
+ }

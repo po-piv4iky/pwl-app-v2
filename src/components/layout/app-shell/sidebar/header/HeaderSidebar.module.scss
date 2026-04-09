@@ -1,0 +1,35 @@
+@use 'helpers' as *;
+
+.header{
+    display: flex;
+    gap: fluid-to-laptop(18, 14);
+    width: 100%;
+    align-items: center;
+    padding-bottom: fluid-to-laptop(20, 10);
+    border-bottom: solid fluid-to-laptop(2, 1) var(--color-border-sidebar);
+
+    .spanBlock{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        transition: opacity 0.3s ease, max-width 0.3s ease;
+        opacity: 1;
+        max-width: fluid-to-laptop(200, 170);
+        white-space: nowrap;
+        overflow: hidden;
+        
+        :global(.hidedSidebar) & {
+        opacity: 0;
+        max-width: 0;
+        margin-left: 0;
+        padding: 0;
+    }
+
+        .titlePower{
+            color: var(--color-red-button)
+        }
+  }
+}
+
+

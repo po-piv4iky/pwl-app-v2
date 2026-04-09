@@ -1,0 +1,66 @@
+@use "helpers" as*;
+
+.technique{
+    display: flex;
+    flex-direction: column;
+    padding: fluid(16, 10);
+    gap: fluid(16, 12);
+    background-color: var(--color-gray-100);
+    border: solid 1px var(--color-gray-border);
+    border-radius: fluid(10, 7);
+    color: var(--color-gray-text);
+
+}
+.techniqueHeaderIcon{
+    color: var(--color-red-button)
+}
+.techniqueHeader{
+    display: flex;
+    align-items: center;
+    gap: fluid(16, 12);
+    >h5{
+        color: var(--color-white);
+    }
+}
+.techniqueList{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(16, 12);
+}
+.techniqueCardHeader{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(10, 6);
+}
+.techniqueCard{
+    border: solid 1px transparent;
+    border-radius: fluid(10, 7);
+    padding: fluid(18, 12);
+}
+.techniqueCardItem{
+    display: flex;
+}
+
+.techniqueCardVariant0{
+   border-color: var(--color-red-200);
+   background-color: var(--color-red-100);
+   >div >h6{
+    color: var(--color-red-300)
+   }
+}
+
+.techniqueCardVariant1{
+   border-color: var(--color-yellow-300);
+   background-color: var(--color-yellow-100);
+   >div >h6{
+    color: var(--color-yellow-400)
+   }
+}
+
+.techniqueCardVariant2{
+   border-color: var(--color-orange-300);
+   background-color: var(--color-orange-125);
+   >div >h6{
+    color: var(--color-yellow-text);
+   }
+}

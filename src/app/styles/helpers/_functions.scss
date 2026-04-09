@@ -1,0 +1,30 @@
+@use "sass:math";
+@use "config" as *;
+
+@function fluid($max, $min, $is-end-of-laptop: false) {
+  $max-viewport-width: $container-desktop-width;
+  $min-viewport-width: 390;
+
+  @if $is-end-of-laptop {
+    $min-viewport-width: $container-laptop-width;
+  }
+
+  $max-size: math.div($max, 16);
+  $min-size: math.div($min, 16);
+  $max-width: math.div($max-viewport-width, 16);
+  $min-width: math.div($min-viewport-width, 16);
+
+  $slope: math.div(($max-size - $min-size), ($max-width - $min-width));
+  $y-axis-intersections: -$min-width * $slope + $min-size;
+
+  @return clamp(
+    #{$min-size}rem,
+    calc(#{$y-axis-intersections}rem + #{($slope * 100)}vw),
+    #{$max-size}rem
+  );
+}
+
+@function fluid-to-laptop($max, $min) {
+  @return fluid($max, $min, true);
+}
+

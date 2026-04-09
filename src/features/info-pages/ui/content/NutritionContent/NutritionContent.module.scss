@@ -1,0 +1,70 @@
+@use "helpers" as*;
+
+.nutrition{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(16, 12);
+    padding: fluid(16, 10);
+    background-color: var(--color-gray-100);
+    border: solid 1px var( --color-gray-border);
+    border-radius: fluid(10, 7);
+    color: var(--color-gray-text);
+}
+.nutritionHeaderIcon{
+    color: var(--color-green-600);
+}
+
+.nutritionHeader{
+    display: flex;
+    gap: fluid(16, 12);
+    align-items: center;
+}
+.nutritionDescription{
+    color: var(--color-gray-text)
+}
+.nutritionList {
+    display: grid;
+    gap: fluid(16, 12);
+    grid-template-columns: repeat(3, 1fr);
+
+    @include mobile {
+        grid-template-columns: 1fr;
+    }
+}
+.nutritionItem{
+    display: flex;
+    flex-direction: column;
+    padding: fluid(14, 10);
+    border: solid 1px transparent;
+    border-radius: fluid(10, 7);
+}
+.nutritionItemValue{
+    color: var(--color-red-text-button);
+    font-size: fluid(25, 16);
+}
+.nutritionItemDescription{
+    color: var(--color-gray-text);
+}
+.nutritionItemVariant0{
+   border-color: var(--color-red-200);
+   background-color: var(--color-red-100);
+   >h6{
+    color: var(--color-red-300)
+   }
+}
+.nutritionItemVariant1{
+   border-color: var(--color-yellow-300);
+   background-color: var(--color-yellow-100);
+   >h6{
+     color: var(--color-yellow-400)
+   }
+}
+.nutritionItemVariant2{
+   border-color: var(--color-orange-300);
+   background-color: var(--color-orange-125);
+   >h6{
+   color: var(--color-yellow-text);
+   }
+}
+
+

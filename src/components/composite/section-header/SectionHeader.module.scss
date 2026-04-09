@@ -1,0 +1,31 @@
+@use "helpers" as *;
+
+.header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: fluid(30, 20);
+
+  /* по умолчанию слева */
+  align-items: flex-start;
+  text-align: left;
+
+  h2 {
+    font-size: fluid(36, 24);
+    font-weight: 700;
+    margin-bottom: fluid(12, 8);
+  }
+
+  p {
+    font-size: fluid(20, 16);
+    opacity: 0.6;
+    line-height: 1.4;
+    max-width: 900px;
+  }
+}
+
+/* модификатор */
+.centered {
+  align-items: center;
+  text-align: center;
+}

@@ -1,0 +1,17 @@
+@use "helpers" as*;
+
+.field{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(14, 10);
+    padding: fluid(20, 10);
+    border: 1px solid var(--color-gray-border);
+    border-radius: fluid(12, 8);
+    background-color: var(--color-bg-card);
+}
+
+@include tablet{
+    .field{
+        font-size: fluid(15, 10);
+    }
+}

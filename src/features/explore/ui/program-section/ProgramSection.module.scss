@@ -1,0 +1,47 @@
+﻿@use "helpers" as *;
+
+.section {
+  padding: fluid(30, 20);
+  border-radius: fluid-to-laptop(15, 10);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: fluid(16, 12);
+  padding-bottom: fluid(24, 16);
+}
+
+.badge {
+  background: var(--color-red-100);
+  backdrop-filter: blur(8px);
+}
+
+.title {
+  font-size: fluid(24, 18);
+  font-weight: 600;
+}
+
+.bench {
+  background-image:
+    linear-gradient(135deg, rgba(20, 20, 24, 0.22), rgba(20, 20, 24, 0.08)),
+    url('/hero-bg/bg-bench.webp');
+}
+
+.squat {
+  background-image: linear-gradient(135deg, rgba(124, 45, 18, 0.16), rgba(120, 53, 15, 0.06));
+  background-color: #f7e8dd;
+}
+
+.deadlift {
+  background-image: linear-gradient(135deg, rgba(17, 94, 89, 0.16), rgba(15, 118, 110, 0.06));
+  background-color: #deefec;
+}
+
+.complex {
+  background-image: linear-gradient(135deg, rgba(88, 28, 135, 0.14), rgba(30, 64, 175, 0.08));
+  background-color: #ebe7fb;
+}

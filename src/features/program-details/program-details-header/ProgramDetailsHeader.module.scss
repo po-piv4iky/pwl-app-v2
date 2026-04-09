@@ -1,0 +1,82 @@
+@use 'helpers' as *;
+
+.header{
+    display: flex;
+    flex-direction: column;
+    gap: fluid-to-laptop(25, 20);
+}
+
+.topRow{
+    gap: fluid-to-laptop(25, 20);
+    display: flex;
+    align-items: flex-start; 
+}
+
+.button{
+    background-color: transparent;
+    border: solid 1px var(--color-gray-400);
+    &:hover {
+    background-color: var(--color-red-button); 
+    border-color: transparent;
+  }
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(25, 20);
+}
+
+.titleRow{
+    display: flex;
+    align-items: center;
+    gap: fluid-to-laptop(25, 20);
+}
+
+.title{
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.levelBadge{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-yellow-300);
+    border: solid 2px var(--color-yellow-400);
+    color: var(--color-yellow-400);
+    border-radius: fluid(10, 7);
+    padding: fluid(8, 5) fluid(15, 10);
+}
+
+.description{
+    font-size: fluid(30, 15);
+    color: var(--color-gray-400);
+}
+
+.meta{
+    display: flex;
+    gap: fluid(40, 30)
+}
+
+.metaItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: fluid(18, 14);
+    font-size: fluid(25, 20);
+    color: var(--color-gray-400);
+    line-height: 1.2;
+
+    svg{
+        width: fluid(30, 25);
+        height: fluid(30, 25);;
+    }
+}
+
+.programDivider{
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-gray-400);
+    margin-top: auto;
+}

@@ -1,0 +1,7 @@
+﻿@use "helpers" as *;
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(28, 20);
+}

@@ -1,0 +1,188 @@
+@use 'helpers' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(20, 14);
+  padding: fluid(24, 16);
+  border-radius: 24px;
+  border: 1px solid var(--color-gray-border, rgba(255, 255, 255, 0.1));
+  background: var(--color-bg-card, rgba(255, 255, 255, 0.03));
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: white;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.statusOfficial,
+.statusAlternative,
+.statusDoping,
+.statusNoDoping {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  border: 1px solid transparent;
+}
+
+.statusOfficial {
+  color: #d9f99d;
+  background: rgba(163, 230, 53, 0.12);
+  border-color: rgba(163, 230, 53, 0.18);
+}
+
+.statusAlternative {
+  color: #fde68a;
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.18);
+}
+
+.statusDoping {
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.18);
+}
+
+.statusNoDoping {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.18);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  font-size: fluid(24, 20);
+  line-height: 1.15;
+  font-weight: 700;
+  color: white;
+}
+
+.description {
+  font-size: fluid(16, 14);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.infoItem {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.infoLabel {
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.infoValue {
+  font-size: 15px;
+  color: white;
+  font-weight: 600;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.featuresTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.5;
+}
+
+.featureDot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: var(--color-red-button, #ef4444);
+}
+
+.moreButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: fit-content;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  color: white;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+  }
+}

@@ -1,0 +1,26 @@
+@use 'helpers' as *;
+
+.progressBarContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: fluid-to-laptop(10, 7);
+}
+.titleBlock{
+    display: flex;
+    justify-content: space-between;
+    >h5{
+        font-size: fluid(20, 16);
+    }
+    >span{
+        color: var(--color-red-button);
+        font-weight: 700;
+    }
+}
+
+.progressBar{
+    width: 100%;
+    height: fluid(20, 10); // высота прогресс-бара
+    background-color: var(--color-red-100);
+    border-radius: fluid(10, 5);
+}

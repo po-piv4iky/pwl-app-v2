@@ -1,0 +1,33 @@
+@use 'helpers' as *;
+
+.menuItemBlock{
+    display: flex;
+    align-items: center;
+    gap: fluid-to-laptop(15, 10);
+    padding: fluid(10, 5);
+    margin-bottom: fluid-to-laptop(15, 10);
+
+    
+    .icon{
+        flex-shrink: 0;
+    }
+    .text {
+    transition: opacity 0.3s ease, max-width 0.3s ease;
+    opacity: 1;
+    max-width: fluid-to-laptop(200, 170);
+    white-space: nowrap;
+    overflow: hidden;
+   
+    :global(.hidedSidebar) & {
+        opacity: 0;
+        max-width: 0;
+        margin-left: 0;
+        padding: 0;
+    }
+}
+
+    &:hover{
+        background-color: #1A1A1A;
+        border-radius: var(--border-radius-s);
+    }
+}

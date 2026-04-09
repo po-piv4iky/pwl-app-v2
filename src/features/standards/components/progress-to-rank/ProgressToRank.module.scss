@@ -1,0 +1,17 @@
+@use "helpers" as*;
+
+.progress{
+    display: flex;
+    flex-direction: column;
+    padding: fluid(20, 10);
+    gap: fluid(15, 10);
+    border: 1px solid var(--color-red-200);
+    border-radius: fluid(12, 8);
+    background-color: var(--color-bg-card);
+}
+
+@include tablet{
+    .progress{
+        font-size: fluid(15, 10);
+    }
+}

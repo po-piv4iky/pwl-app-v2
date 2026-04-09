@@ -1,0 +1,1 @@
+export { fprStandards as napStandards } from './fpr-standards'

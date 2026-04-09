@@ -1,0 +1,49 @@
+@use "helpers" as *;
+
+.tabs{
+    --tabs-padding: #{fluid(6, 4)};
+    --tabs-gap: #{fluid(6, 4)};
+    --tab-radius: #{fluid(10, 7)};
+
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--tabs-count), minmax(0, 1fr));
+    align-items: stretch;
+    gap: var(--tabs-gap);
+    padding: var(--tabs-padding);
+    border-radius: fluid(12, 8);
+    background-color: var(--color-bg-card);
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.indicator{
+    position: absolute;
+    top: var(--tabs-padding);
+    bottom: var(--tabs-padding);
+    left: var(--tabs-padding);
+    width: calc(
+      (
+        100% - (var(--tabs-padding) * 2) - (var(--tabs-gap) * (var(--tabs-count) - 1))
+      ) / var(--tabs-count)
+    );
+    border-radius: var(--tab-radius);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.18), rgb(255 255 255 / 0.08));
+    border: 1px solid rgb(255 255 255 / 0.08);
+    box-shadow:
+      0 10px 24px rgb(0 0 0 / 0.18),
+      inset 0 1px 0 rgb(255 255 255 / 0.08);
+    transform: translateX(calc(var(--active-index) * (100% + var(--tabs-gap))));
+    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+}
+
+@include mobile {
+    .tabs{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .indicator{
+        display: none;
+    }
+}

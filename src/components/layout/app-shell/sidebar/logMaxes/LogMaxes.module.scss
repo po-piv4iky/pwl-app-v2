@@ -1,0 +1,88 @@
+@use "helpers" as *;
+
+.logBlock{
+    padding: fluid(25, 15);
+    border: solid var(--color-gray-border) fluid(2, 1);
+    border-radius: fluid-to-laptop(10, 8);
+    opacity: 0;
+    overflow: hidden;
+
+    transition: all .35s;
+   
+    >h6{
+        padding-bottom: fluid-to-laptop(10, 6);
+    }
+}
+
+.visible{
+    opacity: 1;
+    transition: all .35s;
+    width: 100%;
+}
+
+.itemsBlock{
+    >li{
+        display: flex;
+        justify-content: space-between;
+        color: var(--color-gray-text-input);
+    }
+}
+
+.valueMax{
+    color: var(--color-red-text-button);
+}
+
+
+
+
+
+
+
+
+
+// @use "helpers" as *;
+
+// .logBlock {
+//   padding: fluid(25, 15);
+//   border: solid var(--color-gray-border) fluid(2, 1);
+//   border-radius: fluid-to-laptop(10, 8);
+
+//   overflow: hidden;
+
+//   /* состояние "скрыто" */
+//   opacity: 0;
+//   transform: translateX(-12px);
+//   max-height: 0;
+
+//   pointer-events: none;
+
+//   transition:
+//     opacity .25s ease,
+//     transform .25s ease,
+//     max-height .3s ease;
+// }
+
+// .visible {
+//   /* состояние "показано" */
+//   opacity: 1;
+//   transform: translateX(0);
+//   max-height: 300px; // с запасом
+
+//   pointer-events: auto;
+// }
+
+// .logBlock > h6 {
+//   padding-bottom: fluid-to-laptop(10, 6);
+// }
+
+// .itemsBlock {
+//   > li {
+//     display: flex;
+//     justify-content: space-between;
+//     color: var(--color-gray-text-input);
+//   }
+// }
+
+// .valueMax {
+//   color: var(--color-red-text-button);
+// }

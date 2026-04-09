@@ -1,0 +1,1 @@
+export { fprStandards as ipfStandards } from './fpr-standards'

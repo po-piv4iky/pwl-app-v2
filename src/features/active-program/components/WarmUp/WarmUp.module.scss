@@ -1,0 +1,60 @@
+@use "helpers" as *;
+
+.warmup {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(20, 15);
+  padding: fluid(20, 14);
+  border-radius: fluid(10, 7);
+}
+
+.warmup--session {
+  border: 1px solid var(--color-orange-200);
+  background-color: var(--color-orange-100);
+}
+
+.warmup--plan {
+  background-color: var(--color-bg-warm);
+  border: 1px solid var(--color-orange-300);
+}
+
+.warmup__header {
+  display: flex;
+  align-items: center;
+  gap: fluid-to-laptop(12, 8);
+  font-weight: 700;
+}
+
+.warmup--session .warmup__header {
+  color: var(--color-orange-400);
+}
+
+.warmup--plan .warmup__header {
+  color: var(--color-yellow-text);
+}
+
+.warmup__item {
+  display: flex;
+  border-radius: fluid(10, 7);
+  justify-content: space-between;
+}
+
+.warmup--session .warmup__item {
+  padding: fluid(20, 16);
+  background-color: var(--color-orange-50);
+  border: 1px solid var(--color-orange-200);
+}
+
+.warmup__value {
+  display: flex;
+  gap: fluid-to-laptop(6, 4);
+}
+
+.warmup__multiplier {
+  color: var(--color-yellow-text);
+}
+
+.warmup__weight {
+  color: var(--color-red-text-button);
+  font-weight: 600;
+}

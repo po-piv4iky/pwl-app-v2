@@ -1,0 +1,66 @@
+@use "helpers" as *;
+
+.plan-training {
+    display: flex;
+    flex-direction: column;
+    gap: fluid(22, 16);
+
+    background-color: var(--color-gray-100);
+    padding: fluid(20, 14);
+    border: 1px solid var(--color-gray-400);
+    border-radius: fluid-to-laptop(10, 8);
+}
+
+/* Заголовок */
+.plan-training__title {
+    font-weight: 700;
+}
+
+/* Список */
+.plan-training__list {
+    display: flex;
+    flex-direction: column;
+    gap: fluid(16, 12);
+}
+
+/* Один элемент */
+.plan-training__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--color-bg-items-set);
+    border: 1px solid var(--color-gray-400);
+    border-radius: fluid-to-laptop(10, 7);
+    padding: fluid(15, 10);
+
+    transition: background-color 0.2s ease;
+}
+
+/* Левая часть */
+.plan-training__item-left {
+    display: flex;
+    align-items: center;
+    gap: fluid(12, 8);
+}
+
+/* Инфо */
+.plan-training__item-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.plan-training__item-title {
+    font-weight: 600;
+}
+
+.plan-training__item-meta {
+    opacity: 0.6;
+    font-size: 14px;
+}
+
+/* Прогресс */
+.plan-training__item-progress {
+    font-weight: 600;
+    opacity: 0.7;
+}

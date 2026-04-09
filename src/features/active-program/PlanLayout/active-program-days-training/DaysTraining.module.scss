@@ -1,0 +1,20 @@
+@use "helpers" as*;
+
+.dayTrainingContainer{
+    display: flex;
+    flex-direction: column;
+    padding: fluid(25, 18);
+    gap: fluid-to-laptop(20, 15);
+    background-color: var(--color-gray-100);
+    border: solid 1px var(--color-gray-bg-input);
+    border-radius: fluid-to-laptop(12, 8);
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: fluid-to-laptop(18, 14);
+    opacity: 60%;
+}
+

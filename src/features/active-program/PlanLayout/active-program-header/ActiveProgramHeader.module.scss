@@ -1,0 +1,91 @@
+@use "helpers" as *;
+
+.header {
+  background-color: var(--color-bg-header);
+  border: solid fluid-to-laptop(2, 1) var(--color-red-200);
+  border-radius: fluid-to-laptop(12, 8);
+  padding: fluid(25, 18);
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: fluid(25, 18);
+}
+
+.programInfo {
+  display: flex;
+  gap: fluid(20, 12);
+  align-items: center;
+}
+
+.icon {
+  svg {
+    color: var(--color-red-button);
+  }
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: fluid(14, 12);
+  opacity: 0.6;
+}
+
+.programName {
+  font-size: fluid(20, 16);
+}
+
+.workoutsCounter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.counterValue {
+  color: var(--color-red-button);
+  font-weight: 700;
+  font-size: fluid(20, 16);
+}
+
+.counterLabel {
+  font-size: fluid(14, 12);
+  opacity: 0.6;
+}
+
+/* ====== Блок со статистикой ====== */
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: fluid(20, 16);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statValue {
+  font-weight: 700;
+  font-size: fluid(22, 16);
+}
+
+.statLabel {
+  font-size: fluid(13, 11);
+  opacity: 0.6;
+}
+
+.red{
+    color: var(--color-red-button)
+}
+.green{
+    color: var(--color-green-600)
+}
+.yellow{
+    color: var(--color-yellow-400)
+}

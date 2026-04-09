@@ -1,0 +1,9 @@
+﻿@use "helpers" as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 320px));
+  gap: fluid(24, 16);
+  justify-content: start;
+  align-items: stretch;
+}

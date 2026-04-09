@@ -1,0 +1,17 @@
+@use 'helpers' as *;
+
+.logoBlock{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-red-button);
+    border-radius: 50%;
+    width: fluid(60, 45);
+    height: fluid(60, 45);
+
+    .icon{
+        color: #ffffff;
+        width: fluid-to-laptop(30, 25);
+        height: fluid-to-laptop(30, 25);
+    }
+}

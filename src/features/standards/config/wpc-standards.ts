@@ -1,0 +1,1 @@
+export { fprStandards as wpcStandards } from './fpr-standards'

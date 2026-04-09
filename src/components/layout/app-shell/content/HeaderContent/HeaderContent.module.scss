@@ -1,0 +1,19 @@
+@use 'helpers' as *;
+
+.headerContentBlock {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  padding: fluid(35, 22) fluid(25, 20) fluid(30, 20);
+
+  border-bottom: solid var(--color-gray-border) fluid(2, 1);
+
+  /* ✨ glass effect */
+  background-color: rgba(20, 20, 20, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
