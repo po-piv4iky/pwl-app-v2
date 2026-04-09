@@ -116,7 +116,7 @@ export default function UserStandartResult() {
         </div>
 
         {athleteLevel ? (
-          <ProgressToRank mode={mode} athleteLevel={athleteLevel} />
+          <ProgressToRank athleteLevel={athleteLevel} />
         ) : (
           <NoField
             icon={Trophy}

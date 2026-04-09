@@ -10,7 +10,7 @@ import { fprStandards } from '../config/fpr-standards'
 import { baseStandards } from '../config/base-standards'
 
 
-export const federationStandardsMap: Partial<Record<FederationId, GenderStandards>> = {
+export const fullListOfFederations: Partial<Record<FederationId, GenderStandards>> = {
   base: baseStandards,
   fpr: fprStandards,
   ipf: ipfStandards,

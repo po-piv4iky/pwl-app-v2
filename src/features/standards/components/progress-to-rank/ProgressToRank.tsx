@@ -1,28 +1,20 @@
 import { Award } from 'lucide-react'
 import css from './ProgressToRank.module.scss'
-import { LiftMode } from '../../types/standart.types'
-
-export type CalculateAthleteLevelResult = {
-  currentLevel: string
-  athleteResult: number
-  nextLevel?: string | null
-  progressPercent?: number
-}
+import { AthleteLevelResult } from '../../types/standart.types'
 
 interface Props {
-  mode: LiftMode
-  athleteLevel: CalculateAthleteLevelResult
+  athleteLevel: AthleteLevelResult
 }
 
-const liftTitles: Record<LiftMode, string> = {
+const liftTitles = {
   total: 'Сумма троеборья',
   bench: 'Жим лёжа',
   squat: 'Присед',
   deadlift: 'Становая тяга',
-}
+} as const
 
-export default function ProgressToRank({ mode, athleteLevel }: Props) {
-  const liftTitle = liftTitles[mode]
+export default function ProgressToRank({ athleteLevel }: Props) {
+  const liftTitle = liftTitles[athleteLevel.mode]
 
   return (
     <div className={css.progress}>
