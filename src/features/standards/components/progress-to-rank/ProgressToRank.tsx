@@ -1,6 +1,7 @@
 import { Award } from 'lucide-react'
 import css from './ProgressToRank.module.scss'
 import { AthleteLevelResult } from '../../types/standart.types'
+import ProgressBar from '../../../../components/ui/progress-bar/ProgressBar';
 
 interface Props {
   athleteLevel: AthleteLevelResult
@@ -18,20 +19,45 @@ export default function ProgressToRank({ athleteLevel }: Props) {
 
   return (
     <div className={css.progress}>
-      <div className='flex justify-between items-center'>
-        <div className='flex gap-6 items-center'>
-          <Award />
-          <h6>Ваш текущий разряд</h6>
+
+      <div className={css.progressHeader}>
+
+        <div className={css.progressLeftSide}>
+          <div className={css.progressLeftSideTitle}>
+            <Award />
+            <h6>Ваш текущий разряд</h6>
+          </div>
+
+          <p className={css.progressLeftSideSubTitle}>
+              {liftTitle}: {athleteLevel.athleteResult}
+          </p>
         </div>
 
-        <div className='color-white text-sm'>
+        <div className={css.progressRank}>
           {athleteLevel.currentLevel}
         </div>
       </div>
 
-      <p>
-        {liftTitle}: {athleteLevel.athleteResult}
-      </p>
+        <ProgressBar 
+          valueLabel={`Осталось: ${athleteLevel.progressToNextKg}.0 кг`} 
+          title={`Прогресс до ${athleteLevel.nextLevel}`}
+          size='sm'
+        />
+
+        <div className='flex justify-between'>
+          <div className='flex-col'>
+            <span>
+              Следующий разряд 
+            </span>
+            <h5>{athleteLevel.nextLevel}</h5>
+          </div>
+
+          <div>
+            <span>Требуется</span>
+            <h5></h5>
+          </div>
+        </div>
+     
     </div>
   )
 }

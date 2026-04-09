@@ -1,8 +1,21 @@
-@use "helpers" as*;
+@use 'helpers' as *;
 
-.button{
-    padding: fluid(15, 10);
-    background-color: var(--color-red-button);
-    border-radius: fluid(10, 7);
-    cursor: pointer;
+.button {
+  padding: fluid(15, 10);
+  border: none;
+  border-radius: fluid(10, 7);
+  cursor: pointer;
+  color: var(--color-white);
+  transition:
+    background-color var(--transition-duration-longer),
+    transform 0.2s ease,
+    border-color var(--transition-duration-longer);
+}
+
+.variantPrimary {
+  background-color: var(--color-red-button);
+}
+
+.variantGhost {
+  background-color: transparent;
 }

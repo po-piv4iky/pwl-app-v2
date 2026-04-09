@@ -10,6 +10,33 @@
     background-color: var(--color-bg-card);
 }
 
+.progressHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.progressLeftSide{
+    display: flex;
+    flex-direction: column;
+    gap: fluid(14, 10);
+}
+.progressLeftSideTitle{
+    display: flex;
+    gap: fluid(14, 10);
+    align-items: center;
+}
+
+.progressLeftSideSubTitle{
+    opacity: 60%;
+}
+
+.progressRank{
+    max-height: fluid(35, 20);
+    padding: fluid(4, 2) fluid(10, 6);
+    background-color: var(--color-green-600);
+    border-radius: fluid(10, 7);
+}
+
 @include tablet{
     .progress{
         font-size: fluid(15, 10);

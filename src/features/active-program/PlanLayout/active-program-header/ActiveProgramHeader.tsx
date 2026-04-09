@@ -38,7 +38,7 @@ export default function ActiveProgramHeader() {
         </div>
       </div>
 
-      <ProgressBar percent={percent} />
+      <ProgressBar percent={percent} title="Прогресс программы"/>
 
       <div className={css.stats}>
         <StatItem value={weeksLength} label="недель" variant="red"/>

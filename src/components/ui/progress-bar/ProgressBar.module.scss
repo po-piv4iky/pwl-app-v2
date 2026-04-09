@@ -18,9 +18,30 @@
     }
 }
 
-.progressBar{
-    width: 100%;
-    height: fluid(20, 10); // высота прогресс-бара
-    background-color: var(--color-red-100);
-    border-radius: fluid(10, 5);
+
+.progressBar {
+  width: 100%;
+  background-color: var(--color-red-100);
+  border-radius: fluid(10, 5);
+}
+
+/* размеры */
+.progressBar--sm {
+  height: fluid(10, 6);
+}
+
+.progressBar--md {
+  height: fluid(14, 8);
+}
+
+.progressBar--lg {
+  height: fluid(20, 10);
+}
+
+/* заполнение */
+.fill {
+  height: 100%;
+  background: var(--color-red-button);
+  border-radius: inherit;
+  transition: width 0.3s ease;
 }

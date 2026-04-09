@@ -1,7 +1,6 @@
 'use client'
 
 import { useActiveProgramStore } from "@/store/active-program.store";
-import css from './ActiveProgramPage.module.scss'
 import PlanSession from "./PlanLayout/PlanSession";
 import TrainingSession from "./TrainingLayout/TrainingSession";
 import FinishedSession from "./FinishedLayout/FinishedSession";
