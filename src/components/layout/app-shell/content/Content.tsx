@@ -9,11 +9,7 @@ type Props = {
 
 export function Content({children, toggleSidebar}: Props) {
     return (
-        <div 
-           style={{
-            flex: '1 1 0%'
-        }}
-        >
+        <div className={css.contentWrapper}>
             <HeaderContent toggleSidebar={toggleSidebar} />
             <section className={css.contentBlock}>
                 {children}

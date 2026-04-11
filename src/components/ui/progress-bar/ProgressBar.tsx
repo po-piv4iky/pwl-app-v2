@@ -27,7 +27,7 @@ export default function ProgressBar({
   return (
     <div className={css.progressBarContainer}>
       <div className={css.titleBlock}>
-        <h5 className="opacity-60">{title}</h5>
+        <h5 className={css.title}>{title}</h5>
         <span>{valueLabel ?? `Осталось: ${remaining} кг`}</span>
       </div>
 

@@ -8,10 +8,14 @@ import css from './Sidebar.module.scss'
 
 export function Sidebar() {
     const { isSidebarOpen, isMobile } = useUIStore()
+    const isCollapsed = !isSidebarOpen && !isMobile
     const showMaxes = isSidebarOpen || isMobile
 
     return (
-        <aside className={css.sidebarContainer}>
+        <aside
+            className={css.sidebarContainer}
+            data-sidebar-collapsed={isCollapsed}
+        >
             <HeaderSidebar />
             <SidebarMenu menu={SIDEBAR_DATA}></SidebarMenu>
             <LogMaxes show={showMaxes} />

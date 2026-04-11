@@ -9,12 +9,25 @@
 .titleBlock{
     display: flex;
     justify-content: space-between;
+    gap: fluid-to-laptop(12, 8);
+    color: var(--color-gray-text);
+
+    @include mobile {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
     >h5{
         font-size: fluid(20, 16);
     }
     >span{
         color: var(--color-red-button);
         font-weight: 700;
+        text-align: right;
+
+        @include mobile {
+            text-align: left;
+        }
     }
 }
 

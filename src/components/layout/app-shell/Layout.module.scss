@@ -2,6 +2,9 @@
 
 .layout {
   position: relative;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: clip;
 }
 
 @keyframes fadeIn{
@@ -31,24 +34,24 @@
     >aside{
         width: fluid(95, 50);
         overflow: hidden;
-        transition: .35s;
+        transition: width .35s ease;
         >div a{
             background-color: var(--color-bg-sidebar);
-            transition: .35s;
+            transition: background-color .35s ease;
         }
     }
 
     @include mobile {
         >aside{
-            width: 0;
-            padding: 0;
-            border: none;
+            width: min(80vw, 320px);
             transform: translateX(-100%);
             position: fixed;
             left: 0;
             top: 0;
             bottom: 0;
-            z-index: 350; 
+            z-index: 350;
+            border-right: solid fluid-to-laptop(2, 1) var(--color-border-sidebar);
+            transition: transform .35s ease;
         }
     }
     
@@ -68,7 +71,8 @@
     }
     @include mobile{
        >aside{
-         width: min(80vw, 320px) !important;
+         width: min(80vw, 320px);
+         transform: translateX(0);
          transition: transform .35s ease;
          position: fixed;
          left: 0;

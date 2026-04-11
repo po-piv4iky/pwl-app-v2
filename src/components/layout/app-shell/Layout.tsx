@@ -20,11 +20,13 @@ export function Layout({ children }: Props) {
   } = useUIStore()
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 767px)')
+    const mediaQuery = window.matchMedia('(max-width: 767px)')
 
     const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
-      setIsMobile(!e.matches)
-      setSidebarOpen(e.matches)
+      const mobile = e.matches
+
+      setIsMobile(mobile)
+      setSidebarOpen(!mobile)
     }
 
     handleChange(mediaQuery)
@@ -32,12 +34,11 @@ export function Layout({ children }: Props) {
 
     return () =>
       mediaQuery.removeEventListener('change', handleChange)
-  }, [])
+  }, [setIsMobile, setSidebarOpen])
 
   return (
     <main
       className={cn(
-        'flex',
         css.layout,
         isSidebarOpen ? css.showedSidebar : css.hidedSidebar
       )}

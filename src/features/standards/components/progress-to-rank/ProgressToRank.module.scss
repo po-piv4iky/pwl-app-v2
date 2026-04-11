@@ -35,13 +35,14 @@
 }
 
 .progress__subtitle {
-  opacity: 0.6;
+  color: var(--color-gray-text);
 }
 
 .progress__rank {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-weight: 700;
   align-self: flex-start;
   white-space: nowrap;
   padding: fluid(4, 2) fluid(10, 6);
@@ -60,7 +61,7 @@
   justify-content: space-between;
   gap: fluid(16, 10);
   padding: fluid(22, 16);
-  border: solid fluid(3, 2) var(--color-gray-border-main);
+  border: solid fluid(2, 1) var(--color-gray-border-main);
   border-radius: fluid(10, 8);
 }
 
@@ -71,7 +72,7 @@
 }
 
 .progress__detailLabel {
-  opacity: 0.6;
+  color: var(--color-gray-text);
 }
 
 .progress__detailValue {

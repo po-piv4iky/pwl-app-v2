@@ -12,8 +12,8 @@ export default function ActiveProgramHeader() {
     const { program, completedDays } = activeProgram
     const totalWorkouts = program.weeks.reduce((acc, week) => week.days.length + acc ,0) 
     const completedWorkouts = completedDays.length
-    const percent = Math.round((completedWorkouts / totalWorkouts) * 100)
     const weeksLength = getTotalTrainingWeeks(program)
+    const percent = totalWorkouts === 0 ? 0 : Math.round((completedWorkouts / totalWorkouts) * 100)
 
      return (
     <div className={css.header}>
@@ -38,7 +38,13 @@ export default function ActiveProgramHeader() {
         </div>
       </div>
 
-      <ProgressBar percent={percent} title="Прогресс программы"/>
+      <ProgressBar 
+        current={completedWorkouts} 
+        target={totalWorkouts} 
+        title="Прогресс программы" 
+        valueLabel={`${percent}%`}
+        size="md"
+      />
 
       <div className={css.stats}>
         <StatItem value={weeksLength} label="недель" variant="red"/>

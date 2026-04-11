@@ -5,9 +5,9 @@
     top: 0;
     padding: fluid(25, 15);
     height: 100vh;
+    overflow-y: auto;
     border-right: solid fluid-to-laptop(2, 1) var(--color-border-sidebar);
     background-color: #111111;
     white-space: nowrap;
 }
-
 
