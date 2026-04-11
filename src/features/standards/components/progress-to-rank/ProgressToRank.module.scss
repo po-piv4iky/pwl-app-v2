@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     padding: fluid(20, 10);
-    gap: fluid(15, 10);
+    gap: fluid(20, 14);
     border: 1px solid var(--color-red-200);
     border-radius: fluid(12, 8);
     background-color: var(--color-bg-card);
@@ -35,6 +35,14 @@
     padding: fluid(4, 2) fluid(10, 6);
     background-color: var(--color-green-600);
     border-radius: fluid(10, 7);
+}
+
+.progressBottomBlock{
+    display: flex;
+    justify-content: space-between;
+    padding: fluid(22, 16);
+    border: solid fluid(3, 2) var(--color-gray-border-main);
+    border-radius: fluid(10, 8);
 }
 
 @include tablet{

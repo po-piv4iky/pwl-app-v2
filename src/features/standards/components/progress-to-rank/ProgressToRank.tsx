@@ -38,13 +38,15 @@ export default function ProgressToRank({ athleteLevel }: Props) {
         </div>
       </div>
 
+      <div className='flex flex-col gap-6'>
+
         <ProgressBar 
           valueLabel={`Осталось: ${athleteLevel.progressToNextKg}.0 кг`} 
           title={`Прогресс до ${athleteLevel.nextLevel}`}
           size='sm'
         />
 
-        <div className='flex justify-between'>
+        <div className={css.progressBottomBlock}>
           <div className='flex-col'>
             <span>
               Следующий разряд 
@@ -59,5 +61,7 @@ export default function ProgressToRank({ athleteLevel }: Props) {
         </div>
      
     </div>
+      </div>
+
   )
 }
