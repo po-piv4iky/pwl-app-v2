@@ -2,31 +2,39 @@ import clsx from 'clsx'
 import css from './ProgressBar.module.scss'
 
 interface ProgressBarProps {
-  percent?: number
   title: string
+  current: number
+  target: number
   valueLabel?: string
   size?: 'sm' | 'md' | 'lg'
   className?: string
 }
 
 export default function ProgressBar({
-  percent,
   title,
+  current,
+  target,
   valueLabel,
   size = 'lg',
   className,
 }: ProgressBarProps) {
+  const safeCurrent = Math.max(0, current)
+  const safeTarget = Math.max(1, target)
+
+  const percent = Math.min((safeCurrent / safeTarget) * 100, 100)
+  const remaining = Math.max(target - current, 0)
+
   return (
     <div className={css.progressBarContainer}>
       <div className={css.titleBlock}>
         <h5 className="opacity-60">{title}</h5>
-        <span>{valueLabel ?? `${percent}%`}</span>
+        <span>{valueLabel ?? `Осталось: ${remaining} кг`}</span>
       </div>
 
       <div
         className={clsx(
           css.progressBar,
-          css[`progressBar--${size}`], // 👈 вот это главное
+          css[`progressBar--${size}`],
           className
         )}
       >
