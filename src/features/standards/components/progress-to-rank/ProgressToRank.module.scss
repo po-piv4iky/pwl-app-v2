@@ -1,52 +1,85 @@
-@use "helpers" as*;
+@use "helpers" as *;
 
-.progress{
-    display: flex;
-    flex-direction: column;
-    padding: fluid(20, 10);
-    gap: fluid(20, 14);
-    border: 1px solid var(--color-red-200);
-    border-radius: fluid(12, 8);
-    background-color: var(--color-bg-card);
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(24, 16);
+  padding: fluid(20, 10);
+  border: 1px solid var(--color-red-200);
+  border-radius: fluid(12, 8);
+  background-color: var(--color-bg-card);
 }
 
-.progressHeader{
-    display: flex;
-    justify-content: space-between;
+.progress__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: fluid(16, 10);
 }
 
-.progressLeftSide{
-    display: flex;
-    flex-direction: column;
-    gap: fluid(14, 10);
-}
-.progressLeftSideTitle{
-    display: flex;
-    gap: fluid(14, 10);
-    align-items: center;
+.progress__info {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(10, 6);
 }
 
-.progressLeftSideSubTitle{
-    opacity: 60%;
+.progress__titleRow {
+  display: flex;
+  align-items: center;
+  gap: fluid(14, 10);
 }
 
-.progressRank{
-    max-height: fluid(35, 20);
-    padding: fluid(4, 2) fluid(10, 6);
-    background-color: var(--color-green-600);
-    border-radius: fluid(10, 7);
+.progress__icon {
+  color: var(--color-red-button);
+  flex-shrink: 0;
 }
 
-.progressBottomBlock{
-    display: flex;
-    justify-content: space-between;
-    padding: fluid(22, 16);
-    border: solid fluid(3, 2) var(--color-gray-border-main);
-    border-radius: fluid(10, 8);
+.progress__subtitle {
+  opacity: 0.6;
 }
 
-@include tablet{
-    .progress{
-        font-size: fluid(15, 10);
-    }
+.progress__rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  white-space: nowrap;
+  padding: fluid(4, 2) fluid(10, 6);
+  border-radius: fluid(10, 7);
+  background-color: var(--color-green-600);
+}
+
+.progress__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(14, 8);
+}
+
+.progress__details {
+  display: flex;
+  justify-content: space-between;
+  gap: fluid(16, 10);
+  padding: fluid(22, 16);
+  border: solid fluid(3, 2) var(--color-gray-border-main);
+  border-radius: fluid(10, 8);
+}
+
+.progress__detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(6, 4);
+}
+
+.progress__detailLabel {
+  opacity: 0.6;
+}
+
+.progress__detailValue {
+  margin: 0;
+}
+
+@include tablet {
+  .progress {
+    font-size: fluid(15, 10);
+  }
 }

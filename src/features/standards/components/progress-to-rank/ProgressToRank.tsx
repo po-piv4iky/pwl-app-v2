@@ -1,7 +1,7 @@
 import { Award } from 'lucide-react'
 import css from './ProgressToRank.module.scss'
 import { AthleteLevelResult } from '../../types/standart.types'
-import ProgressBar from '../../../../components/ui/progress-bar/ProgressBar';
+import ProgressBar from "@/components/ui/progress-bar/ProgressBar"
 
 interface Props {
   athleteLevel: AthleteLevelResult
@@ -19,49 +19,50 @@ export default function ProgressToRank({ athleteLevel }: Props) {
 
   return (
     <div className={css.progress}>
-
-      <div className={css.progressHeader}>
-
-        <div className={css.progressLeftSide}>
-          <div className={css.progressLeftSideTitle}>
-            <Award />
+      <div className={css.progress__top}>
+        <div className={css.progress__info}>
+          <div className={css.progress__titleRow}>
+            <Award className={css.progress__icon} />
             <h6>Ваш текущий разряд</h6>
           </div>
 
-          <p className={css.progressLeftSideSubTitle}>
-              {liftTitle}: {athleteLevel.athleteResult}
+          <p className={css.progress__subtitle}>
+            {liftTitle}: {athleteLevel.athleteResult}
           </p>
         </div>
 
-        <div className={css.progressRank}>
+        <div className={css.progress__rank}>
           {athleteLevel.currentLevel}
         </div>
       </div>
 
-      <div className='flex flex-col gap-6'>
-
-        <ProgressBar 
-          valueLabel={`Осталось: ${athleteLevel.progressToNextKg}.0 кг`} 
+      <div className={css.progress__bottom}>
+        <ProgressBar
+          valueLabel={`Осталось: ${athleteLevel.progressToNextKg}.0 кг`}
           title={`Прогресс до ${athleteLevel.nextLevel}`}
-          size='sm'
+          size="sm"
         />
 
-        <div className={css.progressBottomBlock}>
-          <div className='flex-col'>
-            <span>
-              Следующий разряд 
+        <div className={css.progress__details}>
+          <div className={css.progress__detailItem}>
+            <span className={css.progress__detailLabel}>
+              Следующий разряд
             </span>
-            <h5>{athleteLevel.nextLevel}</h5>
+            <h5 className={css.progress__detailValue}>
+              {athleteLevel.nextLevel}
+            </h5>
           </div>
 
-          <div>
-            <span>Требуется</span>
-            <h5></h5>
+          <div className={css.progress__detailItem}>
+            <span className={css.progress__detailLabel}>
+              Требуется
+            </span>
+            <h5 className={css.progress__detailValue}>
+              {athleteLevel.progressToNextKg} кг
+            </h5>
           </div>
         </div>
-     
-    </div>
       </div>
-
+    </div>
   )
 }
