@@ -38,7 +38,7 @@ export default function ProgressToRank({ athleteLevel }: Props) {
 
       <div className={css.progress__bottom}>
         <ProgressBar
-          valueLabel={`Осталось: ${athleteLevel.progressToNextKg}.0 кг`}
+          valueLabel={`Осталось: ${athleteLevel.progressToNextKg} кг`}
           title={`Прогресс до ${athleteLevel.nextLevel}`}
           size="sm"
         />
@@ -57,8 +57,11 @@ export default function ProgressToRank({ athleteLevel }: Props) {
             <span className={css.progress__detailLabel}>
               Требуется
             </span>
-            <h5 className={css.progress__detailValue}>
-              {athleteLevel.progressToNextKg} кг
+            <h5 
+              className={css.progress__detailValue}
+              data-variant="accent"
+            >
+              {athleteLevel.nextStandard} кг
             </h5>
           </div>
         </div>

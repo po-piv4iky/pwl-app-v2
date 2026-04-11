@@ -75,8 +75,12 @@
 }
 
 .progress__detailValue {
-  margin: 0;
+  font-weight: 800;
 }
+.progress__detailValue[data-variant='accent'] {
+  color: var(--color-red-button);
+}
+
 
 @include tablet {
   .progress {
