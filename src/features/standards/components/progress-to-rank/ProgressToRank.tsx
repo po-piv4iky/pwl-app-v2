@@ -2,6 +2,7 @@ import { Award } from 'lucide-react'
 import css from './ProgressToRank.module.scss'
 import { AthleteLevelResult } from '../../types/standart.types'
 import ProgressBar from "@/components/ui/progress-bar/ProgressBar"
+import Card from '@/components/ui/card/Card'
 
 interface Props {
   athleteLevel: AthleteLevelResult
@@ -18,7 +19,7 @@ export default function ProgressToRank({ athleteLevel }: Props) {
   const liftTitle = liftTitles[athleteLevel.mode]
 
   return (
-    <div className={css.progress}>
+    <Card variant='danger'>
       <div className={css.progress__top}>
         <div className={css.progress__info}>
           <div className={css.progress__titleRow}>
@@ -68,6 +69,6 @@ export default function ProgressToRank({ athleteLevel }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }

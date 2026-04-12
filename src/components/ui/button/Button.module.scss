@@ -1,21 +1,111 @@
 @use 'helpers' as *;
 
 .button {
-  padding: fluid(15, 10);
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
   border-radius: fluid(10, 7);
   cursor: pointer;
+  border: none;
+
   color: var(--color-white);
+
   transition:
     background-color var(--transition-duration-longer),
     transform 0.2s ease,
-    border-color var(--transition-duration-longer);
+    border-color var(--transition-duration-longer),
+    color var(--transition-duration-longer);
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
-.variantPrimary {
-  background-color: var(--color-red-button);
+/* ================== SIZE ================== */
+
+.button--sm {
+  padding: fluid(10, 6);
+  font-size: fluid(13, 11);
 }
 
-.variantGhost {
+.button--md {
+  padding: fluid(15, 10);
+  font-size: fluid(14, 12);
+}
+
+.button--lg {
+  padding: fluid(18, 12);
+  font-size: fluid(16, 14);
+}
+
+/* ================== VARIANT ================== */
+
+.button--solid {
+  background-color:  var(--color-red-button);
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+
+
+.button--ghost {
+  
+  white-space: nowrap;
+  border: solid var(--color-gray-border) fluid(2, 1);
+  background-color: var(--color-bg-overlay);
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-red-button);
+  }
+
+}
+
+.button--outline {
   background-color: transparent;
+  border: 1px solid var(--btn-border);
+  color: var(--btn-color);
+
+  &:hover {
+    background-color: var(--btn-bg-hover);
+  }
+}
+
+/* ================== COLOR ================== */
+
+.button--primary {
+  --btn-bg: var(--color-red-button);
+  --btn-border: var(--color-red-button);
+  --btn-color: var(--color-red-button);
+  --btn-bg-hover: rgba(255, 0, 0, 0.1);
+}
+
+.button--success {
+  --btn-bg: var(--color-green-600);
+  --btn-border: var(--color-green-600);
+  --btn-color: var(--color-green-600);
+  --btn-bg-hover: rgba(0, 200, 0, 0.1);
+}
+
+.button--warning {
+  --btn-bg: var(--color-yellow-500);
+  --btn-border: var(--color-yellow-500);
+  --btn-color: var(--color-yellow-500);
+  --btn-bg-hover: rgba(255, 200, 0, 0.1);
+}
+
+.button--danger {
+  --btn-bg: var(--color-red-200);
+  --btn-border: var(--color-red-200);
+  --btn-color: var(--color-red-200);
+  --btn-bg-hover: rgba(255, 0, 0, 0.1);
 }

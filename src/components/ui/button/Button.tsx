@@ -1,30 +1,39 @@
-import { ReactNode } from 'react'
-
+import clsx from 'clsx'
 import css from './Button.module.scss'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 
-type ButtonVariant = 'primary' | 'ghost'
+type ButtonVariant = 'solid' | 'ghost' | 'outline'
+type ButtonColor = 'primary' | 'success' | 'warning' | 'danger'
+type ButtonSize = 'sm' | 'md' | 'lg'
 
-type Props = {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
   className?: string
-  onClick?: () => void
   variant?: ButtonVariant
+  color?: ButtonColor
+  size?: ButtonSize
 }
 
 export default function Button({
   children,
-  className = '',
-  onClick,
-  variant = 'primary',
+  className,
+  variant = 'solid',
+  color = 'primary',
+  size = 'md',
+  type = 'button',
+  ...props
 }: Props) {
-  const variantClass =
-    variant === 'ghost' ? css.variantGhost : css.variantPrimary
-
   return (
     <button
-      className={`${css.button} ${variantClass} ${className}`.trim()}
-      onClick={onClick}
-      type='button'
+      type={type}
+      className={clsx(
+        css.button,
+        css[`button--${variant}`],
+        css[`button--${color}`],
+        css[`button--${size}`],
+        className
+      )}
+      {...props}
     >
       {children}
     </button>

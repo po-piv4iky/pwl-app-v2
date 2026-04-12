@@ -1,0 +1,63 @@
+@use "helpers" as *;
+
+.card {
+  display: flex;
+  border-radius: fluid(12, 8);
+  background-color: var(--color-bg-card);
+}
+
+.card--direction-column {
+  flex-direction: column;
+}
+
+.card--direction-row {
+  flex-direction: row;
+}
+
+/* цвета рамки */
+.card--default {
+  border-color: var(--color-gray-border-main);
+}
+
+.card--success {
+  border-color: var(--color-green-600);
+}
+
+.card--warning {
+  border-color: var(--color-yellow-500);
+}
+
+.card--danger {
+  border-color: var(--color-red-200);
+}
+
+/* размеры */
+.card--sm {
+  gap: fluid(16, 10);
+  padding: fluid(14, 8);
+}
+
+.card--md {
+  gap: fluid(24, 16);
+  padding: fluid(20, 10);
+}
+
+.card--lg {
+  gap: fluid(32, 20);
+  padding: fluid(28, 16);
+}
+
+/* тип рамки */
+.card--border-solid {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.card--border-dashed {
+  border-width: 1px;
+  border-style: dashed;
+}
+
+.card--border-none {
+  border: none;
+}

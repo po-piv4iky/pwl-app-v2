@@ -1,70 +1,46 @@
 @use "helpers" as *;
 
 .userCard {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: fluid(16, 12);
-    padding: fluid(16, 12);
-
-    border: 1px solid var(--color-gray-border);
-    border-radius: fluid(12, 8);
-    background-color: var(--color-bg-card);
-
-    /* центрирование контейнера */
-    margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
 }
 
-/* блок с инфой */
-.userCardInfo {
-    display: flex;
-    align-items: center;
-    gap: fluid(20, 14);
+.userCard__info {
+  display: flex;
+  align-items: center;
+  gap: fluid(20, 14);
 }
 
-/* один элемент */
-.userCardItem {
-    display: flex;
-    align-items: center;
-    gap: fluid(8, 6);
-
-    color: var(--color-white);
-    font-size: fluid(14, 12);
+.userCard__item {
+  display: flex;
+  align-items: center;
+  gap: fluid(8, 6);
+  color: var(--color-white);
+  font-size: fluid(14, 12);
 }
 
-/* иконка */
-.userCardIcon {
-    color: var(--color-red-text-button);
-    width: 30px;
-    height: 30px;
+.userCard__icon {
+  width: 30px;
+  height: 30px;
+  color: var(--color-red-text-button);
+  flex-shrink: 0;
 }
 
-/* кнопка */
-.userCardButton {
-    border: solid var(--color-gray-border) fluid(2, 1);
-    background-color: var(--color-bg-overlay);
-    white-space: nowrap;
-    transition: background-color 0.2s ease;
 
-    &:hover {
-        background-color: var(--color-red-button);
-    }
-}
-
-/* 📱 адаптив */
 @include mobile {
-    .userCard {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .userCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .userCardInfo {
-        width: 100%;
-        justify-content: space-between;
-    }
+  .userCard__info {
+    width: 100%;
+    justify-content: space-between;
+  }
 
-    .userCardButton {
-        width: 100%;
-    }
+  .userCard__button {
+    width: 100%;
+  }
 }

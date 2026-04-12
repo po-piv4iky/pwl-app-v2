@@ -30,6 +30,7 @@ import {
   LiftMode,
 } from '../../types/standart.types'
 import { calculateAthleteLevel } from '../../lib/calculate-athlete-level'
+import AllStandards from '../all-standards/AllStandards'
 
 const modeOptions: { label: string; value: LiftMode }[] = [
   { label: 'Сумма', value: 'total' },
@@ -128,9 +129,14 @@ export default function UserStandartResult() {
           />
         )}
 
+          <AllStandards 
+            mode={mode}
+          />
+
         {selectedFederation && (
           <FederationPreviewCard federation={selectedFederation} />
         )}
+
       </Stack>
     </Container>
   )
