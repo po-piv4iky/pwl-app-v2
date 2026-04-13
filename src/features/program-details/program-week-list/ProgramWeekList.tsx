@@ -1,15 +1,15 @@
-import { Program } from "@/config/programs/types/programs.types"
+import { ProgramTraining } from "@/programs/types/program.types"
 import ProgramWeekCard from "./ProgramWeekCard"
 
 interface Props { 
-    program: Program
+    program: ProgramTraining
 }
 
 export default function ProgramWeekList({program}: Props) {
     return (
         <div>
             {program.weeks.map(week => (
-                <ProgramWeekCard key={week.week} week={week}/> 
+                <ProgramWeekCard key={week.weekNumber} week={week}/> 
             ))}
         </div>
     )

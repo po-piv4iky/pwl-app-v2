@@ -1,4 +1,4 @@
-import { TrainingWeek } from "@/config/programs/types/trainingWeek"
+import { TrainingWeek } from "@/programs/types/training.types"
 import ProgramDayCard from "./day-card/ProgramDayCard"
 import css from './ProgramWeekCard.module.scss'
 
@@ -13,15 +13,15 @@ export default function ProgramWeekCard({week}: Props) {
 
                 <div className={css.weekInfo}>
                     <div className={css.numberWeek}>
-                        {week.week} 
+                        {week.weekNumber} 
                     </div>
                     <span className="font-semibold text-2xl">Неделя</span>
                 </div>
 
-                <span className="opacity-60">{week.days.length} тренировки</span>
+                <span className="opacity-60">{week.trainingDays.length} тренировки</span>
             </div>
             <div className={css.daysGrid}>
-                {week.days.map(day => (
+                {week.trainingDays.map(day => (
                     <ProgramDayCard key={day.day} day={day}/>
                 ))}
             </div>

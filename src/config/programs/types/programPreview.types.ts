@@ -1,12 +1,12 @@
 
 export interface ProgramPreview {
   id: string;
-  title: string;
+  title: string; // название программы
   author?: string;
-  lift: 'bench' | 'deadlift' | 'squat' | 'complex';
+  lift: 'bench' | 'deadlift' | 'squat' | 'complex'; // движение
   level: string;
-  description?: string ;
-  durationWeeks: string;
+  description?: string; // описание
+  durationWeeks: string; // колличество недель
 }
 
 

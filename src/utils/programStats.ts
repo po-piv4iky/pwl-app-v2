@@ -1,9 +1,9 @@
-import { Program } from "@/config/programs/types/programs.types";
+import { ProgramTraining } from "@/programs/types/program.types";
 
-export function getTotalTrainingDays(program: Program){
-    return program.weeks.reduce((acc, week) => acc + week.days.length, 0)
+export function getTotalTrainingDays(program: ProgramTraining){
+    return program.weeks.reduce((acc, week) => acc + week.trainingDays.length, 0)
 }
 
-export function getTotalTrainingWeeks(program: Program){
+export function getTotalTrainingWeeks(program: ProgramTraining){
     return program.weeks.length
 }

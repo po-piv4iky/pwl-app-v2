@@ -1,7 +1,9 @@
 import { ExerciseDefinition } from "./types/exercise-definition.types";
 
 export const exercises: ExerciseDefinition[] = [
-  // Bench
+  // =========================
+  // ЖИМОВЫЕ ДВИЖЕНИЯ / BENCH
+  // =========================
   {
     id: "bench_press",
     name: "Жим лёжа",
@@ -29,11 +31,13 @@ export const exercises: ExerciseDefinition[] = [
   },
   {
     id: "wide_grip_bench_press",
-    name: "Жим лежа широким хватом",
+    name: "Жим лёжа широким хватом",
     lift: "bench"
   },
 
-  // Squat
+  // =========================
+  // ПРИСЕДАНИЯ / SQUAT
+  // =========================
   {
     id: "squat",
     name: "Приседания со штангой",
@@ -60,7 +64,9 @@ export const exercises: ExerciseDefinition[] = [
     lift: "squat"
   },
 
-  // Deadlift
+  // =========================
+  // ТЯГОВЫЕ ДВИЖЕНИЯ / DEADLIFT
+  // =========================
   {
     id: "deadlift",
     name: "Становая тяга",
@@ -87,7 +93,9 @@ export const exercises: ExerciseDefinition[] = [
     lift: "deadlift"
   },
 
-  // Accessory
+  // =========================
+  // СПИНА / ТЯГИ / ВЕРХ СПИНЫ
+  // =========================
   {
     id: "pullups",
     name: "Подтягивания",
@@ -119,6 +127,15 @@ export const exercises: ExerciseDefinition[] = [
     lift: "accessory"
   },
   {
+    id: "barbell_pull_to_the_belt",
+    name: "Тяга штанги к поясу в наклоне",
+    lift: "accessory"
+  },
+
+  // =========================
+  // ТРИЦЕПС / БИЦЕПС / РУКИ
+  // =========================
+  {
     id: "triceps_pushdown",
     name: "Разгибание рук на блоке",
     lift: "accessory"
@@ -134,20 +151,62 @@ export const exercises: ExerciseDefinition[] = [
     lift: "accessory"
   },
   {
+    id: "bicep_curl",
+    name: "Подъём штанги на бицепс",
+    lift: "accessory"
+  },
+  {
+    id: "triceps_biceps_superset",
+    name: "Трицепс + бицепс",
+    lift: "accessory"
+  },
+
+  // =========================
+  // ПЛЕЧИ
+  // =========================
+  {
     id: "seated_incline_press",
     name: "Жим сидя под углом",
     lift: "accessory"
   },
   {
-    id: "bicep_curl",
-    name: "Сгибание рук на бицепс",
+    id: "standing_barbell_press",
+    name: "Жим штанги стоя",
     lift: "accessory"
   },
+  {
+    id: "lateral_raise",
+    name: "Разводка гантелей в стороны",
+    lift: "accessory"
+  },
+  {
+    id: "rear_delt_fly",
+    name: "Разводка гантелей в наклоне",
+    lift: "accessory"
+  },
+  {
+    id: "overhead_press_behind_neck",
+    name: "Жим из-за головы",
+    lift: "accessory"
+  },
+
+  // =========================
+  // ГРУДЬ / ДОПОЛНИТЕЛЬНЫЕ ЖИМОВЫЕ
+  // =========================
   {
     id: "dumbbell_fly",
     name: "Разводка гантелей лёжа",
     lift: "accessory"
   },
+  {
+    id: "chest_simulator",
+    name: "Грудные на тренажёре",
+    lift: "accessory"
+  },
+
+  // =========================
+  // НОГИ / ЯГОДИЦЫ
+  // =========================
   {
     id: "leg_press",
     name: "Жим ногами",
@@ -159,23 +218,8 @@ export const exercises: ExerciseDefinition[] = [
     lift: "accessory"
   },
   {
-    id: 'hip_extension',
-    name: 'Разгибание бедра',
-    lift: "accessory"
-  },
-  {
-    id: "back_extension",
-    name: "Гиперэкстензия",
-    lift: "accessory"
-  },
-  {
-    id: "press",
-    name: "Пресс",
-    lift: "accessory"
-  },
-  {
-    id: "triceps_biceps_superset",
-    name: "Трицепс + бицепс",
+    id: "hip_extension",
+    name: "Разгибание бедра",
     lift: "accessory"
   },
   {
@@ -183,28 +227,30 @@ export const exercises: ExerciseDefinition[] = [
     name: "Приседания в ножницах со штангой на спине",
     lift: "accessory"
   },
+
+  // =========================
+  // ЗАДНЯЯ ЦЕПЬ / ПОЯСНИЦА
+  // =========================
   {
-    id: "chest_simulator",
-    name: "Грудные на тренажёре",
+    id: "back_extension",
+    name: "Гиперэкстензия",
     lift: "accessory"
   },
   {
-    id: "barbell_pull_to_the_belt",
-    name: "Тяга штанги к поясу в наклоне",
-    lift: "accessory"
+  id: "good_morning",
+  name: "Наклоны со штангой на плечах",
+  lift: "accessory"
   },
+
+  // =========================
+  // КОР / ПРЕСС
+  // =========================
   {
-    id: "good_morning",
-    name: "Наклоны сидя",
-    lift: "accessory"
-  },
-  {
-    id: "overhead_press_behind_neck",
-    name: "Жим из-за головы",
+    id: "press",
+    name: "Пресс",
     lift: "accessory"
   }
 ];
-
 // const definition = exerciseDefinitions.find(
 //   e => e.id === exercise.exerciseId
 // )

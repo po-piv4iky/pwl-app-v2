@@ -1,13 +1,13 @@
-import { Program } from "@/config/programs/types/programs.types";
 import { getTotalTrainingDays, getTotalTrainingWeeks } from "@/utils/programStats";
 import ProgramDetailsHeader from "./program-details-header/ProgramDetailsHeader";
 import ProgramWeekList from "./program-week-list/ProgramWeekList";
 import FooterIsStart from "./footer-start/FooterIsStart";
 import css from './ProgramDetailsPage.module.scss'
 import Container from "@/components/layout/container/Container";
+import { ProgramTraining } from "@/programs/types/program.types";
 
 interface Props {
-    program: Program
+    program: ProgramTraining
 }
 
 export default function ProgramDetailsPage({program}: Props) {

@@ -9,7 +9,7 @@ export interface ProgramTraining {
     title: string //Программа Шейко Б.И.
     author: string
     country: string // страна тренера
-    category: ProgramCategory //bench
+    lift: ProgramCategory //bench
     description: string //Жим лежа для любителей «пахать»
     level: Level
     durationWeeks: number

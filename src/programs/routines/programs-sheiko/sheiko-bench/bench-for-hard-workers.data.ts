@@ -1,5 +1,4 @@
 import { day } from "@/programs/builder/day-builder";
-import { generateWarmUp } from "@/programs/builder/warmup";
 import { week } from "@/programs/builder/week-builder";
 import { reps, work, works } from "@/programs/builder/work";
 import { COMMENTS } from "@/programs/constants/comments";
@@ -35,7 +34,7 @@ export const benchForHardWorkers: ProgramTraining = {
     title: 'Жим лёжа для любителей пахать',
     author: 'Шейко',
     country: 'Russia',
-    category: 'bench',
+    lift: 'bench',
     description: 'Высокообъемная программа жима лёжа от Бориса Шейко для опытных атлетов.',
     level: 'advanced', // передовой
     durationWeeks: 14,

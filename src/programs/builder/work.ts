@@ -5,7 +5,7 @@ export function works(percent: number, reps: number, sets: number): ExerciseSet[
 }
 
 
-export function work(percent: number, reps: number): ExerciseSet{ 
+export function work(percent: number, reps: number | string): ExerciseSet{ 
   return { percent, reps }
 }
 

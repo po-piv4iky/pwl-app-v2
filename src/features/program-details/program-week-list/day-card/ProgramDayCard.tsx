@@ -1,6 +1,7 @@
 import Card from '@/components/ui/card/Card'
-import { ProgramExercise, TrainingDay } from '@/config/programs/types/trainingDay.types'
+import { ProgramExercise } from '@/config/programs/types/trainingDay.types'
 import css from './ProgramDayCard.module.scss'
+import { TrainingDay } from '@/programs/types/training.types'
 
 interface Props {
   day: TrainingDay
@@ -8,7 +9,7 @@ interface Props {
 
 export default function ProgramDayCard({ day }: Props) {
   const mainExercises = day.exercises.filter(
-    (exercise) => exercise.category === 'main'
+    (exercise) => exercise.exerciseId === 'main'
   )
 
   const lockoutExercises = day.exercises.filter(
