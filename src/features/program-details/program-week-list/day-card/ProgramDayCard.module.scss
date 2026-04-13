@@ -1,59 +1,70 @@
 @use "helpers" as *;
 
-.dayCard{
-    display: flex;
-    gap: fluid-to-laptop(30, 25); 
-    flex-direction: column;
-    background-color: var(--color-gray-100);
-    padding: fluid-to-laptop(20, 15);
-    border: solid 1px var(--color-gray-border);
-    border-radius: fluid(10, 6);
-    transition: all .2s;
-    &:hover{
-        border-color: var(--color-red-200);
-    }
+.dayCard {
+  gap: fluid-to-laptop(30, 25);
+  border-color: var(--color-gray-border);
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-red-200);
+  }
 }
 
-.exercisesBlock{
-    display: flex;
-    flex-direction: column;
-    gap: fluid-to-laptop(15, 10);
+.dayCard__title {
+  margin: 0;
 }
 
-.exercise{
-    display: flex;
-    flex-direction: column;
-    border: solid 1px  var(--color-gray-400);
-    border-radius: fluid(10, 8);
-    padding: fluid-to-laptop(12, 8);
-    background-color: var(--color-gray-bg-input);
+.dayCard__exercises {
+  display: flex;
+  flex-direction: column;
+  gap: fluid-to-laptop(15, 10);
 }
 
-.exerciseHeader{
-    display: flex;
-    justify-content: space-between;
+.dayCard__sectionTitle {
+  margin: 0;
+  font-weight: 700;
+  font-size: fluid(16, 12);
+  color: var(--color-gray-text-input);
 }
 
-.exerciseName{
-    font-weight: 700;
+.dayCard__exercise {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(8, 6);
+  padding: fluid-to-laptop(12, 8);
+  border: 1px solid var(--color-gray-400);
+  border-radius: fluid(10, 8);
+  background-color: var(--color-gray-bg-input);
 }
 
-.intensity{
-    color: var(--color-red-button);
+.dayCard__exerciseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: fluid(12, 8);
 }
 
-.scheme{
-    font-weight: 700;
-    font-size: fluid(16, 12);
-    color: var(--color-gray-text-input)
+.dayCard__exerciseName {
+  margin: 0;
+  font-weight: 700;
 }
 
-.comment{
-    font-size: fluid(16, 12);
-    color: var(--color-gray-text-input)
+.dayCard__intensity {
+  white-space: nowrap;
+  color: var(--color-red-button);
 }
-.sectionTitle{
-    font-weight: 700;
-    font-size: fluid(16, 12);
-    color: var(--color-gray-text-input)
+
+.dayCard__scheme {
+  margin: 0;
+  font-weight: 700;
+  font-size: fluid(16, 12);
+  color: var(--color-gray-text-input);
+}
+
+.dayCard__comment {
+  margin: 0;
+  font-size: fluid(16, 12);
+  color: var(--color-gray-text-input);
 }

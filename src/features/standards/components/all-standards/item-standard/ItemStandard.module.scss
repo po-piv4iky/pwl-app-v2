@@ -1,0 +1,103 @@
+@use "helpers" as *;
+
+.itemStandard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.itemStandard__left {
+  display: flex;
+  align-items: center;
+  gap: fluid(24, 12);
+  font-weight: 800;
+}
+
+.itemStandard__levelBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemStandard__subLevel {
+  font-size: fluid(14, 10);
+  font-weight: 400;
+  color: var(--color-red-text-button);
+}
+
+.itemStandard__level {
+  font-size: fluid(16, 14);
+  line-height: 1.2;
+}
+
+.itemStandard__value {
+  white-space: nowrap;
+}
+
+.itemStandard__circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fluid(40, 30);
+  height: fluid(40, 30);
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.itemStandard__right {
+  display: flex;
+  align-items: center;
+  gap: fluid(15, 10);
+  font-weight: 800;
+}
+
+.itemStandard_completed {
+  background-color: var(--color-green-rank);
+  border-color: var(--color-green-border);
+}
+
+.itemStandard_current {
+  background-color: var(--color-red-rank);
+  border-color: var(--color-red-text-button);
+}
+
+.itemStandard__iconCompleted {
+  flex-shrink: 0;
+  color: var(--color-green-600);
+}
+
+.itemStandard__iconCurrent {
+  flex-shrink: 0;
+  color: var(--color-red-text-button);
+}
+
+/* цвета кружков */
+.elite {
+  background: #ffd700;
+  color: #1a1a1a;
+}
+
+.master {
+  background: #c0c0c0;
+  color: #1a1a1a;
+}
+
+.advanced {
+  background: #2563eb;
+}
+
+.level1 {
+  background: #7c3aed;
+}
+
+.level2 {
+  background: #f97316;
+}
+
+.level3 {
+  background: #14b8a6;
+}
+
+.beginner {
+  background: #6b7280;
+}

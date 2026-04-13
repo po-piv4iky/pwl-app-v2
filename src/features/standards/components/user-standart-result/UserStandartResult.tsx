@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { Trophy } from 'lucide-react'
-
 import SectionHeader from '@/components/composite/section-header/SectionHeader'
 import Container from '@/components/layout/container/Container'
 import Stack from '@/components/layout/stack/Stack'
@@ -10,16 +9,12 @@ import SettingsField from '@/components/ui/settings-field/SettingsField'
 import SegmentedControl from '@/components/ui/segmented-control/SegmentedControl'
 import { UiSelect } from '@/components/ui/ui-select/UiSelect'
 import NoField from '@/components/no-field/NoField'
-
 import UserRender from '../user-render/UserRender'
 import ProgressToRank from '../progress-to-rank/ProgressToRank'
 import FederationPreviewCard from '../federation-preview/FederationPreviewCard'
-
 import css from './UserStandartResult.module.scss'
-
 import { useStandartUserStore } from '@/store/user-standart.store'
 import { useUserMaxesStore } from '@/store/maxes.store'
-
 import { federationOptions } from '@/config/federations/federation-options'
 import { getFederationById } from '@/config/federations/get-federation-by-id'
 import { FederationId } from '@/config/federations/federation.types'
@@ -28,9 +23,10 @@ import { PAGE } from '@/config/public-page.config'
 import {
   CalculateAthleteLevelParams,
   LiftMode,
-} from '../../types/standart.types'
+} from '../../types/standard.types'
 import { calculateAthleteLevel } from '../../lib/calculate-athlete-level'
-import AllStandards from '../all-standards/AllStandards'
+import StandardsList from '../all-standards/StandardsList'
+import { getStandardsList } from '../../lib/get-standards-list'
 
 const modeOptions: { label: string; value: LiftMode }[] = [
   { label: 'Сумма', value: 'total' },
@@ -78,6 +74,7 @@ export default function UserStandartResult() {
     : null
 
   const athleteLevel = params ? calculateAthleteLevel(params) : null
+  const standards = params ? getStandardsList(params) : null
 
   const selectedFederation = federation
     ? getFederationById(federation)
@@ -128,10 +125,14 @@ export default function UserStandartResult() {
             buttonHref={PAGE.MY_MAXIMUM}
           />
         )}
-
-          <AllStandards 
-            mode={mode}
+        
+        {athleteLevel && standards && (
+          <StandardsList
+            athleteLevel={athleteLevel}
+            standards={standards}
           />
+        )}
+
 
         {selectedFederation && (
           <FederationPreviewCard federation={selectedFederation} />

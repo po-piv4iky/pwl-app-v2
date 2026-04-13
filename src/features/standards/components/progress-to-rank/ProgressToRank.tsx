@@ -1,6 +1,6 @@
 import { Award } from 'lucide-react'
 import css from './ProgressToRank.module.scss'
-import { AthleteLevelResult } from '../../types/standart.types'
+import { AthleteLevelResult } from '../../types/standard.types'
 import ProgressBar from "@/components/ui/progress-bar/ProgressBar"
 import Card from '@/components/ui/card/Card'
 

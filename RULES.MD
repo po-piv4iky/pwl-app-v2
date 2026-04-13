@@ -114,6 +114,59 @@ set((state) => ({
 * Использовать helpers (fluid, mixins)
 * Не использовать inline-стили без необходимости
 
+# 🎯 Styling Rules
+
+## CSS / SCSS
+
+- Используем BEM-подобную структуру:
+  - block
+  - block__element
+  - block--modifier
+
+Пример:
+- userCard
+- userCard__item
+- userCard--active
+
+---
+
+## ❌ Запрещено
+- Tailwind классы в JSX
+- inline стили
+- случайные названия классов
+
+---
+
+## Cursor / UX
+
+- Все кликабельные элементы:
+  cursor: pointer;
+
+- Неактивные:
+  cursor: default;
+
+---
+
+## Naming
+
+- Блок = название компонента (camelCase)
+- Элемент = через __
+- Модификатор = через --
+
+---
+
+## Цвета
+
+- Используем только CSS variables:
+  var(--color-...)
+
+---
+
+## Компоненты
+
+- UI компоненты (Card, Button) не содержат бизнес-логики
+- Feature компоненты (ItemStandard) используют UI компоненты
+
 ---
 
 ## 10. Reusability

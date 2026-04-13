@@ -1,4 +1,4 @@
-import { AthleteResults, LiftMode } from '../types/standart.types'
+import { AthleteResults, LiftMode } from '../types/standard.types'
 
 export function getAthleteResult(
   mode: LiftMode,

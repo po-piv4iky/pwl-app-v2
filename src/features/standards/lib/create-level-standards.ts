@@ -1,4 +1,4 @@
-import { StandardsByLevel } from '../types/standart.types'
+import { StandardsByLevel } from '../types/standard.types'
 
 export function createLevelStandards(
   beginner: number,

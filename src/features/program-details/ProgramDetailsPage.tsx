@@ -28,17 +28,6 @@ export default function ProgramDetailsPage({program}: Props) {
             <FooterIsStart program={program}/>
           </div>
         </Container>
-        // <div className={css.contentBlock}>
-        //     <ProgramDetailsHeader 
-        //         title={program.title} 
-        //         description={program.description} 
-        //         level={program.level}
-        //         weeks={totalWeeks} 
-        //         totalDay={totalDay}
-        //     />
-        //     <ProgramWeekList program={program}/>
-        //     <FooterIsStart program={program}/>
-        // </div>
     )
 }
 

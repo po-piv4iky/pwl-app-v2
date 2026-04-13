@@ -1,22 +1,13 @@
 
+import { levelsDescending } from '@/config/levels/levels'
 import {
   AthleteLevelResult,
   CalculateAthleteLevelParams,
-  FederationLevel,
-} from '../types/standart.types'
+} from '../types/standard.types'
 import { getAthleteResult } from './get-athlete-result'
 import { getWeightClass } from './get-weight-class'
 import { fullListOfFederations } from './standards-map'
 
-const levelsDescending: FederationLevel[] = [
-  'Элита',
-  'Мастер',
-  'Продвинутый',
-  '1 уровень',
-  '2 уровень',
-  '3 уровень',
-  'Начальный',
-]
 
 export function calculateAthleteLevel(
   params: CalculateAthleteLevelParams

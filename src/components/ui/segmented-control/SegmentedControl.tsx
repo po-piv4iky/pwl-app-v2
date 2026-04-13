@@ -1,4 +1,4 @@
-import { LiftMode } from '@/features/standards/types/standart.types'
+import { LiftMode } from '@/features/standards/types/standard.types'
 
 import Button from '../button/Button'
 

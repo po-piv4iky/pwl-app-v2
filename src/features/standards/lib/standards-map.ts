@@ -1,5 +1,5 @@
 import { FederationId } from '@/config/federations/federation.types'
-import { GenderStandards } from '../types/standart.types'
+import { GenderStandards } from '../types/standard.types'
 
 
 import { napStandards } from '../config/nap-standards'

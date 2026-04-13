@@ -1,5 +1,5 @@
 import { createLevelStandards } from '../lib/create-level-standards'
-import { GenderStandards } from '../types/standart.types'
+import { GenderStandards } from '../types/standard.types'
 
 export const fprStandards: GenderStandards = {
   male: {
