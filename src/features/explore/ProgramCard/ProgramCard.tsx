@@ -1,13 +1,13 @@
 'use client'
 
-import { ProgramPreview } from "@/config/programs/types/programPreview.types";
 import css from "./ProgramCard.module.scss";
 import { useUserMaxesStore } from "@/store/maxes.store";
 import { useRouter } from "next/navigation";
 import { PAGE } from "@/config/public-page.config";
+import { ProgramsPreview } from "@/config/programs-preview/types/programsPreview.types";
 
 type Props = {
-  data: ProgramPreview;
+  data: ProgramsPreview;
 };
 
 export default function ProgramCard({ data }: Props) {
@@ -15,7 +15,7 @@ export default function ProgramCard({ data }: Props) {
   const router = useRouter();
 
   const handleClick = () => {
-    if (data.lift === "complex") {
+    if (data.lift === "powerlifting") {
       const allMaxes = ["bench", "squat", "deadlift"] as const;
       const hasAllMaxes = allMaxes.every((lift) => maxes[lift] > 0);
 

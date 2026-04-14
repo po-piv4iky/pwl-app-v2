@@ -1,8 +1,8 @@
-import { benchForHardWorkers } from "@/programs/routines/programs-sheiko/sheiko-bench/bench-for-hard-workers.data";
-import { surovetskyBenchStandard } from "./surovetskyStandard.data";
-import { ProgramPreview } from "./types/programPreview.types";
+import { surovetskyBenchStandard } from "@/programs/routines/programs-surovetsky/surovetsky-bench/surovetskyStandard.data";
+import { ProgramsPreview } from "./types/programsPreview.types";
+import { benchForHardWorkers } from "@/programs/routines/programs-sheiko/sheiko-bench/benchForHardWorkers.data";
 
-export const programPreviews: ProgramPreview[] = [
+export const programsPreviews: ProgramsPreview[] = [
   {
     id: surovetskyBenchStandard.id,
     title: surovetskyBenchStandard.title,
@@ -10,7 +10,7 @@ export const programPreviews: ProgramPreview[] = [
     lift: surovetskyBenchStandard.lift,
     level: surovetskyBenchStandard.level,
     description: surovetskyBenchStandard.description,
-    durationWeeks: surovetskyBenchStandard.cycleWeeks,
+    durationWeeks: surovetskyBenchStandard.durationWeeks,
   },
   {
     id: benchForHardWorkers.id,
@@ -19,7 +19,7 @@ export const programPreviews: ProgramPreview[] = [
     lift: benchForHardWorkers.lift,
     level: benchForHardWorkers.level,
     description: benchForHardWorkers.description,
-    durationWeeks: benchForHardWorkers.cycleWeeks,
+    durationWeeks: benchForHardWorkers.durationWeeks,
 
   }
 ];

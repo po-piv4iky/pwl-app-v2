@@ -1,12 +1,13 @@
+import { ProgramCategory } from "@/programs/types/program.types";
 
-export interface ProgramPreview {
+export interface ProgramsPreview {
   id: string;
   title: string; // название программы
   author?: string;
-  lift: 'bench' | 'deadlift' | 'squat' | 'complex'; // движение
+  lift: ProgramCategory; // движение
   level: string;
   description?: string; // описание
-  durationWeeks: string; // колличество недель
+  durationWeeks: number; // колличество недель
 }
 
 
