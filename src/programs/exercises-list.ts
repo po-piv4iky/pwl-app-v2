@@ -1,6 +1,6 @@
 import { ExerciseDefinition } from "./types/exercise-definition.types";
 
-export const exercises: ExerciseDefinition[] = [
+export const exercisesList: ExerciseDefinition[] = [
   // =========================
   // ЖИМОВЫЕ ДВИЖЕНИЯ / BENCH
   // =========================
