@@ -1,0 +1,1 @@
+export function groupExerciseSets(){} // групировка упражнения на понятные подходы

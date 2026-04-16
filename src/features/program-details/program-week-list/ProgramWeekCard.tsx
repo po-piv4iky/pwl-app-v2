@@ -5,8 +5,15 @@ import css from './ProgramWeekCard.module.scss'
 interface Props { 
     week: TrainingWeek
 }
+// { weekNumber: 1, trainingDays: [Array] }
+// [
+//   { day: 1, exercises: [ [Object] ] },
+//   { day: 3, exercises: [ [Object] ] },
+//   { day: 6, exercises: [ [Object] ] }
+// ]
 
 export default function ProgramWeekCard({week}: Props) {
+
     return (
         <section className={css.weekCard}>
             <div className={css.weekHeader}>
@@ -21,8 +28,8 @@ export default function ProgramWeekCard({week}: Props) {
                 <span className="opacity-60">{week.trainingDays.length} тренировки</span>
             </div>
             <div className={css.daysGrid}>
-                {week.trainingDays.map(day => (
-                    <ProgramDayCard key={day.day} day={day}/>
+                {week.trainingDays.map((day, index) => (
+                    <ProgramDayCard key={index} day={day}/>
                 ))}
             </div>
         </section>

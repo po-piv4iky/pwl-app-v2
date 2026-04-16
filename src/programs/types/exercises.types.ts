@@ -11,5 +11,6 @@ export interface ExerciseSet {
     isWarmUp?: boolean
     percent?: number
     reps: number | string
+    repeat?: number;
     rpe?: number
 } 

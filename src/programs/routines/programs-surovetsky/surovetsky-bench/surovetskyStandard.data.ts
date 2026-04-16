@@ -23,7 +23,7 @@ export const surovetskyBenchStandard: ProgramTraining = {
         bench( works(68, 5, 4), work(68, "до 7 раз") ),
         barbellPullToTheBelt( reps(8, 5), COMMENTS.SELF_WEIGHT ),
         bicepCurl( reps( "до 8 повторений", 4 ), COMMENTS.SELF_WEIGHT ),
-        rearDeltFly( reps( "до 12 повторений", 3 ), COMMENTS.COMPETITIVE_WORK )
+        rearDeltFly( reps( "до 12 повторений", 3 ), COMMENTS.EXPLOSIVE )
       ]),
       day(3, [
         bench( works(96, 3, 1) ),

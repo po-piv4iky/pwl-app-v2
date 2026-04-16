@@ -35,6 +35,7 @@ export interface ExerciseSet {
     percent?: number // проценты от максимума
     reps: number | string // подходы // 4 или от 4 до 5
     rpe?: number // значение сколько ещё можно сделать повторений
+    repeat?: number; // если одинаковый вес, то просто указываем сколько повторений
 } 
 
 

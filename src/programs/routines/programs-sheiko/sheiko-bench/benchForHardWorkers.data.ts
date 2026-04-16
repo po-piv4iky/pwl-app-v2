@@ -9,17 +9,20 @@ import { ProgramTraining } from "@/programs/types/program.types";
 
 // {
 //   exerciseId: "bench_press",
-//   sets: [
-//     { percent: 0.5, reps: 5, isWarmUp: true },
-//     { percent: 0.6, reps: 4, isWarmUp: true },
-//     { percent: 0.7, reps: 3 },
-//     { percent: 0.7, reps: 3 },
-//     { percent: 0.75, reps: 3 },
-//     { percent: 0.75, reps: 3 },
-//     { percent: 0.75, reps: 3 },
-//     { percent: 0.75, reps: 3 },
-//     { percent: 0.75, reps: 3 }
+//   sets: [                                      //Жим лёжа
+//     { percent: 0.5, reps: 5, isWarmUp: true }, 1 на 5     50%
+//     { percent: 0.6, reps: 4, isWarmUp: true }, 1 на 4     60%
+//     { percent: 0.7, reps: 3 },                 2 на 3     70%  
+//     { percent: 0.7, reps: 3 },                  
+//     { percent: 0.75, reps: 3, repeat: 5 },                5 на 3     75%       
 //   ]
+// },
+// {
+//   exerciseId: "dumbbell_fly",
+//   sets: [
+//     { reps: 8, repeat: 5 }
+//   ],
+//   comment: "Подберите вес по ощущениям"
 // }
 
 //использование
