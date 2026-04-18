@@ -1,0 +1,116 @@
+@use "helpers" as *;
+
+.theStart {
+  position: sticky;
+  top: 120px;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: fluid-to-laptop(20, 14);
+
+  width: 100%;
+  margin-top: fluid(40, 24);
+  padding: fluid-to-laptop(25, 20);
+
+  border: 1px solid var(--color-red-200);
+  background-color: var(--color-bg-footer);
+  border-radius: fluid(10, 7);
+
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.25s ease,
+    transform 0.3s ease;
+
+  &--hidden {
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+  }
+}
+
+.theStart__titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(12, 8);
+  min-width: 0;
+}
+
+.theStart__title {
+  font-size: fluid(24, 18);
+}
+
+.theStart__description {
+  color: var(--color-gray-text);
+}
+
+.theStart__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: fluid-to-laptop(20, 15);
+
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.theStartMini {
+  position: fixed;
+  right: 32px;
+  bottom: 20px;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  gap: fluid-to-laptop(20, 14);
+
+  padding: fluid-to-laptop(20, 16);
+  border: 1px solid var(--color-red-200);
+  background-color: var(--color-bg-footer);
+  border-radius: fluid(10, 7);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+}
+
+.theStartMini__title {
+  font-size: fluid(20, 16);
+}
+
+.theStartMobile {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 10px;
+  z-index: 100;
+
+  display: flex;
+  justify-content: center;
+
+  padding: fluid-to-laptop(12, 10);
+  border: 1px solid var(--color-red-200);
+  background-color: var(--color-bg-footer);
+  border-radius: fluid(10, 7);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+@include mobile {
+  .theStart__button {
+    width: 100%;
+    gap: 10px;
+  }
+}

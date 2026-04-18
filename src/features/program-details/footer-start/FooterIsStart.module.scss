@@ -1,10 +1,11 @@
 @use "helpers" as*;
 
 .footerStartBlock{
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    gap: fluid(20, 15);
     padding: fluid-to-laptop(25, 20);
     border: solid 1px var(--color-red-200);
     background-color: var(--color-bg-footer);
@@ -25,5 +26,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: fluid-to-laptop(20, 15);
+    gap: fluid(20, 15);
 }

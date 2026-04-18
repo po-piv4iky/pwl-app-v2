@@ -6,10 +6,10 @@ import { Dumbbell } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { PAGE } from "@/config/public-page.config"
 import { useActiveProgramStore } from "@/store/active-program.store"
-import { Program } from "@/config/programs/types/programs.types"
+import { ProgramTraining } from "@/programs/types/program.types"
 
 interface Props {
-    program: Program
+    program: ProgramTraining
 }
 
 export default function FooterIsStart({ program }: Props) {
