@@ -7,6 +7,7 @@ import { useUIStore } from '@/store/ui.store'
 import css from './Layout.module.scss'
 import cn from 'clsx'
 
+
 type Props = {
     children: ReactNode
 }
@@ -37,7 +38,7 @@ export function Layout({ children }: Props) {
   }, [setIsMobile, setSidebarOpen])
 
   return (
-    <main
+      <main
       className={cn(
         css.layout,
         isSidebarOpen ? css.showedSidebar : css.hidedSidebar
