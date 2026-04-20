@@ -1,64 +1,57 @@
 import Card from '@/components/ui/card/Card'
-import css from './ProgramDayCard.module.scss'
 import { TrainingDay } from '@/programs/types/training.types'
+import css from './ProgramDayCard.module.scss'
 import { exercisesList } from '@/programs/exercises-list'
-import { formatExerciseScheme } from '@/programs/helpers/format-exercise-scheme'
+import { formatExercisePreview } from '@/programs/helpers/format-exercise-scheme'
 
 interface Props {
   day: TrainingDay
 }
-
-// { 
-//     day: 1,
-//     exercises: [ [Object], [Object], [Object], [Object], [Object] ]
-// },
 
 export default function ProgramDayCard({ day }: Props) {
   const dayTotalTraining = day.exercises.length
   const levelDay = dayTotalTraining > 5 ? 'тяжёлая' : 'лёгкая'
 
   return (
-    <Card variant='danger'>
-      <header className='flex justify-between items-start'>
-        <div className='flex flex-col'>
-          <span>День - {day.day}</span>
-          <span className='opacity-60'>{dayTotalTraining} упражнений</span>
+    <Card className={css.dayCard}>
+      <header className={css.dayHeader}>
+        <div className={css.dayInfo}>
+          <span className={css.dayTitle}>День {day.day}</span>
+          <span className={css.dayMeta}>
+            {dayTotalTraining} упражнений • {levelDay}
+          </span>
         </div>
 
-        <span className='p-2 border border-b-emerald-500 bg-emerald-400 rounded-2xl'>
-          {levelDay}
-        </span>
+        <span className={css.dayLevel}>{levelDay}</span>
       </header>
 
-      <div className='flex flex-col gap-3'>
+      <div className={css.exerciseList}>
         {day.exercises.map((exercise, index) => {
-          const exerciseMeta = exercisesList.find((item) => item.id === exercise.exerciseId)
-          const schemeLines = formatExerciseScheme(exercise.sets)
+          const exerciseMeta = exercisesList.find(
+            (item) => item.id === exercise.exerciseId
+          )
+
+          const preview = formatExercisePreview(exercise.sets)
 
           return (
-            <Card key={`${exercise.exerciseId}-${index}`}>
-              <h6>{exerciseMeta?.name ?? exercise.exerciseId}</h6>
+            <div
+              key={`${exercise.exerciseId}-${index}`}
+              className={css.exerciseItem}
+            >
+              <h6 className={css.exerciseName}>
+                {exerciseMeta?.name ?? exercise.exerciseId}
+              </h6>
 
-              <div className='flex flex-col gap-2'>
-                {schemeLines.map((line, lineIndex) => (
-                  <div
-                    key={`${line.left}-${lineIndex}`}
-                    className='flex items-center justify-between gap-4'
-                  >
-                    <span>{line.left}</span>
-                    {line.right && (
-                      <span className='text-red-500 font-semibold'>
-                        {line.right}
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </div>
+              <p className={css.exerciseScheme}>
+                {preview}
+              </p>
 
               {exercise.comment && (
-                <p className='text-sm opacity-60 mt-2'>{exercise.comment}</p>
+                <p className={css.exerciseComment}>
+                  {exercise.comment}
+                </p>
               )}
-            </Card>
+            </div>
           )
         })}
       </div>

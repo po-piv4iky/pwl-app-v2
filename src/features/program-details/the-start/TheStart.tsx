@@ -3,7 +3,7 @@
 import clsx from 'clsx'
 import { Dumbbell } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 import { PAGE } from '@/config/public-page.config'
 import Button from '@/components/ui/button/Button'
@@ -22,11 +22,12 @@ const COLLAPSE_SCROLL_OFFSET = 300
 export default function TheStart({ program }: Props) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileViewport, setIsMobileViewport] = useState(false)
+  const [isReady, setIsReady] = useState(false)
 
   const router = useRouter()
   const startProgram = useActiveProgramStore((state) => state.startProgram)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY)
 
     const handleViewportChange = (
@@ -41,6 +42,7 @@ export default function TheStart({ program }: Props) {
 
     handleViewportChange(mediaQuery)
     handleScroll()
+    setIsReady(true)
 
     mediaQuery.addEventListener('change', handleViewportChange)
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -54,6 +56,10 @@ export default function TheStart({ program }: Props) {
   const handleClick = () => {
     startProgram(program)
     router.push(PAGE.MY_TRAINING)
+  }
+
+  if (!isReady) {
+    return null
   }
 
   if (isMobileViewport) {

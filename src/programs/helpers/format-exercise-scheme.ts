@@ -22,46 +22,34 @@ export interface ExerciseSchemeLine {
   left: string;
   right?: string;
 }
-
-function formatRepeatWord(repeat: number): string {
-  if (repeat === 1) return "подход";
-  if (repeat >= 2 && repeat <= 4) return "подхода";
-  return "подходов";
-}
-
-function formatRepWord(reps: number): string {
-  const value = Math.abs(reps) % 100;
-  const last = value % 10;
-
-  if (value >= 11 && value <= 19) return "повторений";
-  if (last === 1) return "повторение";
-  if (last >= 2 && last <= 4) return "повторения";
-  return "повторений";
-}
-
 export function formatExerciseScheme(
   sets: ExerciseSet[]
 ): ExerciseSchemeLine[] {
   return sets.map((set) => {
     const repeat = set.repeat ?? 1;
 
-    let left = "";
-
-    if (typeof set.reps === "string") {
-      left =
-        repeat > 1
-          ? `${repeat} ${formatRepeatWord(repeat)} ${set.reps}`
-          : `1 подход ${set.reps}`;
-    } else {
-      left =
-        repeat > 1
-          ? `${repeat} ${formatRepeatWord(repeat)} на ${set.reps}`
-          : `1 подход ${set.reps} ${formatRepWord(set.reps)}`;
-    }
+    const left =
+      repeat > 1
+        ? `${set.reps} × ${repeat}`
+        : `${set.reps}`;
 
     return {
       left,
       right: set.percent !== undefined ? `${set.percent}%` : undefined,
     };
   });
+}
+
+
+export function formatExercisePreview(sets: ExerciseSet[]): string {
+  return sets
+    .map((set) => {
+      const repeat = set.repeat ?? 1;
+      const repsPart = repeat > 1 ? `${set.reps}×${repeat}` : `${set.reps}`;
+
+      return set.percent !== undefined
+        ? `${set.percent}%×${repsPart}`
+        : repsPart;
+    })
+    .join(" ");
 }

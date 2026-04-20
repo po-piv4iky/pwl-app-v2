@@ -28,8 +28,8 @@ export default function ProgramWeekCard({week}: Props) {
                 <span className="opacity-60">{week.trainingDays.length} тренировки</span>
             </div>
             <div className={css.daysGrid}>
-                {week.trainingDays.map((day, index) => (
-                    <ProgramDayCard key={index} day={day}/>
+                {week.trainingDays.map((day) => (
+                    <ProgramDayCard key={day.day} day={day}/>
                 ))}
             </div>
         </section>

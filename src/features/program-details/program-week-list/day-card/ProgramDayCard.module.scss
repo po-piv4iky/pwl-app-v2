@@ -1,70 +1,116 @@
 @use "helpers" as *;
 
 .dayCard {
-  gap: fluid-to-laptop(30, 25);
-  border-color: var(--color-gray-border);
-  transition:
-    border-color 0.2s ease,
-    transform 0.2s ease;
-
-  &:hover {
-    border-color: var(--color-red-200);
-  }
-}
-
-.dayCard__title {
-  margin: 0;
-}
-
-.dayCard__exercises {
   display: flex;
   flex-direction: column;
-  gap: fluid-to-laptop(15, 10);
+  gap: fluid(16, 12);
+
+  padding: fluid-to-laptop(24, 18);
+  border-radius: fluid(14, 10);
+
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-gray-border);
 }
 
-.dayCard__sectionTitle {
-  margin: 0;
-  font-weight: 700;
-  font-size: fluid(16, 12);
-  color: var(--color-gray-text-input);
-}
+/* =========================
+   HEADER
+========================= */
 
-.dayCard__exercise {
-  display: flex;
-  flex-direction: column;
-  gap: fluid(8, 6);
-  padding: fluid-to-laptop(12, 8);
-  border: 1px solid var(--color-gray-400);
-  border-radius: fluid(10, 8);
-  background-color: var(--color-gray-bg-input);
-}
-
-.dayCard__exerciseHeader {
+.dayHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: fluid(12, 8);
+  gap: fluid(12, 10);
 }
 
-.dayCard__exerciseName {
-  margin: 0;
-  font-weight: 700;
+.dayInfo {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(6, 4);
 }
 
-.dayCard__intensity {
-  white-space: nowrap;
+.dayTitle {
+  font-size: fluid(18, 16);
+  font-weight: 600;
+}
+
+.dayMeta {
+  font-size: fluid(14, 12);
+  opacity: 0.6;
+}
+
+.dayLevel {
+  flex-shrink: 0;
+
+  padding: fluid(8, 6) fluid(12, 10);
+  border-radius: fluid(20, 14);
+
+  font-size: fluid(12, 11);
+  font-weight: 600;
+
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+/* =========================
+   EXERCISE LIST
+========================= */
+
+.exerciseList {
+  display: flex;
+  flex-direction: column;
+}
+
+.exerciseItem {
+  display: flex;
+  flex-direction: column;
+
+  padding: fluid-to-laptop(12, 10) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.exerciseName {
+  font-size: fluid(15, 14);
+  font-weight: 500;
+}
+
+.exerciseScheme {
+  margin-top: fluid(4, 3);
+
+  font-size: fluid(14, 13);
+  font-weight: 500;
   color: var(--color-red-button);
+
+  word-break: break-word;
 }
 
-.dayCard__scheme {
-  margin: 0;
-  font-weight: 700;
-  font-size: fluid(16, 12);
-  color: var(--color-gray-text-input);
+.exerciseComment {
+  margin-top: fluid(4, 3);
+
+  font-size: fluid(12, 11);
+  opacity: 0.5;
 }
 
-.dayCard__comment {
-  margin: 0;
-  font-size: fluid(16, 12);
-  color: var(--color-gray-text-input);
+/* =========================
+   MOBILE
+========================= */
+
+@include mobile {
+  .dayCard {
+    padding: fluid(18, 14);
+  }
+
+  .exerciseScheme {
+    font-size: 13px;
+  }
+
+  .dayHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
