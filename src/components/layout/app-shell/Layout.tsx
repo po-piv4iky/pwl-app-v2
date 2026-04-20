@@ -1,11 +1,12 @@
 'use client'
 
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useLayoutEffect, useState } from 'react'
 import { Sidebar } from './sidebar/Sidebar'
 import { Content } from './content/Content'
 import { useUIStore } from '@/store/ui.store'
 import css from './Layout.module.scss'
 import cn from 'clsx'
+import LoadingPage from '@/features/loading-page/Loading'
 
 
 type Props = {
@@ -19,8 +20,9 @@ export function Layout({ children }: Props) {
     setSidebarOpen,
     setIsMobile,
   } = useUIStore()
+  const [isLayoutReady, setIsLayoutReady] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 767px)')
 
     const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
@@ -30,12 +32,29 @@ export function Layout({ children }: Props) {
       setSidebarOpen(!mobile)
     }
 
+    const finishLoading = () => {
+      setIsLayoutReady(true)
+    }
+
     handleChange(mediaQuery)
+
+    if (document.readyState === 'complete') {
+      finishLoading()
+    } else {
+      window.addEventListener('load', finishLoading, { once: true })
+    }
+
     mediaQuery.addEventListener('change', handleChange)
 
-    return () =>
+    return () => {
       mediaQuery.removeEventListener('change', handleChange)
+      window.removeEventListener('load', finishLoading)
+    }
   }, [setIsMobile, setSidebarOpen])
+
+  if (!isLayoutReady) {
+    return <LoadingPage />
+  }
 
   return (
       <main
