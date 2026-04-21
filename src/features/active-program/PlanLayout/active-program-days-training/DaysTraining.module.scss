@@ -1,20 +1,161 @@
-@use "helpers" as*;
+@use "helpers" as *;
 
-.dayTrainingContainer{
+.dayTraining {
+  width: 100%;
+}
+
+.dayTraining__card {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(20, 16);
+}
+
+.dayTraining__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: fluid(16, 12);
+}
+
+.dayTraining__info {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(8, 6);
+}
+
+.dayTraining__titleRow {
+  display: flex;
+  align-items: center;
+  gap: fluid(10, 8);
+
+  > h4 {
+    font-size: fluid(22, 18);
+    font-weight: 700;
+  }
+}
+
+.dayTraining__meta {
+  font-size: fluid(14, 12);
+  opacity: 0.6;
+}
+
+.dayTraining__statusCurrent,
+.dayTraining__statusView {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: fluid(10, 8) fluid(14, 12);
+  border-radius: fluid(999, 999);
+
+  font-size: fluid(13, 12);
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.dayTraining__statusCurrent {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dayTraining__statusView {
+  color: var(--color-gray-light);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-gray-border);
+}
+
+.dayTraining__exerciseList {
+  display: flex;
+  flex-direction: column;
+}
+
+.dayTraining__exerciseItem {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(6, 4);
+
+  padding: fluid(14, 12) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.dayTraining__exerciseName {
+  font-size: fluid(16, 14);
+  font-weight: 600;
+}
+
+.dayTraining__exerciseScheme {
+  font-size: fluid(14, 13);
+  font-weight: 500;
+  color: var(--color-red-button);
+  word-break: break-word;
+}
+
+.dayTraining__exerciseComment {
+  font-size: fluid(12, 11);
+  opacity: 0.55;
+}
+
+.dayTraining__footer {
+  padding-top: fluid(8, 6);
+}
+
+.dayTraining__button {
+  width: 100%;
+}
+
+.dayTraining__viewOnly {
+  padding: fluid(14, 12);
+  border-radius: fluid(12, 10);
+
+  font-size: fluid(13, 12);
+  line-height: 1.4;
+
+  color: var(--color-gray-light);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-gray-border);
+}
+
+.emptyDay {
+  width: 100%;
+}
+
+.emptyDay__content {
+  display: flex;
+  align-items: center;
+  gap: fluid(14, 12);
+
+  > div {
     display: flex;
     flex-direction: column;
-    padding: fluid(25, 18);
-    gap: fluid-to-laptop(20, 15);
-    background-color: var(--color-gray-100);
-    border: solid 1px var(--color-gray-bg-input);
-    border-radius: fluid-to-laptop(12, 8);
+    gap: 4px;
+  }
+
+  h4 {
+    font-size: fluid(18, 16);
+    font-weight: 600;
+  }
+
+  p {
+    font-size: fluid(14, 12);
+    opacity: 0.65;
+  }
 }
 
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: fluid-to-laptop(18, 14);
-    opacity: 60%;
-}
+@include mobile {
+  .dayTraining__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  .dayTraining__statusCurrent,
+  .dayTraining__statusView {
+    white-space: normal;
+  }
+}

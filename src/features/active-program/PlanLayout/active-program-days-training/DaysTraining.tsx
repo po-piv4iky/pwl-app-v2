@@ -1,73 +1,121 @@
 'use client'
 
-import { useActiveProgramStore } from '@/store/active-program.store'
-import { Calendar } from 'lucide-react'
-import css from './DaysTraining.module.scss'
 import Button from '@/components/ui/button/Button'
-import WarmUp from '@/features/active-program/components/WarmUp/WarmUp'
-
+import Card from '@/components/ui/card/Card'
+import { Calendar, Eye, PlayCircle } from 'lucide-react'
+import css from './DaysTraining.module.scss'
+import { useActiveProgramStore } from '@/store/active-program.store'
+import { exercisesList } from '@/programs/exercises-list'
+import { formatExercisePreview } from '@/programs/helpers/format-exercise-scheme'
 
 export default function DaysTraining() {
-  const { activeProgram, getDayData, getDayToRender } = useActiveProgramStore()
-
-  const start = useActiveProgramStore(s => s.startTraining)
+  const activeProgram = useActiveProgramStore((s) => s.activeProgram)
+  const getDayData = useActiveProgramStore((s) => s.getDayData)
+  const getDayToRender = useActiveProgramStore((s) => s.getDayToRender)
+  const startTraining = useActiveProgramStore((s) => s.startTraining)
 
   if (!activeProgram) return null
-  const dayToRender = getDayToRender() //получаем объект для отрисовки
 
-  if(!dayToRender) return null
+  const dayToRender = getDayToRender()
+  if (!dayToRender) return null
 
-  const { week, day } = dayToRender // вытаскиваем из объекта неделю и день для отрисовки
-  const dayData = getDayData(week, day)// информация о текущем дне 
+  const { week, day, isCurrent } = dayToRender
+  const dayData = getDayData(week, day)
 
-  if (!dayData) return null
-
-  // helper для reps (number | {min,max})
-  const renderReps = (reps: number | { min: number; max: number }) => {
-    if (typeof reps === 'number') return reps
-    return `${reps.min}–${reps.max}`
+  if (!dayData) {
+    return (
+      <Card className={css.emptyDay}>
+        <div className={css.emptyDay__content}>
+          <Calendar />
+          <div>
+            <h4>Неделя {week} • День {day}</h4>
+            <p>На этот день тренировка не запланирована.</p>
+          </div>
+        </div>
+      </Card>
+    )
   }
 
+  const exercisesCount = dayData.exercises.length
+  const canStart = isCurrent
+
   return (
-    <div className={css.dayTrainingContainer}>
-      
-        <header className={css.header}>
-            <Calendar />
-            <h4>Неделя {week} день {day} (План тренирвоки)</h4>
-        </header>
-
-        <WarmUp lift='bench' variant='plan' />
-      
-      {/* упражнения */}
-      <div className='flex flex-col gap-4'>
-        {dayData.exercises.map((exercise, index) => (
-          <div
-            key={index}
-            className='border border-white rounded-xl p-4 flex flex-col gap-2'
-          >
-            <h5 className='font-bold'>{exercise.name}</h5>
-
-            <div className='flex justify-between'>
-              <span>Подходы: {exercise.sets}</span>
-              <span>
-                Повторения: {renderReps(exercise.reps)}
-              </span>
+    <section className={css.dayTraining}>
+      <Card className={css.dayTraining__card}>
+        <header className={css.dayTraining__header}>
+          <div className={css.dayTraining__info}>
+            <div className={css.dayTraining__titleRow}>
+              <Calendar size={20} />
+              <h4>Неделя {week} • День {day}</h4>
             </div>
 
-            {'intensity' in exercise && (
-              <span>Интенсивность: {typeof exercise.intensity === 'number' ? `${exercise.intensity}%` : `до ${exercise.intensity?.max}%` }</span>
-            )}
+            <p className={css.dayTraining__meta}>
+              {exercisesCount} упражнений
+            </p>
+          </div>
 
-            {exercise.comment && (
-              <span className='text-sm opacity-70'>
-                {exercise.comment}
-              </span>
+          <div
+            className={
+              canStart ? css.dayTraining__statusCurrent : css.dayTraining__statusView
+            }
+          >
+            {canStart ? (
+              <>
+                <PlayCircle size={16} />
+                <span>Текущая тренировка</span>
+              </>
+            ) : (
+              <>
+                <Eye size={16} />
+                <span>Режим просмотра</span>
+              </>
             )}
           </div>
-        ))}
-      </div>
-      <Button onClick={start}>Начать тренировку</Button>
-    </div>
+        </header>
+
+        <div className={css.dayTraining__exerciseList}>
+          {dayData.exercises.map((exercise, index) => {
+            const exerciseMeta = exercisesList.find(
+              (item) => item.id === exercise.exerciseId
+            )
+
+            const preview = formatExercisePreview(exercise.sets)
+
+            return (
+              <div
+                key={`${exercise.exerciseId}-${index}`}
+                className={css.dayTraining__exerciseItem}
+              >
+                <h5 className={css.dayTraining__exerciseName}>
+                  {exerciseMeta?.name ?? exercise.exerciseId}
+                </h5>
+
+                <p className={css.dayTraining__exerciseScheme}>
+                  {preview}
+                </p>
+
+                {exercise.comment && (
+                  <p className={css.dayTraining__exerciseComment}>
+                    {exercise.comment}
+                  </p>
+                )}
+              </div>
+            )
+          })}
+        </div>
+
+        <footer className={css.dayTraining__footer}>
+          {canStart ? (
+            <Button onClick={startTraining} className={css.dayTraining__button}>
+              Начать тренировку
+            </Button>
+          ) : (
+            <div className={css.dayTraining__viewOnly}>
+              Вы просматриваете план. Начать можно только текущий тренировочный день.
+            </div>
+          )}
+        </footer>
+      </Card>
+    </section>
   )
 }
-

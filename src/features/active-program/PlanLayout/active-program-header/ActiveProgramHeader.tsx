@@ -10,7 +10,7 @@ export default function ActiveProgramHeader() {
     const activeProgram = useActiveProgramStore(state => state.activeProgram)
     if(!activeProgram) return null
     const { program, completedDays } = activeProgram
-    const totalWorkouts = program.weeks.reduce((acc, week) => week.days.length + acc ,0) 
+    const totalWorkouts = program.weeks.reduce((acc, week) => week.trainingDays.length + acc, 0)
     const completedWorkouts = completedDays.length
     const weeksLength = getTotalTrainingWeeks(program)
     const percent = totalWorkouts === 0 ? 0 : Math.round((completedWorkouts / totalWorkouts) * 100)
@@ -25,7 +25,7 @@ export default function ActiveProgramHeader() {
           <div className={css.title}>
             <p className={css.label}>Активная программа</p>
             <h5 className={css.programName}>
-              {program.title} ({program.cycleWeeks})
+              {program.title} ({program.durationWeeks})
             </h5>
           </div>
         </div>

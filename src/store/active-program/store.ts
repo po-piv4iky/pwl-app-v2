@@ -1,16 +1,11 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { Program } from '@/config/programs/types/programs.types'
-import {
-  ActiveProgram,
-  ActiveProgramStore,
-  CompletedDay,
-  ScheduleDay,
-  TrainingSession,
-} from './types'
-import { buildTrainingSession, createRestTimerState } from './utils'
 
-const createActiveProgramState = (program: Program): ActiveProgram => ({
+import { ActiveProgram, ActiveProgramStore, CompletedDay, ScheduleDay, TrainingSession,} from './types'
+import { buildTrainingSession, createRestTimerState } from './utils'
+import { ProgramTraining } from '@/programs/types/program.types'
+
+const createActiveProgramState = (program: ProgramTraining): ActiveProgram => ({
   program,
   trainingState: {
     mode: 'plan',
@@ -25,15 +20,10 @@ const createActiveProgramState = (program: Program): ActiveProgram => ({
   status: 'active',
 })
 
-const hasCompletedDay = (
-  completedDays: CompletedDay[],
-  week: number,
-  day: number
-) => completedDays.some((item) => item.week === week && item.day === day)
+const hasCompletedDay = (completedDays: CompletedDay[], week: number, day: number) => 
+  completedDays.some((item) => item.week === week && item.day === day)
 
-const updateCurrentSessionCompletion = (
-  session: TrainingSession
-): TrainingSession => {
+const updateCurrentSessionCompletion = (session: TrainingSession): TrainingSession => {
   const isCompleted = session.exercises.every((exercise) => exercise.isCompleted)
 
   return {
@@ -89,15 +79,15 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           if (!state.activeProgram) return {}
 
           const weekData = state.activeProgram.program.weeks.find(
-            (item) => item.week === week
+            (item) => item.weekNumber === week
           )
-          if (!weekData || weekData.days.length === 0) return {}
+          if (!weekData || weekData.trainingDays.length === 0) return {}
 
           return {
             activeProgram: {
               ...state.activeProgram,
               currentWeek: week,
-              currentDay: weekData.days[0].day,
+              currentDay: weekData.trainingDays[0].day,
               viewMode: { type: 'current' },
             },
           }
@@ -110,7 +100,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           const weekData = get().getCurrentWeekData()
           if (!weekData) return {}
 
-          const dayExists = weekData.days.some((item) => item.day === day)
+          const dayExists = weekData.trainingDays.some((item) => item.day === day)
           if (!dayExists) return {}
 
           return {
@@ -231,7 +221,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
 
         return (
           state.activeProgram.program.weeks.find(
-            (week) => week.week === state.activeProgram?.currentWeek
+            (week) => week.weekNumber === state.activeProgram?.currentWeek
           ) || null
         )
       },
@@ -241,11 +231,11 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
         if (!state.activeProgram) return null
 
         const weekData = state.activeProgram.program.weeks.find(
-          (item) => item.week === week
+          (item) => item.weekNumber === week
         )
         if (!weekData) return null
 
-        return weekData.days.find((item) => item.day === day) || null
+        return weekData.trainingDays.find((item) => item.day === day) || null
       },
 
       getWeekSchedule: () => {
@@ -259,12 +249,8 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
         const weekDays = [1, 2, 3, 4, 5, 6, 7]
 
         return weekDays.map<ScheduleDay>((dayNumber) => {
-          const training = weekData.days.find((day) => day.day === dayNumber)
-          const isCompleted = hasCompletedDay(
-            state.activeProgram!.completedDays,
-            state.activeProgram!.currentWeek,
-            dayNumber
-          )
+          const training = weekData.trainingDays.find((day) => day.day === dayNumber)
+          const isCompleted = hasCompletedDay(state.activeProgram!.completedDays, state.activeProgram!.currentWeek, dayNumber)
 
           return {
             day: dayNumber,

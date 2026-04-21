@@ -1,6 +1,16 @@
-import { Program } from '@/config/programs/types/programs.types'
-import { TrainingDay } from '@/config/programs/types/trainingDay.types'
-import { TrainingWeek } from '@/config/programs/types/trainingWeek'
+import { ProgramTraining } from '@/programs/types/program.types';
+import { TrainingDay, TrainingWeek } from '@/programs/types/training.types';
+
+export interface ActiveProgram {
+  program: ProgramTraining
+  trainingState: TrainingState
+  startedAt: string
+  currentWeek: number
+  currentDay: number
+  viewMode: ViewMode
+  completedDays: CompletedDay[]
+  status: 'active' | 'completed'
+}
 
 export type ViewMode =
   | { type: 'current' }
@@ -55,17 +65,6 @@ export interface CompletedDay {
   day: number
 }
 
-export interface ActiveProgram {
-  program: Program
-  trainingState: TrainingState
-  startedAt: string
-  currentWeek: number
-  currentDay: number
-  viewMode: ViewMode
-  completedDays: CompletedDay[]
-  status: 'active' | 'completed'
-}
-
 export interface ScheduleDay {
   day: number
   isTraining: boolean
@@ -81,7 +80,7 @@ export interface DayToRender {
 
 export interface ActiveProgramStore {
   activeProgram: ActiveProgram | null
-  startProgram: (program: Program) => void
+  startProgram: (program: ProgramTraining) => void
   resetProgram: () => void
   startTraining: () => void
   setCurrentWeek: (week: number) => void
