@@ -22,7 +22,6 @@ const COLLAPSE_SCROLL_OFFSET = 300
 export default function TheStart({ program }: Props) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileViewport, setIsMobileViewport] = useState(false)
-  const [isReady, setIsReady] = useState(false)
 
   const router = useRouter()
   const startProgram = useActiveProgramStore((state) => state.startProgram)
@@ -42,7 +41,6 @@ export default function TheStart({ program }: Props) {
 
     handleViewportChange(mediaQuery)
     handleScroll()
-    setIsReady(true)
 
     mediaQuery.addEventListener('change', handleViewportChange)
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -56,10 +54,6 @@ export default function TheStart({ program }: Props) {
   const handleClick = () => {
     startProgram(program)
     router.push(PAGE.MY_TRAINING)
-  }
-
-  if (!isReady) {
-    return null
   }
 
   if (isMobileViewport) {

@@ -52,28 +52,30 @@ export function Layout({ children }: Props) {
     }
   }, [setIsMobile, setSidebarOpen])
 
-  if (!isLayoutReady) {
-    return <LoadingPage />
-  }
-
   return (
+    <>
+      {!isLayoutReady && <LoadingPage />}
+
       <main
-      className={cn(
-        css.layout,
-        isSidebarOpen ? css.showedSidebar : css.hidedSidebar
-      )}
-    >
-      <Sidebar />
-
-      {isSidebarOpen && isMobile && (
-        <div className={css.overlay} onClick={() => setSidebarOpen(false)} />
-      )}
-
-      <Content
-        toggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
+        className={cn(
+          css.layout,
+          isSidebarOpen ? css.showedSidebar : css.hidedSidebar,
+          !isLayoutReady && css.layoutHidden
+        )}
+        aria-hidden={!isLayoutReady}
       >
-        {children}
-      </Content>
-    </main>
+        <Sidebar />
+
+        {isSidebarOpen && isMobile && (
+          <div className={css.overlay} onClick={() => setSidebarOpen(false)} />
+        )}
+
+        <Content
+          toggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
+        >
+          {children}
+        </Content>
+      </main>
+    </>
   )
 }
