@@ -4,6 +4,7 @@ import { persist } from 'zustand/middleware'
 import { ActiveProgram, ActiveProgramStore, CompletedDay, ScheduleDay, TrainingSession,} from './types'
 import { buildTrainingSession, createRestTimerState } from './utils'
 import { ProgramTraining } from '@/programs/types/program.types'
+import { useUserMaxesStore } from '../maxes.store'
 
 const createActiveProgramState = (program: ProgramTraining): ActiveProgram => ({
   program,
@@ -47,6 +48,15 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           activeProgram: null,
         }),
 
+
+        // export interface TrainingSession {
+        //   week: number
+        //   day: number
+        //   exercises: SessionExercise[]
+        //   startedAt: string
+        //   isCompleted: boolean
+        // }
+
       startTraining: () =>
         set((state) => {
           if (!state.activeProgram) return {}
@@ -56,7 +66,8 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
 
           const dayData = state.getDayData(dayToRender.week, dayToRender.day)
           if (!dayData || dayData.exercises.length === 0) return {}
-
+           
+          const { maxes } = useUserMaxesStore.getState()
           return {
             activeProgram: {
               ...state.activeProgram,
@@ -64,11 +75,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
                 ...state.activeProgram.trainingState,
                 mode: 'training',
                 exerciseIndex: 0,
-                currentSession: buildTrainingSession(
-                  dayToRender,
-                  dayData.exercises,
-                  state.activeProgram.program.oneRM
-                ),
+                currentSession: buildTrainingSession(dayToRender, dayData.exercises, maxes),
               },
             },
           }

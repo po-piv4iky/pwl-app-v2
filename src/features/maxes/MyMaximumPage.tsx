@@ -8,13 +8,14 @@ import Container from '@/components/layout/container/Container'
 import { liftInputs } from '@/config/liftInputs/liftInputs'
 import { maxesSchema } from '@/lib/validation'
 import { useUserMaxesStore } from '@/store/maxes.store'
+import Stack from '@/components/layout/stack/Stack'
 
 export default function MyMaximumPage() {
   const { maxes, setAllMaxes } = useUserMaxesStore()
 
   return (
     <Container size='narrow'>
-      <section className={css.wrapper}>
+      <Stack padding>
         <SectionHeader
           title='Мои максимумы'
           description='Укажите ваши текущие разовые максимумы (1ПМ) для расчёта рабочих весов'
@@ -36,7 +37,7 @@ export default function MyMaximumPage() {
         />
 
         <MaximumTips />
-      </section>
+      </Stack>
     </Container>
   )
 }

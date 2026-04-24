@@ -1,11 +1,8 @@
-import { ProgramExercise } from '@/config/programs/types/trainingDay.types'
-import {
-  DayToRender,
-  RestTimerState,
-  SessionExercise,
-  SessionSet,
-  TrainingSession,
-} from './types'
+import { Exercise, ExerciseSet } from '@/programs/types/exercises.types'
+import {DayToRender, RestTimerState, SessionExercise, SessionSet, TrainingSession,} from './types'
+import { exercisesList } from '../../programs/exercises-list';
+import { ExerciseLift, isMainLift } from '@/programs/types/exercise-definition.types';
+import { UserMaxes } from '../maxes.store';
 
 const DEFAULT_REST_TIMER_STATE: RestTimerState = {
   isActive: false,
@@ -17,90 +14,87 @@ export const createRestTimerState = (): RestTimerState => ({
   ...DEFAULT_REST_TIMER_STATE,
 })
 
-export const getRestDuration = (category?: string) => {
-  switch (category) {
-    case 'main':
-    case 'lockout':
-      return 180
-    case 'accessory':
-      return 120
-    default:
-      return 90
+export const getRestDuration = (category?: ExerciseLift) => {
+  if(category === 'accessory'){
+    return 120
+  } else {
+    return 180
   }
 }
 
 export const roundToStep = (weight: number, step = 2.5) =>
   Math.round(weight / step) * step
 
-export const formatTargetReps = (exercise: ProgramExercise) =>
-  typeof exercise.reps === 'number'
-    ? exercise.reps
-    : `от ${exercise.reps.min} до ${exercise.reps.max}`
+export const formatTargetReps = (set: ExerciseSet) =>
+  typeof set.reps === 'number'
+    ? set.reps
+    : `${set.reps}`
 
-export const createSessionSets = (
-  exercise: ProgramExercise,
-  exerciseIndex: number,
-  oneRM: number
-): SessionSet[] => {
+export const createSessionSets = (exercise: Exercise, exerciseIndex: number, oneRM: number): SessionSet[] => {
   const sets: SessionSet[] = []
 
-  for (let setNumber = 1; setNumber <= exercise.sets; setNumber += 1) {
-    const targetReps = formatTargetReps(exercise)
-    let targetWeight = 0
-    let intensityValue: number | null = null
+  exercise.sets.forEach((planSet, planSetIndex) => { //       
+    const repeat = planSet.repeat ?? 1 // сколько повторных подходов
 
-    if (exercise.category === 'main' || exercise.category === 'lockout') {
-      if (typeof exercise.intensity === 'number') {
-        intensityValue = exercise.intensity
-      } else if (exercise.intensity) {
-        const { min, max } = exercise.intensity
-        const step = exercise.sets > 1 ? (max - min) / (exercise.sets - 1) : 0
-        intensityValue = Math.round(min + step * (setNumber - 1))
-      }
+    for (let repeatIndex = 1; repeatIndex <= repeat; repeatIndex += 1) {
+      const setNumber = sets.length + 1 // номер подхода
 
-      if (intensityValue !== null) {
-        targetWeight = roundToStep((intensityValue / 100) * oneRM)
-      }
+      const targetReps = formatTargetReps(planSet) //повтореня
+
+      const targetWeight = planSet.percent
+        ? Math.round((planSet.percent * oneRM) / 100)
+        : 0
+
+      sets.push({
+        id: `${exerciseIndex}-${planSetIndex}-${repeatIndex}`,
+        setNumber,
+        targetReps,
+        targetWeight,
+        actualReps: targetReps,
+        actualWeight: targetWeight,
+        intensity: planSet.percent ?? null,
+        isCompleted: false,
+      })
     }
-
-    sets.push({
-      id: `${exerciseIndex}-${setNumber}`,
-      setNumber,
-      targetReps,
-      targetWeight,
-      actualReps: targetReps,
-      actualWeight: targetWeight,
-      intensity: intensityValue,
-      isCompleted: false,
-    })
-  }
+  })
 
   return sets
 }
 
-export const createSessionExercise = (
-  exercise: ProgramExercise,
-  exerciseIndex: number,
-  oneRM: number
-): SessionExercise => ({
-  id: String(exerciseIndex),
-  name: exercise.name,
-  category: exercise.category,
-  lift: exercise.lift,
-  sets: createSessionSets(exercise, exerciseIndex, oneRM),
-  restDuration: getRestDuration(exercise.category),
-  isCompleted: false,
-})
+// const exercise = {
+//   exerciseId: "bench_press",
+//   sets: [
+//     { percent: 50, reps: 5 },
+//     { percent: 60, reps: 4 },
+//     { percent: 70, reps: 3, repeat: 2 },
+//     { percent: 75, reps: 3, repeat: 5 }
+//   ],
+//   comment: "Работаем чисто, без отказа"
+// }
 
-export const buildTrainingSession = (
-  day: DayToRender,
-  exercises: ProgramExercise[],
-  oneRM: number
-): TrainingSession => ({
+export const createSessionExercise = (exercise: Exercise, exerciseIndex: number, maxes: UserMaxes): SessionExercise => {
+  const exerciseMeta = exercisesList.find(item => item.id === exercise.exerciseId)
+  if (!exerciseMeta) {
+    throw new Error(`Exercise not found: ${exercise.exerciseId}`)
+  }
+  const oneRM = isMainLift(exerciseMeta.lift) ? maxes[exerciseMeta.lift] : 0
+
+  return {
+     id: String(exerciseIndex),
+     name: exerciseMeta.name,
+     lift: exerciseMeta.lift,
+     sets: createSessionSets(exercise, exerciseIndex, oneRM),
+     restDuration: getRestDuration(exerciseMeta?.lift),
+     isCompleted: false,
+  }
+}
+  
+
+export const buildTrainingSession = (day: DayToRender, exercises: Exercise[], maxes: UserMaxes): TrainingSession => ({
   week: day.week,
   day: day.day,
   exercises: exercises.map((exercise, index) =>
-    createSessionExercise(exercise, index, oneRM)
+    createSessionExercise(exercise, index, maxes)
   ),
   startedAt: new Date().toISOString(),
   isCompleted: false,

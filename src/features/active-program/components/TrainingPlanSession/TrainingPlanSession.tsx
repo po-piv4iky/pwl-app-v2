@@ -4,9 +4,7 @@ import css from './TrainingPlanSession.module.scss'
 
 export default function TrainingPlanSession() {
 
-    const exercises = useActiveProgramStore(
-        s => s.activeProgram?.trainingState.currentSession?.exercises
-    )
+    const currentSession = useActiveProgramStore(s => s.activeProgram?.trainingState.currentSession)
 
     return (
         <div className={css['plan-training']}>
@@ -16,7 +14,7 @@ export default function TrainingPlanSession() {
             </h5>
 
             <div className={css['plan-training__list']}>
-                {exercises?.map((item, index) => {
+                {currentSession?.exercises.map((item, index) => {
                     const sets = item.sets.length
                     const rep = item.sets[0].targetReps
 

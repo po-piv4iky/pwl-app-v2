@@ -6,10 +6,12 @@ import ProgramGrid from '@/features/explore/ui/program-grid/ProgramGrid'
 import ProgramSection from '@/features/explore/ui/program-section/ProgramSection'
 import { exploreSections } from '@/features/explore/model/sections'
 import { programsPreviews } from '@/config/programs-preview/programsPreview.data'
+import Stack from '@/components/layout/stack/Stack'
 
 export function Explore() {
   return (
        <Container>
+        <Stack padding>
         <SectionHeader
           title='Программы тренировок'
           description='Выберите программу для специализации по одному из упражнений или комплексную программу для развития всех движений'
@@ -38,6 +40,7 @@ export function Explore() {
               </ProgramSection>
             ))}
         </div>
+        </Stack>
     </Container>
   )
 }

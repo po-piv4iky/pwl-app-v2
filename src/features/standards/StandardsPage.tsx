@@ -7,6 +7,7 @@ import { userInputs } from "@/config/standartUserInputs/standartUserInputs"
 import UserStandartResult from "@/features/standards/components/user-standart-result/UserStandartResult"
 import { userSchema } from "@/lib/validation"
 import { useStandartUserStore } from "@/store/user-standart.store"
+import Stack from "@/components/layout/stack/Stack"
 
 
 export default function Standarts() {
@@ -25,7 +26,7 @@ export default function Standarts() {
   // 🔥 иначе форма
   return (
     <Container size="narrow">
-
+      <Stack padding>
       <SectionHeader 
         title="Разряды и нормативы"    
         description="Ваш текущий уровень в пауэрлифтинге"  
@@ -41,6 +42,7 @@ export default function Standarts() {
           setAll(data)
         }}
       />
+      </Stack>
     </Container>
   )
 }

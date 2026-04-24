@@ -25,15 +25,14 @@ export interface SessionSet {
   targetWeight: number
   actualReps: number | string
   actualWeight: number
-  intensity: number | null
+  intensity?: number | null
   isCompleted: boolean
 }
 
 export interface SessionExercise {
   id: string
   name: string
-  lift?: string
-  category?: string
+  lift: string
   restDuration: number
   sets: SessionSet[]
   isCompleted: boolean

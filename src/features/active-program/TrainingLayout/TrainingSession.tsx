@@ -12,6 +12,8 @@ import TrainingExercisesSessions from '../components/TrainingExercisesSessions/T
 import TrainingPlanSession from '../components/TrainingPlanSession/TrainingPlanSession'
 
 import css from './TrainingSession.module.scss'
+import Container from '@/components/layout/container/Container'
+import Stack from '@/components/layout/stack/Stack'
 
 export default function TrainingSession() {
   const activeProgram = useActiveProgramStore((s) => s.activeProgram)
@@ -22,7 +24,9 @@ export default function TrainingSession() {
   }
 
   return (
-    <section className={css.trainingSessionContainer}>
+    <Container size='narrow'>
+      <Stack padding>
+
       <header className={css.headerBlock}>
         <div className={css.titleAndButtonBlock}>
           <Button
@@ -48,6 +52,7 @@ export default function TrainingSession() {
       <RestTimer />
       <TrainingExercisesSessions />
       <TrainingPlanSession />
-    </section>
+      </Stack>
+    </Container>
   )
 }
