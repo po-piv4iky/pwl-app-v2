@@ -1,48 +1,53 @@
-import { useActiveProgramStore } from "@/store/active-program.store"
-import { Circle } from "lucide-react"
+import { useActiveProgramStore } from '@/store/active-program.store'
+import { Circle, CircleAlert, CircleCheck } from 'lucide-react'
 import css from './TrainingPlanSession.module.scss'
 
 export default function TrainingPlanSession() {
+  const currentSession = useActiveProgramStore(
+    (s) => s.activeProgram?.trainingState.currentSession
+  )
 
-    const currentSession = useActiveProgramStore(s => s.activeProgram?.trainingState.currentSession)
+  return (
+    <div className={css.planTraining}>
+      <h5 className={css.title}>План тренировки</h5>
 
-    return (
-        <div className={css['plan-training']}>
+      <div className={css.list}>
+        {currentSession?.exercises.map((exercise, index) => {
+          const totalSets = exercise.sets.length
+          const firstSetReps = exercise.sets[0]?.targetReps
+          const completedExercise = exercise.isCompleted
 
-            <h5 className={css['plan-training__title']}>
-                План тренировки
-            </h5>
+          const completedSets = exercise.sets.reduce((acc, set) => {
+            return set.isCompleted ? acc + 1 : acc
+          }, 0)
 
-            <div className={css['plan-training__list']}>
-                {currentSession?.exercises.map((item, index) => {
-                    const sets = item.sets.length
-                    const rep = item.sets[0].targetReps
+          return (
+            <div key={exercise.id ?? index} className={css.item}>
+              <div className={css.leftSide}>
 
-                    return (
-                        <div
-                            key={index}
-                            className={css['plan-training__item']}
-                        >
-                            <div className={css['plan-training__item-left']}>
-                                <Circle size={18} />
-                                <div className={css['plan-training__item-info']}>
-                                    <h6 className={css['plan-training__item-title']}>
-                                        {item.name}
-                                    </h6>
-                                    <span className={css['plan-training__item-meta']}>
-                                        {sets} × {rep}
-                                    </span>
-                                </div>
-                            </div>
+                {completedExercise ? 
+                  <CircleCheck size={18} className={css.icon}/>
+                   : 
+                  <Circle size={18} className={css.icon} />}
+                
+                <div className={css.info}>
+                  <h6 className={css.itemTitle}>{exercise.name}</h6>
 
-                            <div className={css['plan-training__item-progress']}>
-                                <span>4/4</span>
-                            </div>
-                        </div>
-                    )
-                })}
+                  <span className={css.meta}>
+                    {totalSets} × {firstSetReps}
+                  </span>
+                </div>
+              </div>
+
+              <div className={css.progress}>
+                <span>
+                  {completedSets}/{totalSets}
+                </span>
+              </div>
             </div>
-        </div>
-    )
+          )
+        })}
+      </div>
+    </div>
+  )
 }
-

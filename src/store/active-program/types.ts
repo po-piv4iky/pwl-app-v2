@@ -82,6 +82,7 @@ export interface ActiveProgramStore {
   startProgram: (program: ProgramTraining) => void
   resetProgram: () => void
   startTraining: () => void
+  nextExercise: () => void
   setCurrentWeek: (week: number) => void
   setCurrentDay: (day: number) => void
   selectDay: (week: number, day: number) => void

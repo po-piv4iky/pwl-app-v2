@@ -2,9 +2,9 @@ import clsx from 'clsx'
 import css from './ProgressBar.module.scss'
 
 interface ProgressBarProps {
-  title: string
-  current: number
-  target: number
+  title?: string
+  current: number // текущий
+  target: number // цель
   valueLabel?: string
   size?: 'sm' | 'md' | 'lg'
   className?: string
@@ -26,10 +26,12 @@ export default function ProgressBar({
 
   return (
     <div className={css.progressBarContainer}>
-      <div className={css.titleBlock}>
+      { title && 
+       <div className={css.titleBlock}>
         <h5 className={css.title}>{title}</h5>
         <span>{valueLabel ?? `Осталось: ${remaining} кг`}</span>
       </div>
+      }
 
       <div
         className={clsx(

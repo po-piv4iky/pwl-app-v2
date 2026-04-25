@@ -14,13 +14,20 @@ import TrainingPlanSession from '../components/TrainingPlanSession/TrainingPlanS
 import css from './TrainingSession.module.scss'
 import Container from '@/components/layout/container/Container'
 import Stack from '@/components/layout/stack/Stack'
+import ProgressBar from '@/components/ui/progress-bar/ProgressBar'
 
 export default function TrainingSession() {
   const activeProgram = useActiveProgramStore((s) => s.activeProgram)
+  const exercises = activeProgram?.trainingState.currentSession?.exercises ?? []
+  const total = exercises.length
+ const currentIndex = activeProgram?.trainingState.exerciseIndex ?? 0
+
+const currentNumber = currentIndex + 1
+
   const router = useRouter()
 
   const handleGoBack = () => {
-    return router.back()
+    router.back()
   }
 
   return (
@@ -44,7 +51,11 @@ export default function TrainingSession() {
 
         <div className={css.progressBlock}>
           <p>Упражнение 1 из 5</p>
-          <div className={css.progressBar}></div>
+        <ProgressBar 
+          current={total}
+          target={currentNumber}
+        />  
+          {/* <div className={css.progressBar}></div> */}
         </div>
       </header>
 

@@ -1,82 +1,169 @@
 @use "helpers" as *;
 
-.session-set {
-    display: flex;
+.sessionSet {
+  display: flex;
+  align-items: flex-start;
+  gap: fluid(14, 10);
+
+  width: 100%;
+  padding: fluid(15, 10);
+
+  border: 1px solid var(--color-gray-400);
+  border-radius: fluid-to-laptop(10, 7);
+  background-color: var(--color-bg-items-set);
+}
+
+.checkboxWrapper {
+  position: relative;
+  flex-shrink: 0;
+
+  margin-top: fluid(4, 2);
+  cursor: pointer;
+}
+
+.checkboxInput {
+  position: absolute;
+
+  width: 0;
+  height: 0;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkboxCustom {
+  position: relative;
+
+  display: inline-block;
+  width: fluid(22, 16);
+  height: fluid(22, 16);
+
+  border: 2px solid var(--color-gray-400);
+  border-radius: fluid(6, 4);
+  background-color: var(--color-gray-100);
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.checkboxInput:checked + .checkboxCustom {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+}
+
+.checkboxInput:checked + .checkboxCustom::after {
+  content: "";
+
+  position: absolute;
+  left: 50%;
+  top: 45%;
+
+  width: fluid(5, 4);
+  height: fluid(10, 8);
+
+  border: solid white;
+  border-width: 0 2px 2px 0;
+
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(8, 6);
+
+  width: 100%;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: fluid(10, 8);
+}
+
+.title {
+  font-size: fluid(16, 14);
+  font-weight: 700;
+}
+
+.completedBadge {
+  flex-shrink: 0;
+
+  padding: fluid(5, 4) fluid(9, 7);
+
+  border-radius: fluid(999, 999);
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+
+  font-size: fluid(12, 10);
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: fluid(14, 12);
+  color: var(--color-gray-light);
+}
+
+.intensity {
+  color: var(--color-red-button);
+  font-weight: 700;
+}
+
+.inputs {
+  display: flex;
+  align-items: center;
+  gap: fluid(10, 7);
+
+  flex-wrap: wrap;
+}
+
+.input {
+  width: fluid(74, 58);
+  height: fluid(38, 32);
+
+  padding: 0 fluid(10, 8);
+
+  border: 1px solid var(--color-gray-400);
+  border-radius: fluid(8, 6);
+  background-color: var(--color-bg-card);
+  color: inherit;
+
+  font-size: fluid(14, 12);
+  font-weight: 600;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+
+  &:focus {
+    border-color: var(--color-red-button);
+  }
+}
+
+.inputLabel {
+  font-size: fluid(14, 12);
+  color: var(--color-gray-light);
+  white-space: nowrap;
+}
+
+@include mobile {
+  .sessionSet {
+    gap: 10px;
+    padding: fluid(12, 10);
+  }
+
+  .header {
     align-items: flex-start;
-    gap: fluid(12, 8);
-    background-color: var(--color-bg-items-set);
-    border: 1px solid var(--color-gray-400);
-    border-radius: fluid-to-laptop(10, 7);
-    padding: fluid(15, 8);
-}
-
-/* Обёртка */
-.session-set__checkbox-wrapper {
-    position: relative;
-    cursor: pointer;
-    margin-top: 4px;
-}
-
-/* Скрытый нативный input */
-.session-set__checkbox-input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-/* Наш кастомный квадратик */
-.session-set__checkbox-custom {
-    width: fluid(22, 14);
-    height: fluid(22, 14);
-
-    border: 2px solid var(--color-gray-400);
-    border-radius: 6px;
-
-    background-color: var(--color-gray-100);
-
-    display: inline-block;
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-/* Когда checked */
-.session-set__checkbox-input:checked + .session-set__checkbox-custom {
-    background-color: var(--color-accent);
-    border-color: var(--color-accent);
-}
-
-/* Галочка */
-.session-set__checkbox-input:checked + .session-set__checkbox-custom::after {
-    content: "";
-    position: absolute;
-    left: 6px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
-/* Контент */
-.session-set__content {
-    display: flex;
     flex-direction: column;
-    gap: 6px;
-}
+  }
 
-.session-set__title {
-    font-weight: 700;
-}
-
-.session-set__subtitle {
-    opacity: 0.7;
-    font-size: 14px;
-}
-
-.session-set__inputs {
-    display: flex;
-    gap: 12px;
-    align-items: center;
+  .inputs {
+    gap: 8px;
+  }
 }

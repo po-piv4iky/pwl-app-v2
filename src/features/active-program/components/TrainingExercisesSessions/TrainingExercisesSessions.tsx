@@ -1,23 +1,29 @@
 import { useActiveProgramStore } from '@/store/active-program.store'
 import css from './TrainingExercisesSessions.module.scss'
 import SessionSetItem from './SessionSetItem/SessionSetItem'
+import Button from '@/components/ui/button/Button'
 
 export default function TrainingExercisesSessions() {
 
     const exerciseIndex  = useActiveProgramStore(s => s.activeProgram?.trainingState.exerciseIndex)
+    const nextExercise = useActiveProgramStore(s => s.nextExercise)
     const trainingSession = useActiveProgramStore(s => {
-    const session = s.activeProgram?.trainingState.currentSession
-    const index = s.activeProgram?.trainingState.exerciseIndex
+    const session = s.activeProgram?.trainingState.currentSession // текущая сессиЯ
+    const index = s.activeProgram?.trainingState.exerciseIndex // идём по массиву первый эллемент это 0
     if (!session || index === undefined) return null
     return session.exercises[index]
 })
+    const totalSets = trainingSession?.sets.length
+    const current = trainingSession?.sets.reduce((acc, item) => {
+     return item.isCompleted ? acc + 1 : acc
+    }, 0)
+   const isExerciseDone = trainingSession?.sets.every(set => set.isCompleted === true) ?? false
 
-    console.log(trainingSession)
     return (
         <div className={css.sessionsContainer}>
             <div className='flex justify-between'>
                 <h5>{trainingSession?.name}</h5>
-                <span>1/3 подходов</span>
+                <span>{current}/{totalSets} подходов</span>
             </div>
 
             <div className={css.sessionMaps}>
@@ -25,6 +31,7 @@ export default function TrainingExercisesSessions() {
                 <SessionSetItem key={item.id} item={item} exerciseIndex={exerciseIndex!}/>
                 ))}
             </div>
+            {isExerciseDone && <Button onClick={nextExercise}>Следующее упражнение</Button>}
         </div>
     )
 }

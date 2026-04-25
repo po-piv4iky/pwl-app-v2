@@ -1,51 +1,68 @@
-import { SessionSet, useActiveProgramStore } from "@/store/active-program.store"
+import { SessionSet, useActiveProgramStore } from '@/store/active-program.store'
 import css from './SessionSetItem.module.scss'
 
 interface Props {
-    item: SessionSet
-    exerciseIndex: number
+  item: SessionSet
+  exerciseIndex: number
 }
 
 export default function SessionSetItem({ item, exerciseIndex }: Props) {
+  const startRestTimer = useActiveProgramStore((s) => s.startRestTimer)
+  const toggleSetCompletion = useActiveProgramStore((s) => s.toggleSetCompletion)
 
-    const startRestTimer = useActiveProgramStore(s => s.startRestTimer)
-    const toggleSetCompletion = useActiveProgramStore(s => s.toggleSetCompletion)
+  const handleToggleSet = () => {
+    toggleSetCompletion(exerciseIndex, item.id)
 
-    return (
-        <div className={css['session-set']}>
+    if (!item.isCompleted) {
+      startRestTimer(120)
+    }
+  }
 
-            <label className={css['session-set__checkbox-wrapper']}>
-                <input
-                    type='checkbox'
-                    checked={item.isCompleted}
-                    onChange={() => {
-                       toggleSetCompletion(exerciseIndex, item.id)
-                       if (!item.isCompleted) {
-                          startRestTimer(120) // 2 минуты
-                       }
-                    }}
-                    className={css['session-set__checkbox-input']}
-                />
-                <span className={css['session-set__checkbox-custom']} />
-            </label>
+  return (
+    <div className={css.sessionSet}>
+      <label className={css.checkboxWrapper}>
+        <input
+          type='checkbox'
+          checked={item.isCompleted}
+          onChange={handleToggleSet}
+          className={css.checkboxInput}
+        />
 
-            <div className={css['session-set__content']}>
-                <h6 className={css['session-set__title']}>
-                    Подход {item.setNumber}
-                </h6>
+        <span className={css.checkboxCustom} />
+      </label>
 
-                <span className={css['session-set__subtitle']}>
-                    Цель: {item.targetReps} повторений @ {item.targetWeight}кг {item.intensity}%
-                </span>
+      <div className={css.content}>
+        <div className={css.header}>
+          <h6 className={css.title}>Подход {item.setNumber}</h6>
 
-                <div className={css['session-set__inputs']}>
-                    <input placeholder='50' />
-                    <span>кг ×</span>
-                    <input placeholder='10' />
-                    <span>повт.</span>
-                </div>
-            </div>
-
+          {item.isCompleted && (
+            <span className={css.completedBadge}>Выполнено</span>
+          )}
         </div>
-    )
+
+        <p className={css.subtitle}>
+          Цель: {item.targetReps} повт. × {item.targetWeight} кг
+          {item.intensity && (
+            <span className={css.intensity}> {item.intensity}%</span>
+          )}
+        </p>
+
+        <div className={css.inputs}>
+          <input
+            className={css.input}
+            placeholder={String(item.actualWeight)}
+          />
+
+          <span className={css.inputLabel}>кг ×</span>
+
+          <input
+            className={css.input}
+            placeholder={String(item.actualReps)}
+          />
+
+          <span className={css.inputLabel}>повт.</span>
+        </div>
+      </div>
+    </div>
+  )
 }

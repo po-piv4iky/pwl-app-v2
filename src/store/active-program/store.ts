@@ -153,7 +153,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           }
         }),
 
-      toggleSetCompletion: (exerciseIndex, setId) =>
+      toggleSetCompletion: (exerciseIndex, setId) => //переключатель завершения подхода
         set((state) => {
           const currentSession = state.activeProgram?.trainingState.currentSession
           if (!state.activeProgram || !currentSession) return {}
@@ -162,15 +162,12 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
             if (index !== exerciseIndex) return exercise
 
             const sets = exercise.sets.map((set) =>
-              set.id === setId
-                ? { ...set, isCompleted: !set.isCompleted }
-                : set
-            )
+              set.id === setId ? { ...set, isCompleted: !set.isCompleted } : set)
 
             return {
               ...exercise,
               sets,
-              isCompleted: sets.every((set) => set.isCompleted),
+              isCompleted: sets.every((set) => set.isCompleted),// если все сеты тру, то упражнение выполнено
             }
           })
 
@@ -187,6 +184,41 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
             },
           }
         }),
+
+      nextExercise: () =>
+        set((state) => {
+          if (!state.activeProgram) return {}
+
+          const session = state.activeProgram.trainingState.currentSession
+          if (!session) return {}
+
+          const nextIndex = state.activeProgram.trainingState.exerciseIndex + 1
+
+          // если есть следующее упражнение
+          if (nextIndex < session.exercises.length) {
+            return {
+              activeProgram: {
+                ...state.activeProgram,
+                trainingState: {
+                  ...state.activeProgram.trainingState,
+                  exerciseIndex: nextIndex,
+                },
+              },
+            }
+          }
+
+          // если это было последнее упражнение
+          return {
+            activeProgram: {
+              ...state.activeProgram,
+              trainingState: {
+              ...state.activeProgram.trainingState,
+                mode: 'finished',
+              },
+            },
+          }
+        }), 
+        
 
       startRestTimer: (duration) =>
         set((state) => {
