@@ -1,67 +1,105 @@
-import { CircleStop, Timer } from 'lucide-react'
-import css from './RestTimer.module.scss'
-import { useActiveProgramStore } from '@/store/active-program.store'
+import { Minus, Plus, Square, Timer } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
+import { useActiveProgramStore } from '@/store/active-program.store'
+import css from './RestTimer.module.scss'
+
 export default function RestTimer() {
-    
-    const stopRestTimer = useActiveProgramStore(s => s.stopRestTimer)
-    const restTimer = useActiveProgramStore(s => s.activeProgram?.trainingState.restTimer)
-    
-    const isActive = restTimer?.isActive ?? false
-    const duration = restTimer?.duration ?? 0
-    const startedAt = restTimer?.startedAt ?? null
-    
-    
-    const calculateTimeLeft = (): number => { // отсавшейся time
-        if(!startedAt) return 0
-        const passed = Math.floor((Date.now() - startedAt) / 1000) //пройденный time    1772100515429(настоящее) - 1772100485843(прошлое) / 1000 = 29
-        const remaining = duration - passed //  120 - 29 = 91
-        return remaining > 0 ? remaining : 0
-    }
-    
-    const [timeLeft, setTimeLeft] = useState<number>(() => calculateTimeLeft() )
+  const stopRestTimer = useActiveProgramStore((s) => s.stopRestTimer)
+  const changeRestTimer = useActiveProgramStore((s) => s.changeRestTimer)
 
-    useEffect(() => {
-        if(!isActive || !startedAt) return
+  const restTimer = useActiveProgramStore(
+    (s) => s.activeProgram?.trainingState.restTimer
+  )
 
-        const interval = setInterval(() => {
-          const remaining = calculateTimeLeft()
-          if(remaining <= 0) {
-            stopRestTimer()
-          } else {
-            setTimeLeft(remaining)
-          }
-        } , 1000)
+  const isActive = restTimer?.isActive ?? false
+  const duration = restTimer?.duration ?? 0
+  const startedAt = restTimer?.startedAt ?? null
 
-        return () => clearInterval(interval)
-        
-    }, [isActive, startedAt, duration, stopRestTimer])
+  const getTimeLeft = () => {
+    if (!startedAt) return 0
 
-    const minutesString = String(Math.floor(timeLeft / 60)).padStart(2, '0')
-    const secondsString = String(timeLeft % 60).padStart(2, '0')
-    
+    const passed = Math.floor((Date.now() - startedAt) / 1000)
+    return Math.max(duration - passed, 0)
+  }
 
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft)
 
-    return (
-        <div className={css['rest-timer']}>
-            <div className='flex gap-6'>
-                <Timer />
-                <h6>Отдых</h6>
-            </div>
+  useEffect(() => {
+    if (!isActive || !startedAt) return
 
-            <div className='flex'>
-                <div className='flex'>
-                    <span>{minutesString}</span>
-                    <span>:</span>
-                    <span>{secondsString}</span>
-                </div>
-                <button onClick={stopRestTimer}>
-                   <CircleStop />
-                </button>
-            </div>
+    const interval = setInterval(() => {
+      const remaining = getTimeLeft()
+
+      if (remaining <= 0) {
+        stopRestTimer()
+        return
+      }
+
+      setTimeLeft(remaining)
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [isActive, startedAt, duration, stopRestTimer])
+
+  if (!isActive) return null
+
+  const minutesString = String(Math.floor(timeLeft / 60)).padStart(2, '0')
+  const secondsString = String(timeLeft % 60).padStart(2, '0')
+
+  return (
+    <section className={css.restTimer}>
+      <div className={css.leftSide}>
+        <div className={css.iconBox}>
+          <Timer className={css.iconTimer} />
         </div>
-    )
+
+        <div className={css.info}>
+          <h6 className={css.title}>Отдых</h6>
+          <p className={css.description}>
+            Восстановись перед следующим подходом
+          </p>
+        </div>
+      </div>
+
+      <div className={css.rightSide}>
+        <div className={css.clock}>
+          <span>{minutesString}</span>
+          <span className={css.separator}>:</span>
+          <span>{secondsString}</span>
+        </div>
+
+        <div className={css.controls}>
+          <button
+            type="button"
+            className={css.controlButton}
+            onClick={() => changeRestTimer(-30)}
+            disabled={timeLeft <= 30}
+          >
+            <Minus size={16} />
+            30
+          </button>
+
+          <button
+            type="button"
+            className={css.controlButton}
+            onClick={() => changeRestTimer(30)}
+          >
+            <Plus size={16} />
+            30
+          </button>
+
+          <button
+            type="button"
+            className={css.stopButton}
+            onClick={stopRestTimer}
+          >
+            <Square size={16} />
+          </button>
+        </div>
+      </div>
+    </section>
+  )
 }
 
 

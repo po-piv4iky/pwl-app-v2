@@ -45,17 +45,17 @@ const currentNumber = currentIndex + 1
           </Button>
 
           <h5 className={css.weekTitle}>
-            Неделя-{activeProgram?.currentWeek} день-{activeProgram?.currentDay}
+            Неделя - {activeProgram?.currentWeek} день-{activeProgram?.currentDay}
           </h5>
         </div>
 
         <div className={css.progressBlock}>
-          <p>Упражнение 1 из 5</p>
+          <p>Упражнение {currentNumber} из {total}</p>
         <ProgressBar 
-          current={total}
-          target={currentNumber}
-        />  
-          {/* <div className={css.progressBar}></div> */}
+          size='sm'
+          current={currentNumber}
+          target={total}
+        /> 
         </div>
       </header>
 

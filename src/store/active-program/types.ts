@@ -90,8 +90,10 @@ export interface ActiveProgramStore {
   toggleSetCompletion: (exerciseIndex: number, setId: string) => void
   startRestTimer: (duration: number) => void
   stopRestTimer: () => void
+  changeRestTimer: (seconds: number ) => void
   getCurrentWeekData: () => TrainingWeek | null
   getDayData: (week: number, day: number) => TrainingDay | null
   getWeekSchedule: () => ScheduleDay[]
   getDayToRender: () => DayToRender | null
+  updateSetActualValues: (exerciseIndex: number, setId: string, values: Partial<Pick<SessionSet, 'actualWeight' | 'actualReps'>>) => void
 }

@@ -47,7 +47,7 @@ export const benchForHardWorkers: ProgramTraining = {
         day(1, [
             bench( work(50, 5), work(60, 4), works(70, 3, 2), works(75, 3, 5) ),
             squat( work(40, 6), work(50, 6), works(60, 6, 4) ),
-            bench( work(50, 5), work(60, 1), works(70, 4, 4)),
+            bench( work(50, 5), work(60, 5), works(70, 4, 4)),
             dumbbellFly( reps(8, 5), COMMENTS.SELF_WEIGHT ),
             lowerBlockRow( reps(8, 5), COMMENTS.SELF_WEIGHT )
           ]),

@@ -1,0 +1,19 @@
+@use "helpers" as*;
+
+.badge{
+    padding: fluid(5, 4) fluid(9, 7);
+    border-radius: fluid(999, 999);
+    font-size: fluid(12, 10);
+    font-weight: 700;
+}
+
+.badge--default{
+    background-color: var(--color-gray-400);
+}
+
+.badge--red{
+    background-color: var(--color-red-button);
+}
+.badge--green{
+    background-color: var(--color-green-500);
+}

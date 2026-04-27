@@ -1,10 +1,175 @@
-@use "helpers" as*;
+@use "helpers" as *;
 
-.rest-timer{
-    display: flex;
-    padding: fluid-to-laptop(15, 10);
+.restTimer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: fluid(18, 12);
+
+  padding: fluid-to-laptop(18, 14);
+
+  border: 1px solid rgba(220, 38, 38, 0.45);
+  border-radius: fluid(14, 10);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(220, 38, 38, 0.12),
+      rgba(20, 20, 20, 0.92)
+    );
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.leftSide {
+  display: flex;
+  align-items: center;
+  gap: fluid(14, 10);
+
+  min-width: 0;
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fluid(42, 34);
+  height: fluid(42, 34);
+
+  border-radius: fluid(12, 9);
+  background-color: rgba(220, 38, 38, 0.12);
+}
+
+.iconTimer {
+  color: var(--color-red-button);
+  animation: pulseColor 1.8s ease-in-out infinite;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(4, 3);
+
+  min-width: 0;
+}
+
+.title {
+  font-size: fluid(17, 15);
+  font-weight: 700;
+}
+
+.description {
+  font-size: fluid(13, 11);
+  color: var(--color-gray-light);
+}
+
+.rightSide {
+  display: flex;
+  align-items: center;
+  gap: fluid(18, 12);
+}
+
+.clock {
+  display: flex;
+  align-items: center;
+
+  min-width: fluid(92, 76);
+
+  color: var(--color-red-button);
+  font-size: fluid(34, 26);
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.separator {
+  padding: 0 2px;
+  opacity: 0.8;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: fluid(8, 6);
+}
+
+.controlButton,
+.stopButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: fluid(5, 4);
+
+  height: fluid(38, 32);
+  padding: 0 fluid(10, 8);
+
+  border: 1px solid var(--color-gray-border-main);
+  border-radius: fluid(10, 8);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-gray-light);
+
+  font-size: fluid(13, 11);
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    border-color: var(--color-red-button);
+    background-color: rgba(220, 38, 38, 0.12);
+    color: white;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.stopButton {
+  width: fluid(38, 32);
+  padding: 0;
+
+  &:hover {
+    border-color: var(--color-red-button);
+    background-color: var(--color-red-button);
+    color: white;
+  }
+}
+
+@keyframes pulseColor {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+}
+
+@include mobile {
+  .restTimer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .rightSide {
     justify-content: space-between;
-    background-color: var(--color-bg-tabs);
-    border: solid var(--color-red-button) fluid(2, 1);
-    border-radius: fluid(10, 7);
+  }
+
+  .controls {
+    flex-shrink: 0;
+  }
 }

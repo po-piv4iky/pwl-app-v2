@@ -1,14 +1,14 @@
 @use "helpers" as*;
 
-.sessionsContainer{
-    display: flex;
-    flex-direction: column;
-    gap: fluid(22, 16);
-    background-color: var(--color-gray-100);
-    padding: fluid(20, 14);
-    border: solid 1px var(--color-gray-400);
-    border-radius: fluid-to-laptop(10, 8);
-}
+// .sessionsContainer{
+//     display: flex;
+//     flex-direction: column;
+//     gap: fluid(22, 16);
+//     background-color: var(--color-gray-100);
+//     padding: fluid(20, 14);
+//     border: solid 1px var(--color-gray-400);
+//     border-radius: fluid-to-laptop(10, 8);
+// }
 
 .sessionMaps{
     display: flex;

@@ -254,6 +254,33 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           }
         }),
 
+      changeRestTimer: (seconds) =>
+        set((state) => {
+          if (!state.activeProgram) return {}
+
+          const restTimer = state.activeProgram.trainingState.restTimer
+
+          if (!restTimer.isActive || !restTimer.startedAt) return {}
+
+          const passed = Math.floor((Date.now() - restTimer.startedAt) / 1000)
+          const currentLeft = Math.max(restTimer.duration - passed, 0)
+          const nextLeft = Math.max(currentLeft + seconds, 0)
+
+          return {
+            activeProgram: {
+              ...state.activeProgram,
+              trainingState: {
+                ...state.activeProgram.trainingState,
+                restTimer: {
+                  ...restTimer,
+                  duration: nextLeft,
+                  startedAt: Date.now(),
+                },
+              },
+           },
+          }
+        }),
+
       getCurrentWeekData: () => {
         const state = get()
         if (!state.activeProgram) return null
@@ -300,6 +327,40 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
         })
       },
 
+      updateSetActualValues: (exerciseIndex, setId, values) => {
+         set((state) => {
+           const session = state.activeProgram?.trainingState.currentSession
+       
+           if (!session) return state
+       
+           const exercise = session.exercises[exerciseIndex]
+
+           if (!exercise) return state
+       
+           exercise.sets = exercise.sets.map((set) => {
+             if (set.id !== setId) return set
+       
+             return {
+               ...set,
+               ...values,
+             }
+           })
+
+              return {
+                activeProgram: {
+                  ...state.activeProgram!,
+                  trainingState: {
+                    ...state.activeProgram!.trainingState,
+                    currentSession: {
+                      ...session,
+                     exercises: [...session.exercises],
+                    },
+                  },
+                },
+              }
+            })
+          },
+
       getDayToRender: () => {
         const state = get()
         if (!state.activeProgram) return null
@@ -321,7 +382,9 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
             viewMode.week === currentWeek && viewMode.day === currentDay,
         }
       },
+
     }),
+    
     {
       name: 'active-program-storage',
     }
