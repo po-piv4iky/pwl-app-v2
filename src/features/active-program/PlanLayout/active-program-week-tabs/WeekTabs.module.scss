@@ -3,7 +3,7 @@
 .weeksTabsContainer {
   display: flex;
   flex-direction: column;
-  gap: fluid-to-laptop(15, 12);
+  gap: fluid-to-laptop(16, 12);
   // padding: fluid(25, 19) 0;
 
   h5 {
@@ -11,8 +11,16 @@
     opacity: 0.5;
   }
 }
+.scrollWrapper{
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-.buttonsContainer {
+  padding-bottom: fluid(8, 6);
+
+}
+
+.buttonsTrack {
   display: flex;
   gap: fluid-to-laptop(15, 12);
   overflow-x: auto;//горизонтальный скролл
