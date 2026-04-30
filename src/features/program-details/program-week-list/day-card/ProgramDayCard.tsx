@@ -3,6 +3,7 @@ import { TrainingDay } from '@/programs/types/training.types'
 import css from './ProgramDayCard.module.scss'
 import { exercisesList } from '@/programs/exercises-list'
 import { formatExercisePreview } from '@/programs/helpers/format-exercise-scheme'
+import Badge from '@/components/ui/badge/Badge'
 
 interface Props {
   day: TrainingDay
@@ -10,7 +11,11 @@ interface Props {
 
 export default function ProgramDayCard({ day }: Props) {
   const dayTotalTraining = day.exercises.length
-  const levelDay = dayTotalTraining > 5 ? 'тяжёлая' : 'лёгкая'
+  let levelDay
+  switch(dayTotalTraining){
+     case 4 levelDay = 'лёгкая'
+  }
+  
 
   return (
     <Card className={css.dayCard}>
@@ -22,7 +27,7 @@ export default function ProgramDayCard({ day }: Props) {
           </span>
         </div>
 
-        <span className={css.dayLevel}>{levelDay}</span>
+        <Badge border variant={levelDay === 'лёгкая' ? 'green' : 'red'}>{levelDay}</Badge>
       </header>
 
       <div className={css.exerciseList}>
