@@ -68,7 +68,7 @@ export const benchForHardWorkers: ProgramTraining = {
           press( reps(10, 5) )
          ]),
          day(6, [
-          seatedInclinePress( reps(4, 6) ), 
+          seatedInclinePress( reps(4, 6), COMMENTS.SELF_WEIGHT ), 
           boardPress( reps(2, 6), COMMENTS.SELF_WEIGHT ),
           dips( reps(4, 6), COMMENTS.BODY_WEIGHT ),
           frenchPress( reps(10, 5), COMMENTS.SELF_WEIGHT ),

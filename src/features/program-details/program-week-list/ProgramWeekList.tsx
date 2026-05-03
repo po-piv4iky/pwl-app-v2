@@ -10,7 +10,7 @@ export default function ProgramWeekList({program}: Props) {
     return (
         <Stack>
             {program.weeks.map(week => (
-                <ProgramWeekCard key={week.weekNumber} week={week}/> 
+              <ProgramWeekCard key={week.weekNumber} week={week}/> 
             ))}
         </Stack>
     )

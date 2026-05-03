@@ -1,99 +1,158 @@
 @use "helpers" as *;
 
-.dayCard {
+.card {
   display: flex;
   flex-direction: column;
-  gap: fluid(16, 12);
+  gap: fluid(18, 14);
 
-  padding: fluid-to-laptop(24, 18);
-  border-radius: fluid(14, 10);
-
-  background-color: var(--color-bg-card);
+  padding: fluid-to-laptop(24, 16);
   border: 1px solid var(--color-gray-border);
+  border-radius: fluid(18, 14);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0)
+    ),
+    var(--color-bg-card);
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    background-color 0.2s ease;
+
+  @include hover {
+    border-color: rgba(255, 255, 255, 0.16);
+  }
 }
 
 /* =========================
    HEADER
 ========================= */
 
-.dayHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: fluid(12, 10);
-}
-
-.dayInfo {
+.header {
   display: flex;
   flex-direction: column;
-  gap: fluid(6, 4);
+  gap: fluid(12, 8);
+
+  padding-bottom: fluid(16, 12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.dayTitle {
-  font-size: fluid(18, 16);
-  font-weight: 600;
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: fluid(12, 8);
 }
 
-.dayMeta {
-  font-size: fluid(14, 12);
+.title {
+  font-size: fluid(20, 17);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.dayNumber {
+  margin-left: 6px;
+  font-size: fluid(16, 13);
   opacity: 0.6;
 }
 
-.dayLevel {
-  flex-shrink: 0;
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(6, 4);
 
-  padding: fluid(8, 6) fluid(12, 10);
-  border-radius: fluid(20, 14);
+  max-width: 90%;
 
-  font-size: fluid(12, 11);
-  font-weight: 600;
+  font-size: fluid(14, 12);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.58);
 
-  background-color: rgba(16, 185, 129, 0.15);
-  color: #10b981;
+  > span:first-child {
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 500;
+  }
 }
 
 /* =========================
-   EXERCISE LIST
+   EXERCISES
 ========================= */
 
 .exerciseList {
   display: flex;
   flex-direction: column;
+  gap: fluid(10, 8);
 }
 
 .exerciseItem {
   display: flex;
-  flex-direction: column;
+  gap: fluid(12, 10);
 
-  padding: fluid-to-laptop(12, 10) 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: fluid(12, 10);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: fluid(14, 10);
 
-  &:last-child {
-    padding-bottom: 0;
-    border-bottom: none;
+  background-color: rgba(255, 255, 255, 0.025);
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+
+  @include hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background-color: rgba(255, 255, 255, 0.04);
   }
+}
+
+.exerciseIndex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: fluid(28, 24);
+  height: fluid(28, 24);
+  border-radius: 50%;
+
+  font-size: fluid(13, 11);
+  font-weight: 700;
+
+  color: var(--color-red-button);
+  background-color: rgba(255, 255, 255, 0.055);
+}
+
+.exerciseContent {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .exerciseName {
   font-size: fluid(15, 14);
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .exerciseScheme {
-  margin-top: fluid(4, 3);
+  margin-top: fluid(5, 4);
 
   font-size: fluid(14, 13);
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 1.35;
+
   color: var(--color-red-button);
 
   word-break: break-word;
 }
 
 .exerciseComment {
-  margin-top: fluid(4, 3);
+  margin-top: fluid(6, 4);
 
   font-size: fluid(12, 11);
-  opacity: 0.5;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.48);
 }
 
 /* =========================
@@ -101,16 +160,15 @@
 ========================= */
 
 @include mobile {
-  .dayCard {
+  .card {
     padding: fluid(18, 14);
   }
 
-  .exerciseScheme {
-    font-size: 13px;
+  .summary {
+    max-width: 100%;
   }
 
-  .dayHeader {
-    flex-direction: column;
-    align-items: flex-start;
+  .exerciseItem {
+    padding: 10px;
   }
 }

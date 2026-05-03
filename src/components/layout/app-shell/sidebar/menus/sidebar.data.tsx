@@ -32,6 +32,6 @@ export const SIDEBAR_DATA: ISidebarItem[] = [
   {
     icon: Award,
     label: "Разряды",
-    link: PAGE.MY_STANDARTS
+    link: PAGE.MY_STANDARDS
   }
 ];
