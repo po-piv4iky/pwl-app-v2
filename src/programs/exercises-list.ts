@@ -30,6 +30,11 @@ export const exercisesList: ExerciseDefinition[] = [
     lift: "bench"
   },
   {
+    id: "incline_bench_dumbbells",
+    name: "Жим гантелей лёжа на наклонной скамье",
+    lift: "bench"
+  },
+  {
     id: "wide_grip_bench_press",
     name: "Жим лёжа широким хватом",
     lift: "bench"
@@ -160,6 +165,11 @@ export const exercisesList: ExerciseDefinition[] = [
     name: "Трицепс + бицепс",
     lift: "accessory"
   },
+  {
+    id: "hammer_on_biceps",
+    name: "Молот или молтки на бицепс",
+    lift: "accessory"
+  },
 
   // =========================
   // ПЛЕЧИ
@@ -225,6 +235,11 @@ export const exercisesList: ExerciseDefinition[] = [
   {
     id: "split_squat",
     name: "Приседания в ножницах со штангой на спине",
+    lift: "accessory"
+  },
+  {
+    id: "gakk_squat",
+    name: "Гакк приседания",
     lift: "accessory"
   },
 

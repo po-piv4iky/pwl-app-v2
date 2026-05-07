@@ -4,5 +4,6 @@ import { surovetskyBenchStandard } from "./programs-surovetsky/surovetsky-bench/
 
 export const allPrograms: ProgramTraining[] = [
   surovetskyBenchStandard,
-  benchForHardWorkers
+  benchForHardWorkers,
+  
 ];

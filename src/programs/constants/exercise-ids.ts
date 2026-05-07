@@ -8,6 +8,7 @@ export const EXERCISE = {
   CLOSE_GRIP_BENCH: "close_grip_bench", // Жим узким хватом
   BOARD_PRESS: "board_press", // Жим с досок / дожимы
   INCLINE_BENCH: "incline_bench", // Жим на наклонной скамье
+  INCLINE_BENCH_DUMBBELLS: "incline_bench_dumbbells",
   SEATED_INCLINE_PRESS: "seated_incline_press", // Жим сидя на наклонной скамье
   WIDE_GRIP_BENCH_PRESS: "wide_grip_bench_press", // Жим широким хватом
   CHEST_SIMULATOR: "chest_simulator", // Грудной тренажёр / сведение на грудь
@@ -34,6 +35,7 @@ export const EXERCISE = {
   SPLIT_SQUAT: "split_squat", // Сплит-присед / болгарский сплит-присед
   LEG_PRESS: "leg_press", // Жим ногами
   HAMSTRING_CURL: "hamstring_curl", // Сгибание ног
+  GAKK_SQUAT: "gakk_squat", // ГАКК ПРИСЕДАНИЯ
 
   // =========================
   // ТЯГОВЫЕ ДВИЖЕНИЯ / СПИНА / ЗАДНЯЯ ЦЕПЬ
@@ -68,6 +70,7 @@ export const EXERCISE = {
   DIPS: "dips", // Отжимания на брусьях
   FRENCH_PRESS: "french_press", // Французский жим
   BICEP_CURL: "bicep_curl", // Подъём на бицепс
+  HAMER_ON_BICEPS: "hammer_on_biceps",
   TRICEPS_BICEPS_SUPERSET: "triceps_biceps_superset", // Суперсет трицепс + бицепс
 
   // =========================

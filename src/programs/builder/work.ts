@@ -12,10 +12,7 @@ export function works(
   return { percent, reps, repeat };
 }
 
-export function reps(
-  repsValue: number | string,
-  repeat: number
-): ExerciseSet {
+export function reps(repsValue: number | string, repeat: number): ExerciseSet {
   return { reps: repsValue, repeat };
 }
 

@@ -54,4 +54,5 @@ export const COMMENTS = {
   OPTIONAL: "Упражнение по желанию",
   TECHNIQUE: "Работаем над техникой, Соревнования или прикидка веса",
   PUMP: "Работа на памп",
+  
 } as const

@@ -11,6 +11,7 @@ export const closeGripBench = createExercise(EXERCISE.CLOSE_GRIP_BENCH) // уз�
 export const wideGripBenchPress = createExercise(EXERCISE.WIDE_GRIP_BENCH_PRESS) // широкий хват
 export const boardPress = createExercise(EXERCISE.BOARD_PRESS) // жим с бруском
 export const inclineBench = createExercise(EXERCISE.INCLINE_BENCH) // жим на наклонной
+export const inclineBenchDumbbells= createExercise(EXERCISE.INCLINE_BENCH_DUMBBELLS)//жим гантелей на наклонной
 export const seatedInclinePress = createExercise(EXERCISE.SEATED_INCLINE_PRESS) // жим сидя под углом
 export const dumbbellFly = createExercise(EXERCISE.DUMBBELL_FLY) // разводка гантелей
 export const chestSimulator = createExercise(EXERCISE.CHEST_SIMULATOR) // грудной тренажёр
@@ -29,6 +30,7 @@ export const splitSquat = createExercise(EXERCISE.SPLIT_SQUAT) // болгарс
 export const legPress = createExercise(EXERCISE.LEG_PRESS) // жим ногами
 export const hamstringCurl = createExercise(EXERCISE.HAMSTRING_CURL) // сгибание ног
 export const hipExtension = createExercise(EXERCISE.HIP_EXTENSION) // разгибание бедра
+export const gakkSquat = createExercise(EXERCISE.GAKK_SQUAT)
 
 // -----------------------------
 // СТАНОВАЯ / ЗАДНЯЯ ЦЕПЬ
@@ -76,6 +78,7 @@ export const frenchPress = createExercise(EXERCISE.FRENCH_PRESS) // францу
 // -----------------------------
 
 export const bicepCurl = createExercise(EXERCISE.BICEP_CURL) // бицепс
+export const hammerOnBiceps = createExercise(EXERCISE.HAMER_ON_BICEPS)// МОЛОТКИ НА БИЦЕПС
 
 // -----------------------------
 // СУПЕРСЕТЫ

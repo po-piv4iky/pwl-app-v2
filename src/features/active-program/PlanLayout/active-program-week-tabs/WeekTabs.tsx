@@ -1,18 +1,21 @@
+'use client'
+
 import css from "./WeekTabs.module.scss"
-import { Circle, CheckCircle } from "lucide-react"
+import { Circle, CheckCircle, ArrowRight, ArrowLeft } from "lucide-react"
 import clsx from "clsx"
 import { useActiveProgramStore } from "@/store/active-program.store"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { 
-  FreeMode,      // свободный скролл
-  Pagination,    // точки навигации
-  Navigation,    // кнопки "вперёд/назад"
-  Autoplay,      // автопрокрутка
-  EffectFade     // эффект затухания
+  // FreeMode,      // свободный скролл
+  Pagination,       // точки навигации
+  Navigation,       // кнопки "вперёд/назад"
+  // Autoplay,      // автопрокрутка
+  // EffectFade     // эффект затухания
 } from 'swiper/modules';// import { Pagination } from 'swiper/modules'; // Импортируем модуль пагинации
 import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
+import { useRef } from "react"
 
 // 🚀 Золотое правило Framer-motion:
 // initial → что было до анимации
@@ -25,6 +28,8 @@ import "swiper/css/pagination"
 
 
 export default function WeekTabs() {
+  const prevRef = useRef<HTMLButtonElement | null>(null)
+  const nextRef = useRef<HTMLButtonElement | null>(null)
   const { activeProgram, setCurrentWeek } = useActiveProgramStore()
   if(!activeProgram) return null
 
@@ -34,13 +39,47 @@ export default function WeekTabs() {
   return (
     <section className={css.weeksTabsContainer}>
       <h5>Выберите неделю</h5>
+      <div className={css.navigationBlock}>
+        <button
+          ref={prevRef}
+          type="button"
+          className={clsx(css.navButton, css.prevButton)}
+          aria-label="Предыдущие недели"
+        >
+          <ArrowLeft />
+        </button>
+          <button
+          ref={nextRef}
+          type="button"
+          className={clsx(css.navButton, css.nextButton)}
+          aria-label="Следующие недели"
+        >
+          <ArrowRight />
+        </button>
+      </div>
       <Swiper
         // slidesPerView='auto'  //   // автоширина
         // freeMode // свободный скролл
         // slidesPerView={1.15} // сколько видно
-        modules={[FreeMode, Pagination, Navigation, Autoplay, EffectFade]}  // подключает функциональность
+        modules={[Pagination, Navigation]}  // подключает функциональность
         className={css.swiper}
         spaceBetween={12} //расстояние между слайдами px
+        slidesPerGroup={2}//сколько карточек перелистывается за один клик по пагинации.
+        // watchOverflow
+        pagination={{ 
+        clickable: true,//кликабельно: верно,
+        dynamicBullets: true //динамические подсказки: верно
+        }}
+        onBeforeInit={(swiper) => {
+        if (
+          typeof swiper.params.navigation !== "boolean" &&
+          swiper.params.navigation
+        ) {
+          swiper.params.navigation.prevEl = prevRef.current
+          swiper.params.navigation.nextEl = nextRef.current
+         }
+        }}
+        navigation
         breakpoints={{ // адаптив
           360: {
             slidesPerView: 2,  //если ширина >= 480px → показываем 1.6 карточки
@@ -58,10 +97,6 @@ export default function WeekTabs() {
             slidesPerView: 8,
           },
         }}
-        pagination={{ 
-        clickable: true,
-        dynamicBullets: true 
-      }}
       >
             {weeks.map((week) => {
               const weekNumber = week.weekNumber
@@ -77,6 +112,7 @@ export default function WeekTabs() {
                       className={clsx(
                       css.buttonWeek,
                       isActive && css.active,
+                      isCompletedWeek && css.completed
                       )}
                     >
                       <div className={css.iconAndWeekBlock}>
@@ -92,9 +128,6 @@ export default function WeekTabs() {
               )
            })}
       </Swiper>
-      
-         
-      
     </section>
   )
 }
