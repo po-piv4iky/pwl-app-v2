@@ -5,10 +5,7 @@ function roundToPlates(weight: number, step = 2.5) {
   return Math.round(weight / step) * step
 }
 
-export function generateWarmUp(
-  oneRem: number,
-  firstPercent: number
-): WarmUpSet[] {
+export function generateWarmUp(oneRem: number, firstPercent: number): WarmUpSet[] {
 
   const barbell = 20
   const targetWeight = roundToPlates((firstPercent / 100) * oneRem)

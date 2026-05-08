@@ -1,9 +1,8 @@
 import { day } from "@/programs/builder/day-builder";
-import { generateWarmUp } from "@/programs/builder/warmup";
 import { week } from "@/programs/builder/week-builder";
 import { reps, work, works } from "@/programs/builder/work";
 import { COMMENTS } from "@/programs/constants/comments";
-import { backExtension, bench, bicepCurl, deadLift, dumbbellFly, frenchPress, gakkSquat, hammerOnBiceps, hamstringCurl, inclineBenchDumbbells, lateralRaise, latPullDown, standingBarbellPress } from "@/programs/exercises";
+import { backExtension, bench, bicepCurl, deadLift, dumbbellFly, frenchPress, gakkSquat, hammerOnBiceps, hamstringCurl, inclineBenchDumbbells, lateralRaise, latPullDown, lowerBlockRow, standingBarbellPress } from "@/programs/exercises";
 import { ProgramTraining } from "@/programs/types/program.types";
 import { warmupEven, warmupOdd } from "./helper/warmup";
 
@@ -69,188 +68,195 @@ export const surovetskyDeadliftCycle: ProgramTraining = {
   author: 'Суровецкий',
   country: "RU",
   lift: 'deadlift',
-  description:"Тренировочная программа по становой тяге, на основе программ заслуженного тренера РФ по пауэрлифтингу Аскольда Суровецкого",
+  description: "Тяговый цикл Аскольда Суровецкого для развития максимальной силы в становой тяге. Программа построена на чередовании объёмных и интенсивных тренировок: нечётные тренировки развивают силовую выносливость и технику, чётные — адаптацию к предельным весам. Между тяжёлыми тягами предусмотрены увеличенные интервалы восстановления. Основной акцент — прогрессия интенсивности, сохранение свежести ЦНС и постепенный выход на новый максимум.",
   level: "advanced",
-  durationWeeks: 20,
+  durationWeeks: 10,
 
   weeks: [
     week(1, [
       day(1, [ 
-        deadLift(...warmupOdd, works(70, 5, 5)),
-        latPullDown( reps(6, 4), COMMENTS.SELF_WEIGHT),
-        bicepCurl( reps(8, 4), COMMENTS.MEDIUM )
+        deadLift(...warmupOdd, works(70, 5, 5)),//нечёт 5 дней отдых
+        latPullDown( reps("8-10", 4), COMMENTS.SELF_WEIGHT),
+        lowerBlockRow( reps("8-10", 4), COMMENTS.SELF_WEIGHT),
+        bicepCurl( reps("6-8", 4), COMMENTS.EXPLOSIVE )
       ]),
 
-      day(4, [
+      day(3, [
         bench( work(65, 5), work(70, 5), works(75, 5, 5), COMMENTS.EXPLOSIVE ),
-        inclineBenchDumbbells( reps(8, 4), COMMENTS.SELF_WEIGHT ),
-        hammerOnBiceps( reps(8, 4), COMMENTS.SELF_WEIGHT)
+        inclineBenchDumbbells( reps(8, 4), COMMENTS.SELF_WEIGHT ),//жим гантелей на наклонной
+        hammerOnBiceps( reps("8-10", 4), COMMENTS.SELF_WEIGHT)
       ]),
 
       day(6, [
-        deadLift(...warmupEven, work(81, 3), work(85, 2), works(88.5, 1, 3)),
+        deadLift(...warmupEven, work(81, 3), work(85, 2), works(88.5, 1, 3)), // 2 тренировка, чётная. Следующая тяга через 3 дня
         gakkSquat( reps(8, 4), COMMENTS.LIGHT ),
-        hamstringCurl( reps(10, 4), COMMENTS.SELF_WEIGHT )
+        hamstringCurl( reps(12, 4), COMMENTS.SELF_WEIGHT )
       ]),
     ]),
 
     week(2, [
-      day(1, [
+      day(2, [
+        deadLift(...warmupOdd, works(72.5, 5, 5)), // 3 тренировка, нечётная. Следующая тяга через 5 дней,
+        latPullDown( reps("8-10", 4), COMMENTS.SELF_WEIGHT),
+        lowerBlockRow( reps("8-10", 4), COMMENTS.SELF_WEIGHT),
+        bicepCurl( reps("6-8", 4), COMMENTS.EXPLOSIVE )
+      ]),
+      day(5, [
         standingBarbellPress( reps(6, 4), COMMENTS.MEDIUM ),
         lateralRaise( reps(10, 4), COMMENTS.SELF_WEIGHT ),
         frenchPress( reps("8-10", 4), COMMENTS.SELF_WEIGHT )
-      ]),
-
-      day(3, [
+      ]), 
+      day(7, [
+        deadLift(...warmupEven, work(81, 3), work(85, 2), works(88.5, 2, 3)), // 4 тренировка, чётная. Следующая тяга через 3 дня
         bench( work(70, 4), work(75, 4), works(80, 4, 2), COMMENTS.EXPLOSIVE ),
         dumbbellFly( reps(10, 4), COMMENTS.SELF_WEIGHT ),
         backExtension( reps(12, 4), COMMENTS.BODY_WEIGHT )
-      ]),
-
-      day(5, [
-        deadLift(...warmupOdd, works(72.5, 5, 5)),
-      ]),
     ]),
 
-    week(3, [
-      day(1, [
-        deadLift(
-          work(30, 6),
-          work(42.5, 5),
-          work(55, 4),
-          work(67.5, 3),
-          works(77.5, 4, 4)
-        ),
-      ]),
-
-      day(2, [
-        deadLift(
-          work(30, 6),
-          work(42.5, 5),
-          work(55, 4),
-          work(67.5, 3),
-          work(82.5, 3),
-          work(87.5, 2),
-          works(93.75, 2, 3)
-        ),
-      ]),
-
-      day(3, [
-        deadLift(
-          work(30, 6),
-          work(42.5, 5),
-          work(55, 4),
-          work(67.5, 3),
-          works(80, 4, 4)
-        ),
-      ]),
     ]),
 
-    week(4, [
-      day(1, [
-        deadLift(
-          work(30, 6),
-          work(45, 5),
-          work(60, 4),
-          work(75, 3),
-          work(83.75, 3),
-          work(93.75, 2),
-          works(100, 1, 3)
-        ),
-      ]),
-
-      day(2, [
-        deadLift(
-          work(30, 6),
-          work(45, 5),
-          work(60, 4),
-          work(75, 3),
-          works(82.5, 4, 4)
-        ),
-      ]),
-
-      day(3, [
-        deadLift(
-          work(30, 6),
-          work(45, 5),
-          work(60, 4),
-          work(75, 3),
-          work(83.75, 3),
-          work(93.75, 2),
-          works(100, 2, 3)
-        ),
-      ]),
+  week(3, [
+    day(3, [
+      deadLift(...warmupOdd, works(75, 5, 5)), // нечётная, отдых до тяги 5 дней
+      latPullDown(reps("8-10", 4), COMMENTS.SELF_WEIGHT),
+      lowerBlockRow(reps("8-10", 4), COMMENTS.SELF_WEIGHT),
+      bicepCurl(reps("6-8", 4), COMMENTS.EXPLOSIVE),
     ]),
 
-    week(5, [
-      day(1, [
-        deadLift(
-          work(30, 6),
-          work(42.5, 5),
-          work(55, 4),
-          work(67.5, 3),
-          works(85, 3, 3)
-        ),
-      ]),
+    day(5, [
+      bench(work(60, 5), work(65, 5), works(70, 5, 4), COMMENTS.EXPLOSIVE),
+      inclineBenchDumbbells(reps(8, 3), COMMENTS.SELF_WEIGHT),
+      lateralRaise(reps(12, 3), COMMENTS.SELF_WEIGHT),
+      frenchPress(reps("8-10", 3), COMMENTS.SELF_WEIGHT),
+    ]),
+  ]),
 
-      day(2, [
-        deadLift(
-          work(30, 6),
-          work(42.5, 5),
-          work(55, 4),
-          work(67.5, 3),
-          work(85, 3),
-          work(97.5, 2),
-          works(105, 2, 3)
-        ),
-      ]),
-
-      day(3, [
-        deadLift(
-          work(30, 6),
-          work(42.5, 5),
-          work(55, 4),
-          work(67.5, 3),
-          works(87.5, 3, 3)
-        ),
-      ]),
+  week(4, [
+    day(1, [
+      deadLift(...warmupEven, work(82.5, 3), work(87.5, 2), works(94, 1, 3)), // чётная, отдых до тяги 3 дня
+      gakkSquat(reps(8, 3), COMMENTS.LIGHT),
+      hamstringCurl(reps(12, 3), COMMENTS.SELF_WEIGHT),
     ]),
 
-    week(6, [
-      day(1, [
-        deadLift(
-          work(30, 6),
-          work(45, 5),
-          work(60, 4),
-          work(75, 3),
-          work(85, 3),
-          work(97.5, 2),
-          works(105, 2, 3)
-        ),
-      ]),
-
-      day(2, [
-        deadLift(
-          work(30, 6),
-          work(45, 5),
-          work(60, 4),
-          work(75, 3),
-          works(90, 2, 2)
-        ),
-      ]),
-
-      day(3, [
-        deadLift(
-          work(30, 6),
-          work(45, 5),
-          work(60, 4),
-          work(75, 3),
-          work(100, 1), work(102.5, 1), work(105, 1),
-          "Контрольная проходка..."
-        ),
-      ]),
+    day(4, [
+      deadLift(...warmupOdd, works(77.5, 4, 4)), // нечётная, отдых до тяги 5 дней
+      latPullDown(reps("8-10", 4), COMMENTS.SELF_WEIGHT),
+      lowerBlockRow(reps("8-10", 3), COMMENTS.SELF_WEIGHT),
+      bicepCurl(reps("6-8", 3), COMMENTS.MEDIUM),
     ]),
-  ],
+
+    day(6, [
+      bench(work(65, 4), work(70, 4), works(75, 4, 4), COMMENTS.EXPLOSIVE),
+      dumbbellFly(reps(10, 3), COMMENTS.SELF_WEIGHT),
+      hammerOnBiceps(reps("8-10", 3), COMMENTS.SELF_WEIGHT),
+    ]),
+  ]),
+
+  week(5, [
+    day(2, [
+      deadLift(...warmupEven, work(82.5, 3), work(87.5, 2), works(94, 2, 3)), // чётная, отдых до тяги 3 дня
+      gakkSquat(reps(8, 3), COMMENTS.LIGHT),
+      hamstringCurl(reps(10, 3), COMMENTS.SELF_WEIGHT),
+    ]),
+
+    day(5, [
+      deadLift(...warmupOdd, works(80, 4, 4)), // нечётная, отдых до тяги 5 дней
+      latPullDown(reps("8-10", 4), COMMENTS.SELF_WEIGHT),
+      lowerBlockRow(reps("8-10", 3), COMMENTS.SELF_WEIGHT),
+      bicepCurl(reps("6-8", 3), COMMENTS.MEDIUM),
+    ]),
+
+    day(7, [
+      standingBarbellPress(reps(6, 3), COMMENTS.MEDIUM),
+      lateralRaise(reps(12, 3), COMMENTS.SELF_WEIGHT),
+      frenchPress(reps("8-10", 3), COMMENTS.SELF_WEIGHT),
+    ]),
+  ]),
+
+  week(6, [
+    day(3, [
+      deadLift(...warmupEven, work(84, 3), work(94, 2), works(100, 1, 3)), // чётная, отдых до тяги 3 дня
+      hamstringCurl(reps(10, 3), COMMENTS.SELF_WEIGHT),
+      backExtension(reps(12, 3), COMMENTS.BODY_WEIGHT),
+    ]),
+
+    day(6, [
+      deadLift(...warmupOdd, works(82.5, 4, 4)), // нечётная, отдых до тяги 5 дней
+      latPullDown(reps("8-10", 3), COMMENTS.SELF_WEIGHT),
+      lowerBlockRow(reps("8-10", 3), COMMENTS.SELF_WEIGHT),
+      bicepCurl(reps("6-8", 3), COMMENTS.MEDIUM),
+    ]),
+  ]),
+
+  week(7, [
+    day(4, [
+      deadLift(...warmupEven, work(84, 3), work(94, 2), works(100, 2, 3)), // чётная, отдых до тяги 3 дня
+      hamstringCurl(reps(10, 2), COMMENTS.LIGHT),
+      backExtension(reps(12, 2), COMMENTS.BODY_WEIGHT),
+    ]),
+
+    day(7, [
+      deadLift(...warmupOdd, works(85, 3, 3)), // нечётная, отдых до тяги 5 дней
+      latPullDown(reps("8-10", 3), COMMENTS.SELF_WEIGHT),
+      lowerBlockRow(reps("8-10", 3), COMMENTS.SELF_WEIGHT),
+    ]),
+  ]),
+
+  week(8, [
+    day(2, [
+      bench(work(60, 4), work(65, 4), works(70, 4, 3), COMMENTS.EXPLOSIVE),
+      inclineBenchDumbbells(reps(8, 3), COMMENTS.SELF_WEIGHT),
+      lateralRaise(reps(12, 3), COMMENTS.SELF_WEIGHT),
+    ]),
+
+    day(5, [
+      deadLift(...warmupEven, work(85.5, 3), work(97.5, 2), works(105, 1, 3)), // чётная, отдых до тяги 3 дня
+      hamstringCurl(reps(10, 2), COMMENTS.LIGHT),
+      backExtension(reps(10, 2), COMMENTS.BODY_WEIGHT),
+    ]),
+  ]),
+
+  week(9, [
+    day(1, [
+      deadLift(...warmupOdd, works(87.5, 3, 3)), // нечётная, отдых до тяги 5 дней
+      latPullDown(reps("8-10", 3), COMMENTS.SELF_WEIGHT),
+      lowerBlockRow(reps("8-10", 2), COMMENTS.LIGHT),
+    ]),
+
+    day(3, [
+      bench(work(60, 3), work(65, 3), works(70, 3, 3), COMMENTS.EXPLOSIVE),
+      lateralRaise(reps(12, 3), COMMENTS.SELF_WEIGHT),
+      frenchPress(reps("8-10", 2), COMMENTS.SELF_WEIGHT),
+    ]),
+
+    day(6, [
+      deadLift(...warmupEven, work(85.5, 3), work(97.5, 2), works(105, 2, 3)), // чётная, отдых до тяги 3 дня
+      hamstringCurl(reps(10, 2), COMMENTS.LIGHT),
+    ]),
+  ]),
+
+  week(10, [
+    day(2, [
+      deadLift(...warmupOdd, works(90, 2, 2)), // нечётная, перед проходкой 5 дней отдыха
+      latPullDown(reps("8-10", 2), COMMENTS.LIGHT),
+    ]),
+
+    day(4, [
+      bench(work(55, 3), work(60, 3), works(65, 3, 3), COMMENTS.TECHNIQUE),
+      lateralRaise(reps(12, 2), COMMENTS.SELF_WEIGHT),
+    ]),
+
+    day(7, [
+      deadLift(
+        ...warmupEven,
+        work(90, 1),
+        work(100, 1),
+        work(105, 1),
+        COMMENTS.TECHNIQUE
+      ), // проходка на максимум
+    ]),
+  ]),
+]
 }
 
 // Полная схема уже полностью в процентах
