@@ -7,19 +7,17 @@ interface Props {
 }
 
 export default function ExerciseSetPreview({ sets }: Props) {
+  const workSet = sets.filter(set => !set.isWarmUp)
   return (
     <div className={css.sets}>
-      {sets.map((set, index) => {
+      {workSet.map((set, index) => {
         const repeat = set.repeat ?? 1
         const hasPercent = typeof set.percent === 'number'
 
         return (
           <span
             key={index}
-            className={clsx(
-              css.set,
-              set.isWarmUp ? css.setWarmUp : css.setWork
-            )}
+            className={clsx(css.set)}
           >
             {hasPercent && (
               <span className={css.percent}>{set.percent}% ×</span>

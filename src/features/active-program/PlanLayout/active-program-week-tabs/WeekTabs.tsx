@@ -30,7 +30,7 @@ import { useRef } from "react"
 export default function WeekTabs() {
   const prevRef = useRef<HTMLButtonElement | null>(null)
   const nextRef = useRef<HTMLButtonElement | null>(null)
-  const { activeProgram, setCurrentWeek } = useActiveProgramStore()
+  const { activeProgram, selectWeek } = useActiveProgramStore()
   if(!activeProgram) return null
 
   const { program, currentWeek, completedDays } = activeProgram
@@ -108,7 +108,7 @@ export default function WeekTabs() {
               return (
                 <SwiperSlide key={weekNumber} className={css.slide}>
                     <button
-                      onClick={() => setCurrentWeek(weekNumber)}
+                      onClick={() => selectWeek(weekNumber)}
                       className={clsx(
                       css.buttonWeek,
                       isActive && css.active,

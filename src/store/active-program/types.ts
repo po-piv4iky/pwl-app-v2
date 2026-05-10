@@ -83,9 +83,9 @@ export interface ActiveProgramStore {
   resetProgram: () => void
   startTraining: () => void
   nextExercise: () => void
-  setCurrentWeek: (week: number) => void
-  setCurrentDay: (day: number) => void
-  selectDay: (week: number, day: number) => void
+  // setCurrentWeek: (week: number) => void
+  // setCurrentDay: (day: number) => void
+  // selectDay: (week: number, day: number) => void
   completeDay: (week: number, day: number) => void
   toggleSetCompletion: (exerciseIndex: number, setId: string) => void
   startRestTimer: (duration: number) => void
@@ -95,5 +95,8 @@ export interface ActiveProgramStore {
   getDayData: (week: number, day: number) => TrainingDay | null
   getWeekSchedule: () => ScheduleDay[]
   getDayToRender: () => DayToRender | null
+  selectWeek: (week: number) => void
+  selectDay: (week: number, day: number) => void
+  showCurrentDay: () => void
   updateSetActualValues: (exerciseIndex: number, setId: string, values: Partial<Pick<SessionSet, 'actualWeight' | 'actualReps'>>) => void
 }

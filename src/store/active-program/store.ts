@@ -1,7 +1,14 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { ActiveProgram, ActiveProgramStore, CompletedDay, ScheduleDay, TrainingSession,} from './types'
+import {
+  ActiveProgram,
+  ActiveProgramStore,
+  CompletedDay,
+  ScheduleDay,
+  TrainingSession,
+} from './types'
+
 import { buildTrainingSession, createRestTimerState } from './utils'
 import { ProgramTraining } from '@/programs/types/program.types'
 import { useUserMaxesStore } from '../maxes.store'
@@ -21,10 +28,17 @@ const createActiveProgramState = (program: ProgramTraining): ActiveProgram => ({
   status: 'active',
 })
 
-const hasCompletedDay = (completedDays: CompletedDay[], week: number, day: number) => 
-  completedDays.some((item) => item.week === week && item.day === day)
+const hasCompletedDay = (
+  completedDays: CompletedDay[],
+  week: number,
+  day: number
+) => {
+  return completedDays.some((item) => item.week === week && item.day === day)
+}
 
-const updateCurrentSessionCompletion = (session: TrainingSession): TrainingSession => {
+const updateCurrentSessionCompletion = (
+  session: TrainingSession
+): TrainingSession => {
   const isCompleted = session.exercises.every((exercise) => exercise.isCompleted)
 
   return {
@@ -48,77 +62,66 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           activeProgram: null,
         }),
 
-
-        // export interface TrainingSession {
-        //   week: number
-        //   day: number
-        //   exercises: SessionExercise[]
-        //   startedAt: string
-        //   isCompleted: boolean
-        // }
-
+      // Запускаем ТОЛЬКО реальный currentWeek/currentDay
       startTraining: () =>
         set((state) => {
           if (!state.activeProgram) return {}
 
-          const dayToRender = state.getDayToRender()
-          if (!dayToRender) return {}
+          const { currentWeek, currentDay } = state.activeProgram
 
-          const dayData = state.getDayData(dayToRender.week, dayToRender.day)
+          const dayData = state.getDayData(currentWeek, currentDay)
           if (!dayData || dayData.exercises.length === 0) return {}
-           
+
           const { maxes } = useUserMaxesStore.getState()
+
           return {
             activeProgram: {
               ...state.activeProgram,
+              viewMode: { type: 'current' },
               trainingState: {
                 ...state.activeProgram.trainingState,
                 mode: 'training',
                 exerciseIndex: 0,
-                currentSession: buildTrainingSession(dayToRender, dayData.exercises, maxes),
+                currentSession: buildTrainingSession(
+                  {
+                    week: currentWeek,
+                    day: currentDay,
+                    isCurrent: true,
+                  },
+                  dayData.exercises,
+                  maxes
+                ),
               },
             },
           }
         }),
 
-      setCurrentWeek: (week) =>
+      // ВАЖНО: это только просмотр недели, прогресс не меняется
+      selectWeek: (week) =>
         set((state) => {
           if (!state.activeProgram) return {}
 
           const weekData = state.activeProgram.program.weeks.find(
             (item) => item.weekNumber === week
           )
+
           if (!weekData || weekData.trainingDays.length === 0) return {}
 
-          return {
-            activeProgram: {
-              ...state.activeProgram,
-              currentWeek: week,
-              currentDay: weekData.trainingDays[0].day,
-              viewMode: { type: 'current' },
-            },
-          }
-        }),
-
-      setCurrentDay: (day) =>
-        set((state) => {
-          if (!state.activeProgram) return {}
-
-          const weekData = get().getCurrentWeekData()
-          if (!weekData) return {}
-
-          const dayExists = weekData.trainingDays.some((item) => item.day === day)
-          if (!dayExists) return {}
+          const firstTrainingDay = weekData.trainingDays[0].day
 
           return {
             activeProgram: {
               ...state.activeProgram,
-              currentDay: day,
-              viewMode: { type: 'current' },
+              viewMode: {
+                type: 'selected',
+                week,
+                day: firstTrainingDay,
+              },
             },
           }
         }),
 
+      // Просмотр конкретного дня, прогресс не меняется
       selectDay: (week, day) =>
         set((state) => {
           if (!state.activeProgram) return {}
@@ -138,9 +141,23 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           }
         }),
 
+      // Вернуться к реальной текущей тренировке
+      showCurrentDay: () =>
+        set((state) => {
+          if (!state.activeProgram) return {}
+
+          return {
+            activeProgram: {
+              ...state.activeProgram,
+              viewMode: { type: 'current' },
+            },
+          }
+        }),
+
       completeDay: (week, day) =>
         set((state) => {
           if (!state.activeProgram) return {}
+
           if (hasCompletedDay(state.activeProgram.completedDays, week, day)) {
             return {}
           }
@@ -148,26 +165,34 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           return {
             activeProgram: {
               ...state.activeProgram,
-              completedDays: [...state.activeProgram.completedDays, { week, day }],
+              completedDays: [
+                ...state.activeProgram.completedDays,
+                { week, day },
+              ],
             },
           }
         }),
 
-      toggleSetCompletion: (exerciseIndex, setId) => //переключатель завершения подхода
+      toggleSetCompletion: (exerciseIndex, setId) =>
         set((state) => {
-          const currentSession = state.activeProgram?.trainingState.currentSession
+          const currentSession =
+            state.activeProgram?.trainingState.currentSession
+
           if (!state.activeProgram || !currentSession) return {}
 
           const exercises = currentSession.exercises.map((exercise, index) => {
             if (index !== exerciseIndex) return exercise
 
             const sets = exercise.sets.map((set) =>
-              set.id === setId ? { ...set, isCompleted: !set.isCompleted } : set)
+              set.id === setId
+                ? { ...set, isCompleted: !set.isCompleted }
+                : set
+            )
 
             return {
               ...exercise,
               sets,
-              isCompleted: sets.every((set) => set.isCompleted),// если все сеты тру, то упражнение выполнено
+              isCompleted: sets.every((set) => set.isCompleted),
             }
           })
 
@@ -194,7 +219,6 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
 
           const nextIndex = state.activeProgram.trainingState.exerciseIndex + 1
 
-          // если есть следующее упражнение
           if (nextIndex < session.exercises.length) {
             return {
               activeProgram: {
@@ -207,18 +231,16 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
             }
           }
 
-          // если это было последнее упражнение
           return {
             activeProgram: {
               ...state.activeProgram,
               trainingState: {
-              ...state.activeProgram.trainingState,
+                ...state.activeProgram.trainingState,
                 mode: 'finished',
               },
             },
           }
-        }), 
-        
+        }),
 
       startRestTimer: (duration) =>
         set((state) => {
@@ -277,7 +299,38 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
                   startedAt: Date.now(),
                 },
               },
-           },
+            },
+          }
+        }),
+
+      updateSetActualValues: (exerciseIndex, setId, values) =>
+        set((state) => {
+          const session = state.activeProgram?.trainingState.currentSession
+
+          if (!state.activeProgram || !session) return {}
+
+          const exercises = session.exercises.map((exercise, index) => {
+            if (index !== exerciseIndex) return exercise
+
+            return {
+              ...exercise,
+              sets: exercise.sets.map((set) =>
+                set.id === setId ? { ...set, ...values } : set
+              ),
+            }
+          })
+
+          return {
+            activeProgram: {
+              ...state.activeProgram,
+              trainingState: {
+                ...state.activeProgram.trainingState,
+                currentSession: {
+                  ...session,
+                  exercises,
+                },
+              },
+            },
           }
         }),
 
@@ -299,67 +352,11 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
         const weekData = state.activeProgram.program.weeks.find(
           (item) => item.weekNumber === week
         )
+
         if (!weekData) return null
 
         return weekData.trainingDays.find((item) => item.day === day) || null
       },
-
-      getWeekSchedule: () => {
-        const state = get()
-        if (!state.activeProgram) return []
-
-        const weekData = state.getCurrentWeekData()
-        const dayToRender = state.getDayToRender()
-        if (!weekData) return []
-
-        const weekDays = [1, 2, 3, 4, 5, 6, 7]
-
-        return weekDays.map<ScheduleDay>((dayNumber) => {
-          const training = weekData.trainingDays.find((day) => day.day === dayNumber)
-          const isCompleted = hasCompletedDay(state.activeProgram!.completedDays, state.activeProgram!.currentWeek, dayNumber)
-
-          return {
-            day: dayNumber,
-            isTraining: Boolean(training),
-            isCompleted,
-            isActive: dayToRender?.day === dayNumber,
-          }
-        })
-      },
-
-      updateSetActualValues: (exerciseIndex, setId, values) => {
-         set((state) => {
-           const session = state.activeProgram?.trainingState.currentSession
-       
-           if (!session) return state
-       
-           const exercise = session.exercises[exerciseIndex]
-
-           if (!exercise) return state
-       
-           exercise.sets = exercise.sets.map((set) => {
-             if (set.id !== setId) return set
-       
-             return {
-               ...set,
-               ...values,
-             }
-           })
-
-              return {
-                activeProgram: {
-                  ...state.activeProgram!,
-                  trainingState: {
-                    ...state.activeProgram!.trainingState,
-                    currentSession: {
-                      ...session,
-                     exercises: [...session.exercises],
-                    },
-                  },
-                },
-              }
-            })
-          },
 
       getDayToRender: () => {
         const state = get()
@@ -383,8 +380,41 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
         }
       },
 
+      getWeekSchedule: () => {
+        const state = get()
+        if (!state.activeProgram) return []
+
+        const dayToRender = state.getDayToRender()
+        if (!dayToRender) return []
+
+        const weekData = state.activeProgram.program.weeks.find(
+          (week) => week.weekNumber === dayToRender.week
+        )
+
+        if (!weekData) return []
+
+        const weekDays = [1, 2, 3, 4, 5, 6, 7]
+
+        return weekDays.map<ScheduleDay>((dayNumber) => {
+          const training = weekData.trainingDays.find(
+            (day) => day.day === dayNumber
+          )
+
+          const isCompleted = hasCompletedDay(
+            state.activeProgram!.completedDays,
+            dayToRender.week,
+            dayNumber
+          )
+
+          return {
+            day: dayNumber,
+            isTraining: Boolean(training),
+            isCompleted,
+            isActive: dayToRender.day === dayNumber,
+          }
+        })
+      },
     }),
-    
     {
       name: 'active-program-storage',
     }

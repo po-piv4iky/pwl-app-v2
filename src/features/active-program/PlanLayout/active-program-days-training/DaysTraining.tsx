@@ -6,7 +6,7 @@ import { Calendar, Eye, PlayCircle } from 'lucide-react'
 import css from './DaysTraining.module.scss'
 import { useActiveProgramStore } from '@/store/active-program.store'
 import { exercisesList } from '@/programs/exercises-list'
-import { formatExercisePreview } from '@/programs/helpers/format-exercise-scheme'
+import ExerciseSetPreview from '@/features/program-details/program-week-list/day-card/ExerciseSetPreview'
 
 export default function DaysTraining() {
   const activeProgram = useActiveProgramStore((s) => s.activeProgram)
@@ -19,8 +19,12 @@ export default function DaysTraining() {
   const dayToRender = getDayToRender()
   if (!dayToRender) return null
 
-  const { week, day, isCurrent } = dayToRender
+  const { week, day } = dayToRender
   const dayData = getDayData(week, day)
+
+  const canStart =
+    week === activeProgram.currentWeek &&
+    day === activeProgram.currentDay
 
   if (!dayData) {
     return (
@@ -37,7 +41,6 @@ export default function DaysTraining() {
   }
 
   const exercisesCount = dayData.exercises.length
-  const canStart = isCurrent
 
   return (
     <section className={css.dayTraining}>
@@ -56,7 +59,9 @@ export default function DaysTraining() {
 
           <div
             className={
-              canStart ? css.dayTraining__statusCurrent : css.dayTraining__statusView
+              canStart
+                ? css.dayTraining__statusCurrent
+                : css.dayTraining__statusView
             }
           >
             {canStart ? (
@@ -79,8 +84,6 @@ export default function DaysTraining() {
               (item) => item.id === exercise.exerciseId
             )
 
-            const preview = formatExercisePreview(exercise.sets)
-
             return (
               <div
                 key={`${exercise.exerciseId}-${index}`}
@@ -90,9 +93,7 @@ export default function DaysTraining() {
                   {exerciseMeta?.name ?? exercise.exerciseId}
                 </h5>
 
-                <p className={css.dayTraining__exerciseScheme}>
-                  {preview}
-                </p>
+                <ExerciseSetPreview sets={exercise.sets} />
 
                 {exercise.comment && (
                   <p className={css.dayTraining__exerciseComment}>
