@@ -19,11 +19,11 @@ import ProgressBar from '@/components/ui/progress-bar/ProgressBar'
 export default function TrainingSession() {
   const activeProgram = useActiveProgramStore((s) => s.activeProgram)
   const exercises = activeProgram?.trainingState.currentSession?.exercises ?? []
-  console.log(exercises)
   const total = exercises.length
- const currentIndex = activeProgram?.trainingState.exerciseIndex ?? 0
+  const currentIndex = activeProgram?.trainingState.exerciseIndex ?? 0
+  // const warmUp = activeProgram?.trainingState.currentSession?. 
 
-const currentNumber = currentIndex + 1
+  const currentNumber = currentIndex + 1
 
   const router = useRouter()
 
@@ -35,35 +35,35 @@ const currentNumber = currentIndex + 1
     <Container size='narrow'>
       <Stack padding>
 
-      <header className={css.headerBlock}>
-        <div className={css.titleAndButtonBlock}>
-          <Button
-            variant='ghost'
-            className={css.backButton}
-            onClick={handleGoBack}
-          >
-            <ArrowLeft /> Назад
-          </Button>
+        <header className={css.headerBlock}>
+          <div className={css.titleAndButtonBlock}>
+            <Button
+              variant='ghost'
+              className={css.backButton}
+              onClick={handleGoBack}
+            >
+              <ArrowLeft /> Назад
+            </Button>
 
-          <h5 className={css.weekTitle}>
-            Неделя - {activeProgram?.currentWeek} день-{activeProgram?.currentDay}
-          </h5>
-        </div>
+            <h5 className={css.weekTitle}>
+              Неделя - {activeProgram?.currentWeek} день-{activeProgram?.currentDay}
+            </h5>
+          </div>
 
-        <div className={css.progressBlock}>
-          <p>Упражнение {currentNumber} из {total}</p>
-        <ProgressBar 
-          size='sm'
-          current={currentNumber}
-          target={total}
-        /> 
-        </div>
-      </header>
+          <div className={css.progressBlock}>
+            <p>Упражнение {currentNumber} из {total}</p>
+            <ProgressBar
+              size='sm'
+              current={currentNumber}
+              target={total}
+            />
+          </div>
+        </header>
 
-      <WarmUp lift='bench' variant='session' />
-      <RestTimer />
-      <TrainingExercisesSessions />
-      <TrainingPlanSession />
+        <WarmUp lift='bench' variant='session' />
+        <RestTimer />
+        <TrainingExercisesSessions />
+        <TrainingPlanSession />
       </Stack>
     </Container>
   )

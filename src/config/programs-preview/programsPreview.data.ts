@@ -1,7 +1,7 @@
-import { surovetskyBenchStandard } from "@/programs/routines/programs-surovetsky/surovetsky-bench/surovetskyStandard.data";
-import { ProgramsPreview } from "./types/programsPreview.types";
-import { benchForHardWorkers } from "@/programs/routines/programs-sheiko/sheiko-bench/benchForHardWorkers.data";
-import { surovetskyDeadliftCycle } from "@/programs/routines/programs-surovetsky/surovetsky-dead-lift/surovetskyDeadliftCycle";
+import { surovetskyBenchStandard } from '@/programs/routines/programs-surovetsky/surovetsky-bench/surovetskyStandard.data'
+import { ProgramsPreview } from './types/programsPreview.types'
+import { benchForHardWorkers } from '@/programs/routines/programs-sheiko/sheiko-bench/benchForHardWorkers.data'
+import { surovetskyDeadliftCycle } from '@/programs/routines/programs-surovetsky/surovetsky-dead-lift/surovetskyDeadliftCycle'
 
 export const programsPreviews: ProgramsPreview[] = [
   {
@@ -10,7 +10,7 @@ export const programsPreviews: ProgramsPreview[] = [
     author: surovetskyBenchStandard.author,
     lift: surovetskyBenchStandard.lift,
     level: surovetskyBenchStandard.level,
-    description: surovetskyBenchStandard.description,
+    descriptionPreview: surovetskyBenchStandard.descriptionPreview,
     durationWeeks: surovetskyBenchStandard.durationWeeks,
   },
   {
@@ -19,7 +19,7 @@ export const programsPreviews: ProgramsPreview[] = [
     author: benchForHardWorkers.author,
     lift: benchForHardWorkers.lift,
     level: benchForHardWorkers.level,
-    description: benchForHardWorkers.description,
+    descriptionPreview: benchForHardWorkers.descriptionPreview,
     durationWeeks: benchForHardWorkers.durationWeeks,
   },
   {
@@ -28,9 +28,7 @@ export const programsPreviews: ProgramsPreview[] = [
     author: surovetskyDeadliftCycle.author,
     lift: surovetskyDeadliftCycle.lift,
     level: surovetskyDeadliftCycle.level,
-    description: surovetskyDeadliftCycle.description,
+    descriptionPreview: surovetskyDeadliftCycle.descriptionPreview,
     durationWeeks: surovetskyDeadliftCycle.durationWeeks,
   },
-];
-
-
+]

@@ -28,17 +28,11 @@ const createActiveProgramState = (program: ProgramTraining): ActiveProgram => ({
   status: 'active',
 })
 
-const hasCompletedDay = (
-  completedDays: CompletedDay[],
-  week: number,
-  day: number
-) => {
+const hasCompletedDay = (completedDays: CompletedDay[], week: number, day: number) => {
   return completedDays.some((item) => item.week === week && item.day === day)
 }
 
-const updateCurrentSessionCompletion = (
-  session: TrainingSession
-): TrainingSession => {
+const updateCurrentSessionCompletion = (session: TrainingSession): TrainingSession => {
   const isCompleted = session.exercises.every((exercise) => exercise.isCompleted)
 
   return {
@@ -89,7 +83,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
                     isCurrent: true,
                   },
                   dayData.exercises,
-                  maxes
+                  maxes,
                 ),
               },
             },
@@ -102,7 +96,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           if (!state.activeProgram) return {}
 
           const weekData = state.activeProgram.program.weeks.find(
-            (item) => item.weekNumber === week
+            (item) => item.weekNumber === week,
           )
 
           if (!weekData || weekData.trainingDays.length === 0) return {}
@@ -165,18 +159,14 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           return {
             activeProgram: {
               ...state.activeProgram,
-              completedDays: [
-                ...state.activeProgram.completedDays,
-                { week, day },
-              ],
+              completedDays: [...state.activeProgram.completedDays, { week, day }],
             },
           }
         }),
 
       toggleSetCompletion: (exerciseIndex, setId) =>
         set((state) => {
-          const currentSession =
-            state.activeProgram?.trainingState.currentSession
+          const currentSession = state.activeProgram?.trainingState.currentSession
 
           if (!state.activeProgram || !currentSession) return {}
 
@@ -184,9 +174,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
             if (index !== exerciseIndex) return exercise
 
             const sets = exercise.sets.map((set) =>
-              set.id === setId
-                ? { ...set, isCompleted: !set.isCompleted }
-                : set
+              set.id === setId ? { ...set, isCompleted: !set.isCompleted } : set,
             )
 
             return {
@@ -315,7 +303,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
             return {
               ...exercise,
               sets: exercise.sets.map((set) =>
-                set.id === setId ? { ...set, ...values } : set
+                set.id === setId ? { ...set, ...values } : set,
               ),
             }
           })
@@ -340,7 +328,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
 
         return (
           state.activeProgram.program.weeks.find(
-            (week) => week.weekNumber === state.activeProgram?.currentWeek
+            (week) => week.weekNumber === state.activeProgram?.currentWeek,
           ) || null
         )
       },
@@ -350,7 +338,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
         if (!state.activeProgram) return null
 
         const weekData = state.activeProgram.program.weeks.find(
-          (item) => item.weekNumber === week
+          (item) => item.weekNumber === week,
         )
 
         if (!weekData) return null
@@ -375,8 +363,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
         return {
           week: viewMode.week,
           day: viewMode.day,
-          isCurrent:
-            viewMode.week === currentWeek && viewMode.day === currentDay,
+          isCurrent: viewMode.week === currentWeek && viewMode.day === currentDay,
         }
       },
 
@@ -388,7 +375,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
         if (!dayToRender) return []
 
         const weekData = state.activeProgram.program.weeks.find(
-          (week) => week.weekNumber === dayToRender.week
+          (week) => week.weekNumber === dayToRender.week,
         )
 
         if (!weekData) return []
@@ -396,14 +383,12 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
         const weekDays = [1, 2, 3, 4, 5, 6, 7]
 
         return weekDays.map<ScheduleDay>((dayNumber) => {
-          const training = weekData.trainingDays.find(
-            (day) => day.day === dayNumber
-          )
+          const training = weekData.trainingDays.find((day) => day.day === dayNumber)
 
           const isCompleted = hasCompletedDay(
             state.activeProgram!.completedDays,
             dayToRender.week,
-            dayNumber
+            dayNumber,
           )
 
           return {
@@ -417,6 +402,6 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
     }),
     {
       name: 'active-program-storage',
-    }
-  )
+    },
+  ),
 )

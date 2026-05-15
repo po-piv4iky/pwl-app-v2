@@ -1,21 +1,21 @@
 // src/store/userMaxes.store.ts
-import { validateMax } from '@/lib/validate.max';
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { validateMax } from '@/lib/validate.max'
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
-export type LiftType = 'bench' | 'squat' | 'deadlift';
+export type LiftType = 'bench' | 'squat' | 'deadlift'
 
 export interface UserMaxes {
-  bench: number;
-  squat: number;
-  deadlift: number;
+  bench: number
+  squat: number
+  deadlift: number
 }
 
 export interface UserMaxesState {
-  maxes: UserMaxes;
-  setMax: (lift: LiftType, value: number) => void;
-  setAllMaxes: (maxes: UserMaxes) => void;
-  reset: () => void;
+  maxes: UserMaxes
+  setMax: (lift: LiftType, value: number) => void
+  setAllMaxes: (maxes: UserMaxes) => void
+  reset: () => void
 }
 
 export const useUserMaxesStore = create<UserMaxesState>()(
@@ -51,6 +51,6 @@ export const useUserMaxesStore = create<UserMaxesState>()(
     }),
     {
       name: 'user-maxes', // ключ в localStorage
-    }
-  )
-);
+    },
+  ),
+)

@@ -1,56 +1,52 @@
-import { WarmUpSet } from "../types/warmup.types"
+// import { WarmUpSet } from '../types/warmup.types'
 
+// function roundToPlates(weight: number, step = 2.5) {
+//   return Math.round(weight / step) * step
+// }
 
-function roundToPlates(weight: number, step = 2.5) {
-  return Math.round(weight / step) * step
-}
+// export function generateWarmUp(oneRem: number, firstPercent: number): WarmUpSet[] {
+//   const barbell = 20
+//   const targetWeight = roundToPlates((firstPercent / 100) * oneRem)
 
-export function generateWarmUp(oneRem: number, firstPercent: number): WarmUpSet[] {
+//   if (targetWeight <= barbell) {
+//     return [{ weight: barbell, reps: 10, isWarmUp: true }]
+//   }
 
-  const barbell = 20
-  const targetWeight = roundToPlates((firstPercent / 100) * oneRem)
+//   const sets: WarmUpSet[] = []
+//   let weight = barbell
 
-  if (targetWeight <= barbell) {
-    return [{ weight: barbell, reps: 10, isWarmUp: true }]
-  }
+//   const step = Math.max(5, (targetWeight - barbell) / 3)
 
-  const sets: WarmUpSet[] = []
-  let weight = barbell
+//   while (weight < targetWeight) {
+//     let reps = 10
+//     if (sets.length === 1) reps = 8
+//     if (sets.length >= 2) reps = 6
 
-  const step = Math.max(5, (targetWeight - barbell) / 3)
+//     const roundedWeight = roundToPlates(weight)
 
-  while (weight < targetWeight) {
+//     // чтобы не было повторяющихся весов
+//     if (!sets.some((s) => s.weight === roundedWeight)) {
+//       sets.push({
+//         weight: roundedWeight,
+//         reps,
+//         isWarmUp: true,
+//       })
+//     }
 
-    let reps = 10
-    if (sets.length === 1) reps = 8
-    if (sets.length >= 2) reps = 6
+//     weight += step
+//   }
 
-    const roundedWeight = roundToPlates(weight)
+//   return sets
+// }
 
-    // чтобы не было повторяющихся весов
-    if (!sets.some(s => s.weight === roundedWeight)) {
-      sets.push({
-        weight: roundedWeight,
-        reps,
-        isWarmUp: true
-      })
-    }
-
-    weight += step
-  }
-
-  return sets
-}
-
-
-//generateWarmUp(oneRem, 50), использовать только в реакт компоненте, 
+//generateWarmUp(oneRem, 50), использовать только в реакт компоненте,
 // т.к максимумыхранятся в стор, это реакт хук, можно использовать только в реакт компоненете
 // вот так использовать
 //const firstPercent = exercise.sets[0].percent!
 // const warmup = generateWarmUp(oneRM, firstPercent)
 
-function warmUp(percent: number, reps: number): WarmUpSet{
-  return {
-    
-  }
-}
+// function warmUp(percent: number, reps: number): WarmUpSet{
+//   return {
+
+//   }
+// }

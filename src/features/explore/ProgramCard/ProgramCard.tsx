@@ -45,7 +45,7 @@ export default function ProgramCard({ data }: Props) {
       </div>
 
       <div className={css.content}>
-        <p className={css.description}>{data.description}</p>
+        <p className={css.description}>{data.descriptionPreview}</p>
         <span className={css.action}>Выбрать программу</span>
       </div>
     </div>

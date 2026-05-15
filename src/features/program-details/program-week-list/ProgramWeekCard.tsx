@@ -3,11 +3,11 @@ import ProgramDayCard from "./day-card/ProgramDayCard"
 import css from './ProgramWeekCard.module.scss'
 import Carousel from "@/components/ui/Carousel/Carousel"
 
-interface Props { 
+interface Props {
     week: TrainingWeek
 }
 
-export default function ProgramWeekCard({week}: Props) {
+export default function ProgramWeekCard({ week }: Props) {
 
     return (
         <section className={css.weekCard}>
@@ -15,7 +15,7 @@ export default function ProgramWeekCard({week}: Props) {
 
                 <div className={css.weekInfo}>
                     <div className={css.numberWeek}>
-                        {week.weekNumber} 
+                        {week.weekNumber}
                     </div>
                     <span className="font-semibold text-2xl">Неделя</span>
                 </div>
@@ -24,7 +24,7 @@ export default function ProgramWeekCard({week}: Props) {
             </div>
             <Carousel>
                 {week.trainingDays.map((day) => (
-                    <ProgramDayCard key={day.day} day={day}/>
+                    <ProgramDayCard key={day.day} day={day} />
                 ))}
             </Carousel>
             {/* <div className={css.daysGrid}>
@@ -36,9 +36,9 @@ export default function ProgramWeekCard({week}: Props) {
     )
 }
 
-    // { weekNumber: 1, trainingDays: [Array] }
-    // [
-    //   { day: 1, exercises: [ [Object] ] },
-    //   { day: 3, exercises: [ [Object] ] },
-    //   { day: 6, exercises: [ [Object] ] }
-    // ]
+// { weekNumber: 1, trainingDays: [Array] }
+// [
+//   { day: 1, exercises: [ [Object] ] },
+//   { day: 3, exercises: [ [Object] ] },
+//   { day: 6, exercises: [ [Object] ] }
+// ]

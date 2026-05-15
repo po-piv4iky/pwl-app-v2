@@ -10,22 +10,21 @@ interface Props {
     program: ProgramTraining
 }
 
-export default function ProgramDetailsPage({program}: Props) {
-    
+export default function ProgramDetailsPage({ program }: Props) {
     const totalDay = getTotalTrainingDays(program)
     const totalWeeks = getTotalTrainingWeeks(program)
     return (
         <Container>
             <Stack padding bottom>
-                <ProgramDetailsHeader 
-                    title={program.title} 
-                    description={program.description} 
+                <ProgramDetailsHeader
+                    title={program.title}
+                    description={program.description}
                     level={program.level}
-                    weeks={totalWeeks} 
+                    weeks={totalWeeks}
                     totalDay={totalDay}
                 />
-                <TheStart program={program}/>
-                <ProgramWeekList program={program}/>
+                <TheStart program={program} />
+                <ProgramWeekList program={program} />
             </Stack>
         </Container>
     )
