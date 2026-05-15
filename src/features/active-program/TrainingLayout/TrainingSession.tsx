@@ -19,6 +19,7 @@ import ProgressBar from '@/components/ui/progress-bar/ProgressBar'
 export default function TrainingSession() {
   const activeProgram = useActiveProgramStore((s) => s.activeProgram)
   const exercises = activeProgram?.trainingState.currentSession?.exercises ?? []
+  console.log(exercises)
   const total = exercises.length
  const currentIndex = activeProgram?.trainingState.exerciseIndex ?? 0
 

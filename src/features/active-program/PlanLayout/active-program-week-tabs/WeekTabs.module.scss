@@ -4,57 +4,61 @@
   display: flex;
   flex-direction: column;
   gap: fluid-to-laptop(16, 12);
-  // padding: fluid(25, 19) 0;
 
   h5 {
     font-size: fluid(20, 16);
     opacity: 0.5;
   }
 }
-.navigationBlock{
+
+.navigationBlock {
   display: flex;
   gap: fluid(30, 20);
-  >button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  width: 38px;
-  height: 38px;
+  > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  border: 1px solid var(--color-gray-border);
-  border-radius: 50%;
+    width: 38px;
+    height: 38px;
 
-  background-color: var(--color-bg-card);
-  color: inherit;
+    border: 1px solid var(--color-gray-border);
+    border-radius: 50%;
 
-  cursor: pointer;
+    background-color: var(--color-bg-card);
+    color: inherit;
 
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    border-color 0.2s ease;
+    cursor: pointer;
 
-  svg {
-    width: 18px;
-    height: 18px;
-  }
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      border-color 0.2s ease;
 
-  &:not(:disabled):hover {
-    transform: translateY(-2px);
-    border-color: var(--color-red-button);
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:not(:disabled):hover {
+      transform: translateY(-2px);
+      border-color: var(--color-red-button);
+    }
   }
 }
-}
-@include mobile{
-  .navigationBlock{
+
+@include mobile {
+  .navigationBlock {
     display: none;
   }
 }
+
 .swiper {
   width: 100%;
   min-width: 0;
   padding-bottom: fluid(34, 28);
+
   :global(.swiper-pagination-bullet) {
     width: 8px;
     height: 8px;
@@ -68,25 +72,6 @@
   }
 }
 
-// .scrollWrapper{
-//   width: 100%;
-//   overflow-x: auto;
-//   overflow-y: hidden;
-
-//   padding-bottom: fluid(8, 6);
-
-// }
-
-.buttonsTrack {
-  display: flex;
-  gap: fluid-to-laptop(15, 12);
-  overflow-x: auto;//горизонтальный скролл
-  padding-bottom: 4px;
-
-  @include mobile {
-    gap: 10px;
-  }
-}
 .slide {
   width: auto;
   height: auto;
@@ -95,35 +80,61 @@
 
 .buttonWeek {
   width: 100%;
+
   display: flex;
   flex-direction: column;
   gap: fluid(10, 8);
+
   padding: fluid(20, 14);
+
   border: 1px solid var(--color-gray-text-input);
   border-radius: fluid-to-laptop(10, 8);
+
   cursor: pointer;
+
+  color: inherit;
   background-color: transparent;
+
   transition:
     border-color 0.2s ease,
     background-color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
 
   &:hover {
     background-color: var(--color-red-hover);
   }
+}
 
-  &.active {
-    background-color:  var(--color-red-button);
-    border-color: transparent;
-  }
+/* Завершённая неделя */
+.completed {
+  border-color: var(--color-green-600);
+  background-color: var(--color-green-soft);
+}
 
-  &.completed {
-    border-color: var(--color-green-600);
-    background-color: var(--color-green-soft);
+/* Неделя, которую пользователь выбрал для просмотра */
+.selected {
+  border-color: var(--color-red-button);
+  background-color: var(--color-red-hover);
+
+  &:hover {
+    background-color: var(--color-red-hover);
   }
 }
 
-.iconAndWeekBlock{
+/* Реальная текущая неделя программы */
+.current {
+  border-color: transparent;
+  background-color: var(--color-red-button);
+  color: white;
+
+  &:hover {
+    background-color: var(--color-red-button);
+  }
+}
+
+.iconAndWeekBlock {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,7 +160,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: fluid(14, 12);
   opacity: 0.7;
 }
-

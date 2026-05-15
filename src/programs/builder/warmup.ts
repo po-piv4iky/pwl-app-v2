@@ -48,3 +48,9 @@ export function generateWarmUp(oneRem: number, firstPercent: number): WarmUpSet[
 // вот так использовать
 //const firstPercent = exercise.sets[0].percent!
 // const warmup = generateWarmUp(oneRM, firstPercent)
+
+function warmUp(percent: number, reps: number): WarmUpSet{
+  return {
+    
+  }
+}

@@ -33,8 +33,9 @@ export default function WeekTabs() {
   const { activeProgram, selectWeek } = useActiveProgramStore()
   if(!activeProgram) return null
 
-  const { program, currentWeek, completedDays } = activeProgram
+  const { program, currentWeek, completedDays, viewMode } = activeProgram
   const weeks = program.weeks
+  const selectedWeek = viewMode.type === 'selected' ? viewMode.week : currentWeek
 
   return (
     <section className={css.weeksTabsContainer}>
@@ -100,9 +101,10 @@ export default function WeekTabs() {
       >
             {weeks.map((week) => {
               const weekNumber = week.weekNumber
-              const isActive = weekNumber === currentWeek
               const completedWorkouts = completedDays.filter(item => item.week === weekNumber).length
-              const totalWorkouts = week.trainingDays.length
+              const totalWorkouts = week.trainingDays.length              
+              const isSelected = weekNumber === selectedWeek
+              const isCurrent = weekNumber === currentWeek
               
               const isCompletedWeek = completedWorkouts === totalWorkouts
               return (
@@ -111,9 +113,10 @@ export default function WeekTabs() {
                       onClick={() => selectWeek(weekNumber)}
                       className={clsx(
                       css.buttonWeek,
-                      isActive && css.active,
-                      isCompletedWeek && css.completed
-                      )}
+                      isCompletedWeek && css.completed,
+                      isSelected && css.selected,
+                      isCurrent && css.current
+                    )}
                     >
                       <div className={css.iconAndWeekBlock}>
                         {isCompletedWeek ? <CheckCircle /> : <Circle />}
