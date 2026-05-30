@@ -1,8 +1,15 @@
 import { Exercise, ExerciseSet } from '@/programs/types/exercises.types'
-import {DayToRender, RestTimerState, SessionExercise, SessionSet, TrainingSession,} from './types'
-import { exercisesList } from '../../programs/exercises-list';
-import { ExerciseLift, isMainLift } from '@/programs/types/exercise-definition.types';
-import { UserMaxes } from '../maxes.store';
+import {
+  DayToRender,
+  RestTimerState,
+  SessionExercise,
+  SessionSet,
+  TrainingSession,
+  SessionWarmUpSet,
+} from './types'
+import { exercisesList } from '../../programs/exercises-list'
+import { ExerciseLift, isMainLift } from '@/programs/types/exercise-definition.types'
+import { UserMaxes } from '../maxes.store'
 
 const DEFAULT_REST_TIMER_STATE: RestTimerState = {
   isActive: false,
@@ -15,7 +22,7 @@ export const createRestTimerState = (): RestTimerState => ({
 })
 
 export const getRestDuration = (category?: ExerciseLift) => {
-  if(category === 'accessory'){
+  if (category === 'accessory') {
     return 120
   } else {
     return 180
@@ -26,14 +33,17 @@ export const roundToStep = (weight: number, step = 2.5) =>
   Math.round(weight / step) * step
 
 export const formatTargetReps = (set: ExerciseSet) =>
-  typeof set.reps === 'number'
-    ? set.reps
-    : `${set.reps}`
+  typeof set.reps === 'number' ? set.reps : `${set.reps}`
 
-export const createSessionSets = (exercise: Exercise, exerciseIndex: number, oneRM: number): SessionSet[] => {
+export const createSessionSets = (
+  exercise: Exercise,
+  exerciseIndex: number,
+  oneRM: number,
+): SessionSet[] => {
   const sets: SessionSet[] = []
 
-  exercise.sets.forEach((planSet, planSetIndex) => { //       
+  exercise.sets.forEach((planSet, planSetIndex) => {
+    //
     const repeat = planSet.repeat ?? 1 // сколько повторных подходов
 
     for (let repeatIndex = 1; repeatIndex <= repeat; repeatIndex += 1) {
@@ -61,6 +71,32 @@ export const createSessionSets = (exercise: Exercise, exerciseIndex: number, one
   return sets
 }
 
+export const createSessionWarmUp = (
+  exercise: Exercise,
+  oneRM: number,
+): SessionWarmUpSet[] => {
+  if (!exercise.warmup || exercise.warmup.length === 0) {
+    return []
+  }
+
+  return exercise.warmup.map((warmUpSet, index) => {
+    const targetReps = formatTargetReps(warmUpSet)
+
+    const targetWeight = warmUpSet.percent
+      ? roundToStep((warmUpSet.percent * oneRM) / 100)
+      : 0
+
+    return {
+      setNumber: index + 1,
+      targetReps,
+      targetWeight,
+      actualReps: targetReps,
+      actualWeight: targetWeight,
+      intensity: warmUpSet.percent ?? null,
+    }
+  })
+}
+
 // const exercise = {
 //   exerciseId: "bench_press",
 //   sets: [
@@ -72,29 +108,37 @@ export const createSessionSets = (exercise: Exercise, exerciseIndex: number, one
 //   comment: "Работаем чисто, без отказа"
 // }
 
-export const createSessionExercise = (exercise: Exercise, exerciseIndex: number, maxes: UserMaxes): SessionExercise => {
-  const exerciseMeta = exercisesList.find(item => item.id === exercise.exerciseId)
+export const createSessionExercise = (
+  exercise: Exercise,
+  exerciseIndex: number,
+  maxes: UserMaxes,
+): SessionExercise => {
+  const exerciseMeta = exercisesList.find((item) => item.id === exercise.exerciseId)
   if (!exerciseMeta) {
     throw new Error(`Exercise not found: ${exercise.exerciseId}`)
   }
   const oneRM = isMainLift(exerciseMeta.lift) ? maxes[exerciseMeta.lift] : 0
 
   return {
-     id: String(exerciseIndex),
-     name: exerciseMeta.name,
-     lift: exerciseMeta.lift,
-     sets: createSessionSets(exercise, exerciseIndex, oneRM),
-     restDuration: getRestDuration(exerciseMeta?.lift),
-     isCompleted: false,
+    id: String(exerciseIndex),
+    name: exerciseMeta.name,
+    lift: exerciseMeta.lift,
+    warmUp: createSessionWarmUp(exercise, oneRM),
+    sets: createSessionSets(exercise, exerciseIndex, oneRM),
+    restDuration: getRestDuration(exerciseMeta?.lift),
+    isCompleted: false,
   }
 }
-  
 
-export const buildTrainingSession = (day: DayToRender, exercises: Exercise[], maxes: UserMaxes): TrainingSession => ({
+export const buildTrainingSession = (
+  day: DayToRender,
+  exercises: Exercise[],
+  maxes: UserMaxes,
+): TrainingSession => ({
   week: day.week,
   day: day.day,
   exercises: exercises.map((exercise, index) =>
-    createSessionExercise(exercise, index, maxes)
+    createSessionExercise(exercise, index, maxes),
   ),
   startedAt: new Date().toISOString(),
   isCompleted: false,

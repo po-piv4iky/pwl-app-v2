@@ -1,5 +1,5 @@
-import { ProgramTraining } from '@/programs/types/program.types';
-import { TrainingDay, TrainingWeek } from '@/programs/types/training.types';
+import { ProgramTraining } from '@/programs/types/program.types'
+import { TrainingDay, TrainingWeek } from '@/programs/types/training.types'
 
 export interface ActiveProgram {
   program: ProgramTraining
@@ -16,7 +16,7 @@ export type ViewMode =
   | { type: 'current' }
   | { type: 'selected'; week: number; day: number }
 
-export type TrainingMode = 'plan' | 'training' | 'finished'
+export type TrainingMode = 'plan' | 'training'
 
 export interface SessionSet {
   id: string
@@ -29,11 +29,21 @@ export interface SessionSet {
   isCompleted: boolean
 }
 
+export interface SessionWarmUpSet {
+  setNumber: number
+  targetReps: string | number
+  targetWeight: number
+  actualReps: string | number
+  actualWeight: number
+  intensity?: number | null
+}
+
 export interface SessionExercise {
   id: string
   name: string
   lift: string
   restDuration: number
+  warmUp: SessionWarmUpSet[]
   sets: SessionSet[]
   isCompleted: boolean
 }
@@ -55,7 +65,7 @@ export interface RestTimerState {
 export interface TrainingState {
   mode: TrainingMode
   exerciseIndex: number
-  currentSession?: TrainingSession
+  currentSession?: TrainingSession | null
   restTimer: RestTimerState
 }
 
@@ -79,9 +89,10 @@ export interface DayToRender {
 
 export interface ActiveProgramStore {
   activeProgram: ActiveProgram | null
-  startProgram: (program: ProgramTraining) => void
-  resetProgram: () => void
   startTraining: () => void
+  startProgram: (program: ProgramTraining) => void
+  finishTrainingSession: () => void
+  resetProgram: () => void
   nextExercise: () => void
   // setCurrentWeek: (week: number) => void
   // setCurrentDay: (day: number) => void
@@ -90,7 +101,7 @@ export interface ActiveProgramStore {
   toggleSetCompletion: (exerciseIndex: number, setId: string) => void
   startRestTimer: (duration: number) => void
   stopRestTimer: () => void
-  changeRestTimer: (seconds: number ) => void
+  changeRestTimer: (seconds: number) => void
   getCurrentWeekData: () => TrainingWeek | null
   getDayData: (week: number, day: number) => TrainingDay | null
   getWeekSchedule: () => ScheduleDay[]
@@ -98,5 +109,9 @@ export interface ActiveProgramStore {
   selectWeek: (week: number) => void
   selectDay: (week: number, day: number) => void
   showCurrentDay: () => void
-  updateSetActualValues: (exerciseIndex: number, setId: string, values: Partial<Pick<SessionSet, 'actualWeight' | 'actualReps'>>) => void
+  updateSetActualValues: (
+    exerciseIndex: number,
+    setId: string,
+    values: Partial<Pick<SessionSet, 'actualWeight' | 'actualReps'>>,
+  ) => void
 }

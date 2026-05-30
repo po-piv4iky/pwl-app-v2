@@ -90,6 +90,34 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
           }
         }),
 
+      finishTrainingSession: () =>
+        set((state) => {
+          const activeProgram = state.activeProgram
+          const currentSession = activeProgram?.trainingState.currentSession
+
+          if (!activeProgram || !currentSession) return {}
+
+          const week = currentSession.week
+          const day = currentSession.day
+
+          const completedDays = hasCompletedDay(activeProgram.completedDays, week, day)
+            ? activeProgram.completedDays
+            : [...activeProgram.completedDays, { week, day }]
+
+          return {
+            activeProgram: {
+              ...activeProgram,
+              completedDays,
+              trainingState: {
+                ...activeProgram.trainingState,
+                mode: 'plan',
+                exerciseIndex: 0,
+                currentSession: null,
+                restTimer: createRestTimerState(),
+              },
+            },
+          }
+        }),
       // ВАЖНО: это только просмотр недели, прогресс не меняется
       selectWeek: (week) =>
         set((state) => {
@@ -219,15 +247,7 @@ export const useActiveProgramStore = create<ActiveProgramStore>()(
             }
           }
 
-          return {
-            activeProgram: {
-              ...state.activeProgram,
-              trainingState: {
-                ...state.activeProgram.trainingState,
-                mode: 'finished',
-              },
-            },
-          }
+          return {}
         }),
 
       startRestTimer: (duration) =>

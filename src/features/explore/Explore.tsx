@@ -9,14 +9,15 @@ import { programsPreviews } from '@/config/programs-preview/programsPreview.data
 import Stack from '@/components/layout/stack/Stack'
 
 export function Explore() {
+
   return (
-       <Container>
-        <Stack padding>
+    <Container>
+      <Stack padding>
         <SectionHeader
           title='Программы тренировок'
           description='Выберите программу для специализации по одному из упражнений или комплексную программу для развития всех движений'
           centered
-          />
+        />
 
         <div className={css.sections}>
           {exploreSections
@@ -27,10 +28,10 @@ export function Explore() {
             .filter((section) => section.items.length > 0)
             .map((section) => (
               <ProgramSection
-              key={section.key}
-              title={section.title}
-              icon={section.icon}
-              theme={section.key}
+                key={section.key}
+                title={section.title}
+                icon={section.icon}
+                theme={section.key}
               >
                 <ProgramGrid>
                   {section.items.map((item) => (
@@ -40,7 +41,7 @@ export function Explore() {
               </ProgramSection>
             ))}
         </div>
-        </Stack>
+      </Stack>
     </Container>
   )
 }

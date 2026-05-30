@@ -16,15 +16,18 @@ import Container from '@/components/layout/container/Container'
 import Stack from '@/components/layout/stack/Stack'
 import ProgressBar from '@/components/ui/progress-bar/ProgressBar'
 
-export default function TrainingSession() {
+interface Props {
+  onFinish: () => void
+}
+
+export default function TrainingSession({ onFinish }: Props) {
   const activeProgram = useActiveProgramStore((s) => s.activeProgram)
   const exercises = activeProgram?.trainingState.currentSession?.exercises ?? []
   const total = exercises.length
   const currentIndex = activeProgram?.trainingState.exerciseIndex ?? 0
-  // const warmUp = activeProgram?.trainingState.currentSession?. 
-
+  const warmUp = exercises[currentIndex].warmUp
+  const exerciseNameCurrent = exercises[currentIndex].name
   const currentNumber = currentIndex + 1
-
   const router = useRouter()
 
   const handleGoBack = () => {
@@ -60,9 +63,9 @@ export default function TrainingSession() {
           </div>
         </header>
 
-        <WarmUp lift='bench' variant='session' />
+        {warmUp && <WarmUp variant='session' warmUp={warmUp} exerciseName={exerciseNameCurrent} />}
         <RestTimer />
-        <TrainingExercisesSessions />
+        <TrainingExercisesSessions onFinish={onFinish} />
         <TrainingPlanSession />
       </Stack>
     </Container>
