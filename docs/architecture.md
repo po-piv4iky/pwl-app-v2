@@ -1,5 +1,60 @@
 Судя по твоей структуре, ты уже двигаешься в сторону Feature-Sliced Design (FSD), только пока не довёл её до конца. Для задачи с активной программой тренировок я бы не делал огромный active-program.store.ts, а разделил ответственность.
 
+src/
+├── app/ # Слой приложения (маршруты, layout)
+│ ├── (public)/ # Группа публичных маршрутов
+│ │ ├── history/
+│ │ ├── info/
+│ │ ├── my-maximum/
+│ │ ├── my-training/
+│ │ ├── programs/
+│ │ └── standards/
+│ ├── layout.tsx
+│ └── page.tsx
+│
+├── components/ # Переиспользуемые компоненты
+│ ├── composite/ # Сложные компоненты
+│ ├── layout/ # Компоненты макета
+│ ├── no-field/ # Компоненты без полей?
+│ └── ui/ # UI-кирпичики
+│
+├── config/ # Конфигурации
+├── features/ # Фичи (бизнес-логика страниц)
+│ ├── history/
+│ ├── info/
+│ ├── my-maximum/
+│ ├── my-training/
+│ ├── programs/
+│ └── standards/
+│
+├── lib/ # Утилиты (общие)
+├── programs/ # Данные программ тренировок
+├── store/ # Zustand хранилище
+└── utils/ # Вспомогательные функции
+
+store/
+
+active-program/
+
+    active-program.types.ts
+
+    active-program.helpers.ts
+      createActiveProgramState()
+      createRestTimerState()
+
+    active-program.state.ts
+
+
+    active-program.actions.ts
+      startProgram()
+      finishTrainingDay()
+      nextExercise()
+      ...
+
+    active-program.selectors.ts
+
+    active-program.store.ts
+
 Анализ текущих папок
 app/
 app/

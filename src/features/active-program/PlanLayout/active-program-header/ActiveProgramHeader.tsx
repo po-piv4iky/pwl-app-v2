@@ -1,21 +1,23 @@
 import ProgressBar from "@/components/ui/progress-bar/ProgressBar";
-import { useActiveProgramStore } from "@/store/active-program.store"
 import { Trophy } from "lucide-react";
 import css from './ActiveProgramHeader.module.scss'
 import { getTotalTrainingWeeks } from "@/utils/programStats";
 import IconBadge from "@/components/ui/icon-badge/IconBadge";
+import { useProgramTrainingStore } from "@/store/active-program-store/active-program.store";
 
 
 export default function ActiveProgramHeader() {
-    const activeProgram = useActiveProgramStore(state => state.activeProgram)
-    if(!activeProgram) return null
-    const { program, completedDays } = activeProgram
-    const totalWorkouts = program.weeks.reduce((acc, week) => week.trainingDays.length + acc, 0)
-    const completedWorkouts = completedDays.length
-    const weeksLength = getTotalTrainingWeeks(program)
-    const percent = totalWorkouts === 0 ? 0 : Math.round((completedWorkouts / totalWorkouts) * 100)
+  const activeProgram = useProgramTrainingStore(state => state.activeProgram)
+  if (!activeProgram) {
+    return null
+  }
+  const { program, completedDays } = activeProgram
+  const totalWorkouts = program.weeks.reduce((acc, week) => week.trainingDays.length + acc, 0)
+  const completedWorkouts = completedDays.length
+  const weeksLength = getTotalTrainingWeeks(program)
+  const percent = totalWorkouts === 0 ? 0 : Math.round((completedWorkouts / totalWorkouts) * 100)
 
-     return (
+  return (
     <div className={css.header}>
 
       <div className={css.topRow}>
@@ -38,18 +40,18 @@ export default function ActiveProgramHeader() {
         </div>
       </div>
 
-      <ProgressBar 
-        current={completedWorkouts} 
-        target={totalWorkouts} 
-        title="Прогресс программы" 
+      <ProgressBar
+        current={completedWorkouts}
+        target={totalWorkouts}
+        title="Прогресс программы"
         valueLabel={`${percent}%`}
         size="md"
       />
 
       <div className={css.stats}>
-        <StatItem value={weeksLength} label="недель" variant="red"/>
-        <StatItem value={completedWorkouts} label="выполнено" variant="green"/>
-        <StatItem value={totalWorkouts - completedWorkouts} label="осталось" variant="yellow"/>
+        <StatItem value={weeksLength} label="недель" variant="red" />
+        <StatItem value={completedWorkouts} label="выполнено" variant="green" />
+        <StatItem value={totalWorkouts - completedWorkouts} label="осталось" variant="yellow" />
       </div>
 
     </div>

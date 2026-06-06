@@ -4,11 +4,14 @@ import { useActiveProgramStore } from "@/store/active-program.store"
 import { RestDay } from "./rest-day/RestDay"
 import TrainingDay from "./training-day/TrainingDay"
 import css from "./DayTabs.module.scss"
+import { useProgramTrainingStore } from "@/store/active-program-store/active-program.store"
+import { getWeekSchedule } from '@/store/active-program-store/helpers-for-action/helpers-for-action'
 
 export default function DayTabs() {
   // правильные подписки на store (меньше ререндеров)
-  const activeProgram = useActiveProgramStore(s => s.activeProgram)
-  const getWeekSchedule = useActiveProgramStore(s => s.getWeekSchedule)
+  const activeProgram = useProgramTrainingStore(s => s.activeProgram)
+  const getWeekSchedule = getWeekSchedule(activeProgram?.program)
+
   const selectDay = useActiveProgramStore(s => s.selectDay)
   const getDayToRender = useActiveProgramStore(s => s.getDayToRender)
 

@@ -1,6 +1,6 @@
 import cn from 'clsx'
 
-import { useUserMaxesStore } from '@/store/maxes.store'
+import { useUserMaxesStore } from '@/store/maximums/maxes.store'
 
 import css from './LogMaxes.module.scss'
 

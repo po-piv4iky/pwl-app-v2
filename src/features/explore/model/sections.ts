@@ -1,5 +1,5 @@
 ﻿import { Activity, ArrowUp, Dumbbell, LucideIcon, Scale } from 'lucide-react'
-import { LiftType } from '@/store/maxes.store'
+import { LiftType } from '@/store/maximums/maxes.store'
 
 export type ExploreSectionItem = {
   key: LiftType | 'complex'
@@ -11,21 +11,21 @@ export const exploreSections: ExploreSectionItem[] = [
   {
     key: 'bench',
     title: 'Жим лёжа',
-    icon: Dumbbell
+    icon: Dumbbell,
   },
   {
     key: 'squat',
     title: 'Присед',
-    icon: ArrowUp
+    icon: ArrowUp,
   },
   {
     key: 'deadlift',
     title: 'Становая тяга',
-    icon: Activity
+    icon: Activity,
   },
   {
     key: 'complex',
     title: 'Комплекс',
-    icon: Scale
-  }
+    icon: Scale,
+  },
 ]

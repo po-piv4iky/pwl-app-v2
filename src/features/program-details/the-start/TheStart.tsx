@@ -11,6 +11,7 @@ import { ProgramTraining } from '@/programs/types/program.types'
 import { useActiveProgramStore } from '@/store/active-program.store'
 
 import css from './TheStart.module.scss'
+import { useProgramTrainingStore } from '@/store/active-program-store/active-program.store'
 
 interface Props {
   program: ProgramTraining
@@ -24,7 +25,8 @@ export default function TheStart({ program }: Props) {
   const [isMobileViewport, setIsMobileViewport] = useState(false)
 
   const router = useRouter()
-  const startProgram = useActiveProgramStore((state) => state.startProgram)
+  // const startProgram = useActiveProgramStore((state) => state.startProgram)
+  const startProgram = useProgramTrainingStore(state => state.actions.startProgram)
 
   useLayoutEffect(() => {
     const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY)

@@ -7,7 +7,7 @@ import FrameTheInputs from '@/components/composite/frame-the-inputs/FrameTheInpu
 import Container from '@/components/layout/container/Container'
 import { liftInputs } from '@/config/liftInputs/liftInputs'
 import { maxesSchema } from '@/lib/validation'
-import { useUserMaxesStore } from '@/store/maxes.store'
+import { useUserMaxesStore } from '@/store/maximums/maxes.store'
 import Stack from '@/components/layout/stack/Stack'
 
 export default function MyMaximumPage() {

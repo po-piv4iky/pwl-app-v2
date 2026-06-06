@@ -9,7 +9,7 @@ import {
 } from './types'
 import { exercisesList } from '../../programs/exercises-list'
 import { ExerciseLift, isMainLift } from '@/programs/types/exercise-definition.types'
-import { UserMaxes } from '../maxes.store'
+import { UserMaxes } from '../maximums/maxes.store'
 
 const DEFAULT_REST_TIMER_STATE: RestTimerState = {
   isActive: false,

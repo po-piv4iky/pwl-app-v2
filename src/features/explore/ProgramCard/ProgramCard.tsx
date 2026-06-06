@@ -1,7 +1,7 @@
 'use client'
 
 import css from "./ProgramCard.module.scss";
-import { useUserMaxesStore } from "@/store/maxes.store";
+import { useUserMaxesStore } from "@/store/maximums/maxes.store";
 import { useRouter } from "next/navigation";
 import { PAGE } from "@/config/public-page.config";
 import { ProgramsPreview } from "@/config/programs-preview/types/programsPreview.types";

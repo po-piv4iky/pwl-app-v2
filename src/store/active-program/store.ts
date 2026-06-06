@@ -11,7 +11,7 @@ import {
 
 import { buildTrainingSession, createRestTimerState } from './utils'
 import { ProgramTraining } from '@/programs/types/program.types'
-import { useUserMaxesStore } from '../maxes.store'
+import { useUserMaxesStore } from '../maximums/maxes.store'
 
 const createActiveProgramState = (program: ProgramTraining): ActiveProgram => ({
   program,

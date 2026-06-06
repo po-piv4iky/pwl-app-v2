@@ -89,19 +89,20 @@ export interface DayToRender {
 
 export interface ActiveProgramStore {
   activeProgram: ActiveProgram | null
-  startTraining: () => void
   startProgram: (program: ProgramTraining) => void
-  finishTrainingSession: () => void
   resetProgram: () => void
+
+  startTraining: () => void
   nextExercise: () => void
-  // setCurrentWeek: (week: number) => void
-  // setCurrentDay: (day: number) => void
-  // selectDay: (week: number, day: number) => void
+  finishTrainingSession: () => void
+
   completeDay: (week: number, day: number) => void
   toggleSetCompletion: (exerciseIndex: number, setId: string) => void
+
   startRestTimer: (duration: number) => void
   stopRestTimer: () => void
   changeRestTimer: (seconds: number) => void
+
   getCurrentWeekData: () => TrainingWeek | null
   getDayData: (week: number, day: number) => TrainingDay | null
   getWeekSchedule: () => ScheduleDay[]

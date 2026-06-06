@@ -1,6 +1,5 @@
 'use client'
 
-import { useActiveProgramStore } from "@/store/active-program.store";
 import PlanSession from "./PlanLayout/PlanSession";
 import TrainingSession from "./TrainingLayout/TrainingSession";
 import NoActiveTraining from "./components/NoActiveTraining/NoActiveTraining";
@@ -8,12 +7,14 @@ import Container from "@/components/layout/container/Container";
 import { useState } from "react";
 import Button from "@/components/ui/button/Button";
 import css from './ActiveProgramPage.module.scss'
+import { useProgramTrainingStore } from "@/store/active-program-store/active-program.store";
 
 export default function ActiveProgramPage() {
     const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
-    const activeProgram = useActiveProgramStore(s => s.activeProgram)
-    const trainingMode = useActiveProgramStore(s => s.activeProgram?.trainingState.mode || 'plan')
-    const currentSession = useActiveProgramStore(
+    // const activeProgram = useActiveProgramStore(s => s.activeProgram)
+    const activeProgram = useProgramTrainingStore(s => s.activeProgram)
+    const trainingMode = useProgramTrainingStore(s => s.activeProgram?.trainingState.mode || 'plan')
+    const currentSession = useProgramTrainingStore(
         s => s.activeProgram?.trainingState.currentSession
     )
 

@@ -5,7 +5,7 @@ import { Circle, CheckCircle, ArrowRight, ArrowLeft } from "lucide-react"
 import clsx from "clsx"
 import { useActiveProgramStore } from "@/store/active-program.store"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { 
+import {
   // FreeMode,      // свободный скролл
   Pagination,       // точки навигации
   Navigation,       // кнопки "вперёд/назад"
@@ -16,6 +16,7 @@ import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
 import { useRef } from "react"
+import { useProgramTrainingStore } from "@/store/active-program-store/active-program.store"
 
 // 🚀 Золотое правило Framer-motion:
 // initial → что было до анимации
@@ -30,12 +31,13 @@ import { useRef } from "react"
 export default function WeekTabs() {
   const prevRef = useRef<HTMLButtonElement | null>(null)
   const nextRef = useRef<HTMLButtonElement | null>(null)
-  const { activeProgram, selectWeek } = useActiveProgramStore()
-  if(!activeProgram) return null
+  const { activeProgram } = useProgramTrainingStore()
+  const selectWeek = useProgramTrainingStore(s => s.actions.selectWeek)
+  if (!activeProgram) return null
 
-  const { program, currentWeek, completedDays, viewMode } = activeProgram
+  const { program, currentPosition, completedDays, viewMode } = activeProgram
   const weeks = program.weeks
-  const selectedWeek = viewMode.type === 'selected' ? viewMode.week : currentWeek
+  const selectedWeek = viewMode.type === 'preview' ? viewMode.week : currentPosition.week
 
   return (
     <section className={css.weeksTabsContainer}>
@@ -49,7 +51,7 @@ export default function WeekTabs() {
         >
           <ArrowLeft />
         </button>
-          <button
+        <button
           ref={nextRef}
           type="button"
           className={clsx(css.navButton, css.nextButton)}
@@ -67,18 +69,18 @@ export default function WeekTabs() {
         spaceBetween={12} //расстояние между слайдами px
         slidesPerGroup={2}//сколько карточек перелистывается за один клик по пагинации.
         // watchOverflow
-        pagination={{ 
-        clickable: true,//кликабельно: верно,
-        dynamicBullets: true //динамические подсказки: верно
+        pagination={{
+          clickable: true,//кликабельно: верно,
+          dynamicBullets: true //динамические подсказки: верно
         }}
         onBeforeInit={(swiper) => {
-        if (
-          typeof swiper.params.navigation !== "boolean" &&
-          swiper.params.navigation
-        ) {
-          swiper.params.navigation.prevEl = prevRef.current
-          swiper.params.navigation.nextEl = nextRef.current
-         }
+          if (
+            typeof swiper.params.navigation !== "boolean" &&
+            swiper.params.navigation
+          ) {
+            swiper.params.navigation.prevEl = prevRef.current
+            swiper.params.navigation.nextEl = nextRef.current
+          }
         }}
         navigation
         breakpoints={{ // адаптив
@@ -99,37 +101,37 @@ export default function WeekTabs() {
           },
         }}
       >
-            {weeks.map((week) => {
-              const weekNumber = week.weekNumber
-              const completedWorkouts = completedDays.filter(item => item.week === weekNumber).length
-              const totalWorkouts = week.trainingDays.length              
-              const isSelected = weekNumber === selectedWeek
-              const isCurrent = weekNumber === currentWeek
-              
-              const isCompletedWeek = completedWorkouts === totalWorkouts
-              return (
-                <SwiperSlide key={weekNumber} className={css.slide}>
-                    <button
-                      onClick={() => selectWeek(weekNumber)}
-                      className={clsx(
-                      css.buttonWeek,
-                      isCompletedWeek && css.completed,
-                      isSelected && css.selected,
-                      isCurrent && css.current
-                    )}
-                    >
-                      <div className={css.iconAndWeekBlock}>
-                        {isCompletedWeek ? <CheckCircle /> : <Circle />}
-                        <span>Неделя {week.weekNumber}</span>
-                      </div>
-    
-                      <span className={css.progress}>
-                        {completedWorkouts}/{totalWorkouts} завершено
-                      </span>
-                    </button>
-                </SwiperSlide>
-              )
-           })}
+        {weeks.map((week) => {
+          const weekNumber = week.weekNumber
+          const completedWorkouts = completedDays.filter(item => item.week === weekNumber).length
+          const totalWorkouts = week.trainingDays.length
+          const isSelected = weekNumber === selectedWeek
+          const isCurrent = weekNumber === currentPosition.week
+
+          const isCompletedWeek = completedWorkouts === totalWorkouts
+          return (
+            <SwiperSlide key={weekNumber} className={css.slide}>
+              <button
+                onClick={() => selectWeek(weekNumber)}
+                className={clsx(
+                  css.buttonWeek,
+                  isCompletedWeek && css.completed,
+                  isSelected && css.selected,
+                  isCurrent && css.current
+                )}
+              >
+                <div className={css.iconAndWeekBlock}>
+                  {isCompletedWeek ? <CheckCircle /> : <Circle />}
+                  <span>Неделя {week.weekNumber}</span>
+                </div>
+
+                <span className={css.progress}>
+                  {completedWorkouts}/{totalWorkouts} завершено
+                </span>
+              </button>
+            </SwiperSlide>
+          )
+        })}
       </Swiper>
     </section>
   )

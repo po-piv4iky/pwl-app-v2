@@ -14,7 +14,7 @@ import ProgressToRank from '../progress-to-rank/ProgressToRank'
 import FederationPreviewCard from '../federation-preview/FederationPreviewCard'
 import css from './UserStandartResult.module.scss'
 import { useStandartUserStore } from '@/store/user-standart.store'
-import { useUserMaxesStore } from '@/store/maxes.store'
+import { useUserMaxesStore } from '@/store/maximums/maxes.store'
 import { federationOptions } from '@/config/federations/federation-options'
 import { getFederationById } from '@/config/federations/get-federation-by-id'
 import { FederationId } from '@/config/federations/federation.types'
@@ -64,13 +64,13 @@ export default function UserStandartResult() {
 
   const params: CalculateAthleteLevelParams | null = canCalculate
     ? {
-        federation,
-        gender,
-        age,
-        weight,
-        mode,
-        results,
-      }
+      federation,
+      gender,
+      age,
+      weight,
+      mode,
+      results,
+    }
     : null
 
   const athleteLevel = params ? calculateAthleteLevel(params) : null
@@ -125,7 +125,7 @@ export default function UserStandartResult() {
             buttonHref={PAGE.MY_MAXIMUM}
           />
         )}
-        
+
         {athleteLevel && standards && (
           <StandardsList
             athleteLevel={athleteLevel}
